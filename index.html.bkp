@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Clube | Proteção Veicular de Elite</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        .nav-gradient {
+            background: linear-gradient(to right, #0f172a, #1e3a8a);
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+        }
+
+        .cta-button {
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+        }
+
+        .hidden-section {
+            display: none;
+        }
+
+        .parceiros-bg {
+            background-image: url('https://premiumclube.org.br/novo/wp-content/uploads/2023/10/BG-PARCEIROS.png');
+            background-size: cover;
+            background-position: center;
+        }
+
+        details[open] summary i {
+            transform: rotate(180deg);
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            ring: 2px;
+            ring-color: #3b82f6;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900">
+
+    <!-- Navegação -->
+    <nav class="sticky top-0 z-50 nav-gradient border-b border-blue-900/50 py-4 px-6 shadow-lg">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-2 cursor-pointer" onclick="showPage('home')">
+                <img src="assets/logo-tran.png" alt="Premium Clube Logo" class="h-10 w-auto object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                <div style="display:none" class="flex items-center gap-2">
+                    <div class="bg-blue-500 p-1.5 rounded-lg">
+                        <i data-lucide="shield-check" class="text-white w-5 h-5"></i>
+                    </div>
+                    <span class="text-lg font-bold tracking-tight text-white">PREMIUM<span class="font-light text-blue-200">CLUBE</span></span>
+                </div>
+            </div>
+            <!-- Removido o rótulo de consultor do cabeçalho conforme solicitado -->
+        </div>
+    </nav>
+
+    <!-- CONTEÚDO PRINCIPAL (HOME) -->
+    <main id="home-page">
+        <!-- Banner Principal -->
+        <section class="w-full bg-slate-900 overflow-hidden flex items-center justify-center">
+            <div class="w-full max-w-[1440px] mx-auto relative">
+                <img src="assets/banner.png" alt="Banner Premium Clube" class="w-full h-auto block" onerror="this.src='https://placehold.co/1440x500/0f172a/ffffff?text=Proteção+Veicular+Premium'">
+            </div>
+        </section>
+
+        <!-- Hero Section + Formulário -->
+        <header class="gradient-bg text-white pt-16 pb-32 px-6">
+            <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="text-center lg:text-left">
+                    <span class="inline-block py-1 px-3 rounded-full bg-blue-500/20 text-blue-300 text-xs font-bold uppercase tracking-wider mb-6 border border-blue-500/30">
+                        Proteção Inteligente
+                    </span>
+                    <h1 class="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">
+                        Seu carro protegido, <br><span class="text-blue-400">sem a burocracia</span> dos seguros.
+                    </h1>
+                    <p class="text-lg md:text-xl text-slate-300 mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                        Economize até 40% com cobertura nacional completa e assistência 24h. Ativação digital imediata.
+                    </p>
+                    <div class="hidden lg:flex items-center gap-6 text-sm text-slate-400">
+                        <div class="flex items-center gap-2"><i data-lucide="check" class="text-green-500 w-4 h-4"></i> Sem consulta SPC/Serasa</div>
+                        <div class="flex items-center gap-2"><i data-lucide="check" class="text-green-500 w-4 h-4"></i> Pagamento Mensal</div>
+                    </div>
+                </div>
+
+                <!-- Formulário de Cotação -->
+                <div id="cotacao" class="bg-white rounded-3xl p-8 shadow-2xl text-slate-900 border border-slate-100">
+                    <h3 class="text-2xl font-bold mb-2 text-slate-800">Solicite sua Cotação</h3>
+                    <p class="text-slate-500 text-sm mb-6">Receba uma simulação personalizada em poucos minutos.</p>
+                    
+                    <form id="quoteForm" class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-slate-500 mb-1 ml-1">Nome Completo *</label>
+                            <input type="text" id="nome" required placeholder="Ex: João Silva" 
+                                class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white transition-all outline-none">
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-slate-500 mb-1 ml-1">Telefone (WhatsApp) *</label>
+                                <input type="text" id="telefone" required placeholder="(00) 00000-0000" 
+                                    maxlength="15"
+                                    class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white transition-all outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-slate-500 mb-1 ml-1">Placa do Veículo *</label>
+                                <input type="text" id="placa" required placeholder="ABC-1234" 
+                                    maxlength="8"
+                                    class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white transition-all outline-none uppercase text-center font-mono">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-slate-500 mb-1 ml-1">E-mail (Opcional)</label>
+                            <input type="email" id="email" placeholder="seu@email.com" 
+                                class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white transition-all outline-none">
+                        </div>
+
+                        <button type="submit" class="w-full cta-button bg-[#25d366] hover:bg-[#20bd5a] text-white py-4 rounded-xl font-bold text-lg flex items-center justify-center gap-2 mt-4 shadow-lg">
+                            <i data-lucide="whatsapp" class="w-5 h-5"></i>
+                            Solicitar cotação grátis
+                        </button>
+                        <p class="text-[10px] text-center text-slate-400 mt-2">
+                            Ao enviar, você concorda com nossos termos de privacidade.
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </header>
+
+        <!-- Benefícios Rápidos -->
+        <section class="max-w-7xl mx-auto px-6 -mt-16 mb-20">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-2xl shadow-xl border border-slate-100 flex flex-col items-center text-center">
+                    <div class="w-14 h-14 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center mb-6">
+                        <i data-lucide="map-pin" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Cobertura Nacional</h3>
+                    <p class="text-slate-600">Assistência completa em qualquer rodovia ou cidade do Brasil.</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-xl border border-slate-100 flex flex-col items-center text-center transform md:scale-105 z-10">
+                    <div class="w-14 h-14 bg-green-50 text-green-600 rounded-full flex items-center justify-center mb-6">
+                        <i data-lucide="zap" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Ativação Express</h3>
+                    <p class="text-slate-600">Fez a vistoria digital, está protegido. Sem carência abusiva.</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-xl border border-slate-100 flex flex-col items-center text-center">
+                    <div class="w-14 h-14 bg-purple-50 text-purple-600 rounded-full flex items-center justify-center mb-6">
+                        <i data-lucide="shield-check" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Sem Burocracia</h3>
+                    <p class="text-slate-600">Não consultamos SPC/Serasa. Aceitamos condutores de qualquer idade.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sessão de Parceiros -->
+        <section class="parceiros-bg py-20 px-6 relative overflow-hidden">
+            <div class="absolute inset-0 bg-white/40"></div>
+            <div class="max-w-7xl mx-auto relative z-10">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-black text-[#ff7a08] mb-4">PARCEIROS</h2>
+                    <p class="text-lg md:text-xl text-[#003960] font-semibold">Contamos com grandes parceiros para oferecer <br class="hidden md:block"> a melhor experiência ao nosso associado</p>
+                </div>
+                
+                <div class="flex flex-wrap justify-center items-center gap-8 md:gap-16 text-center">
+                    <img src="https://premiumclube.org.br/wp-content/uploads/2023/10/LOGO-LOCALIZA-1024x205.png" alt="Localiza" class="h-10 md:h-14 w-auto object-contain">
+                    <img src="https://premiumclube.org.br/wp-content/uploads/2023/10/LOGO-UNIDAS.png" alt="Unidas" class="h-10 md:h-14 w-auto object-contain">
+                    <img src="https://premiumclube.org.br/wp-content/uploads/2023/11/Group_518-removebg-preview.png" alt="Parceiro" class="h-10 md:h-14 w-auto object-contain">
+                    <img src="https://premiumclube.org.br/wp-content/uploads/2025/09/autoglass-logo-site-75.png" alt="Autoglass" class="h-10 md:h-14 w-auto object-contain">
+                    <img src="https://premiumclube.org.br/wp-content/uploads/2025/09/LogoMovida500pxParceiroPremium-66.png" alt="Movida" class="h-10 md:h-14 w-auto object-contain">
+                </div>
+            </div>
+        </section>
+
+        <!-- Sessão de Comentários -->
+        <section class="py-20 bg-slate-50 px-6">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl font-extrabold text-slate-900 mb-4">O que dizem nossos associados</h2>
+                    <p class="text-slate-600">Confira a experiência de quem já conta com a proteção Premium Clube.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-white p-8 rounded-2xl shadow-md border border-slate-100 italic">
+                        <div class="flex text-yellow-400 mb-4"><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i></div>
+                        <p class="text-slate-700 mb-6">"Precisei de guincho no meio da madrugada e fui atendido muito rápido. O consultor me acompanhou em todo o processo."</p>
+                        <p class="non-italic font-bold text-sm">João Souza</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-2xl shadow-md border border-slate-100 italic">
+                        <div class="flex text-yellow-400 mb-4"><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i></div>
+                        <p class="text-slate-700 mb-6">"Economizei muito trocando meu seguro pela proteção da Premium. A cobertura é completa e o atendimento humano."</p>
+                        <p class="non-italic font-bold text-sm">Maria Alves</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-2xl shadow-md border border-slate-100 italic">
+                        <div class="flex text-yellow-400 mb-4"><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i></div>
+                        <p class="text-slate-700 mb-6">"Fui roubado e em menos de 30 dias recebi 100% da tabela FIPE. O suporte do consultor foi essencial."</p>
+                        <p class="non-italic font-bold text-sm">Ricardo Oliveira</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Reinstalado com as 5 perguntas -->
+        <section class="py-20 bg-white px-6">
+            <div class="max-w-3xl mx-auto">
+                <h2 class="text-3xl font-extrabold text-center mb-10 text-slate-900">Perguntas Frequentes</h2>
+                <div class="space-y-4">
+                    <details class="group border border-slate-200 rounded-xl overflow-hidden bg-white shadow-sm">
+                        <summary class="flex justify-between items-center font-bold p-5 cursor-pointer hover:bg-slate-50 transition-colors">
+                            Qual a diferença entre proteção e seguro?
+                            <i data-lucide="chevron-down" class="transition-transform duration-300"></i>
+                        </summary>
+                        <div class="p-5 pt-0 text-slate-600 border-t border-slate-100 leading-relaxed">
+                            O seguro é operado por seguradoras, enquanto a proteção veicular é um sistema de rateio entre associados. Na prática, você tem coberturas similares com custos menores e menos burocracia.
+                        </div>
+                    </details>
+                    <details class="group border border-slate-200 rounded-xl overflow-hidden bg-white shadow-sm">
+                        <summary class="flex justify-between items-center font-bold p-5 cursor-pointer hover:bg-slate-50 transition-colors">
+                            Existe limite de idade para o veículo?
+                            <i data-lucide="chevron-down" class="transition-transform duration-300"></i>
+                        </summary>
+                        <div class="p-5 pt-0 text-slate-600 border-t border-slate-100 leading-relaxed">
+                            Aceitamos veículos leves com até 20 anos de uso. Para casos específicos de modelos mais antigos ou especiais, consulte nossos especialistas.
+                        </div>
+                    </details>
+                    <details class="group border border-slate-200 rounded-xl overflow-hidden bg-white shadow-sm">
+                        <summary class="flex justify-between items-center font-bold p-5 cursor-pointer hover:bg-slate-50 transition-colors">
+                            Preciso fazer consulta ao SPC ou Serasa?
+                            <i data-lucide="chevron-down" class="transition-transform duration-300"></i>
+                        </summary>
+                        <div class="p-5 pt-0 text-slate-600 border-t border-slate-100 leading-relaxed">
+                            Não. Diferente das seguradoras tradicionais, na Premium Clube não realizamos consulta aos órgãos de proteção ao crédito para a sua adesão.
+                        </div>
+                    </details>
+                    <details class="group border border-slate-200 rounded-xl overflow-hidden bg-white shadow-sm">
+                        <summary class="flex justify-between items-center font-bold p-5 cursor-pointer hover:bg-slate-50 transition-colors">
+                            Como funciona a assistência 24 horas?
+                            <i data-lucide="chevron-down" class="transition-transform duration-300"></i>
+                        </summary>
+                        <div class="p-5 pt-0 text-slate-600 border-t border-slate-100 leading-relaxed">
+                            Nossa assistência cobre guincho, socorro mecânico, troca de pneus, falta de combustível (pane seca) e chaveiro em todo o território nacional.
+                        </div>
+                    </details>
+                    <details class="group border border-slate-200 rounded-xl overflow-hidden bg-white shadow-sm">
+                        <summary class="flex justify-between items-center font-bold p-5 cursor-pointer hover:bg-slate-50 transition-colors">
+                            O que acontece se eu vender meu carro?
+                            <i data-lucide="chevron-down" class="transition-transform duration-300"></i>
+                        </summary>
+                        <div class="p-5 pt-0 text-slate-600 border-t border-slate-100 leading-relaxed">
+                            Você pode transferir sua proteção para o novo veículo ou para o novo proprietário do carro antigo, mantendo a simplicidade e continuidade da cobertura.
+                        </div>
+                    </details>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- PÁGINAS LEGAIS -->
+    <main id="privacy-page" class="hidden-section max-w-4xl mx-auto py-20 px-6">
+        <button onclick="showPage('home')" class="mb-8 flex items-center gap-2 text-blue-700 font-bold hover:underline">
+            <i data-lucide="arrow-left" class="w-4 h-4"></i> Voltar para Início
+        </button>
+        <h1 class="text-3xl font-bold mb-8">Política de Privacidade</h1>
+        <div class="prose prose-slate space-y-4 text-slate-700">
+            <p>Este site é operado por um <strong>consultor independente</strong>.</p>
+            <p><strong>Coleta de dados:</strong> Os dados fornecidos no formulário são usados exclusivamente para realizar a cotação solicitada e entrar em contato via WhatsApp.</p>
+        </div>
+    </main>
+
+    <main id="terms-page" class="hidden-section max-w-4xl mx-auto py-20 px-6">
+        <button onclick="showPage('home')" class="mb-8 flex items-center gap-2 text-blue-700 font-bold hover:underline">
+            <i data-lucide="arrow-left" class="w-4 h-4"></i> Voltar para Início
+        </button>
+        <h1 class="text-3xl font-bold mb-8">Termos de Uso</h1>
+        <div class="prose prose-slate space-y-4 text-slate-700">
+            <p>Este site tem caráter informativo e é gerido por um consultor independente da Premium Clube.</p>
+        </div>
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="bg-slate-900 text-slate-400 py-16 px-6 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+                <div class="flex flex-col items-center md:items-start text-center md:text-left">
+                    <div class="flex items-center gap-2 mb-4">
+                        <i data-lucide="user" class="text-blue-500 w-5 h-5"></i>
+                        <span class="text-xl font-bold text-white tracking-tight">Consultor Independente</span>
+                    </div>
+                    <p class="text-sm leading-relaxed">
+                        Atendimento personalizado para garantir a melhor proteção do seu patrimônio com transparência e ética.
+                    </p>
+                </div>
+                
+                <div class="flex flex-col items-center">
+                    <h4 class="text-white font-bold mb-4 uppercase text-xs tracking-widest">Links Rápidos</h4>
+                    <nav class="flex flex-col items-center gap-2">
+                        <button onclick="showPage('terms')" class="hover:text-white transition-colors text-sm">Termos de Uso</button>
+                        <button onclick="showPage('privacy')" class="hover:text-white transition-colors text-sm">Política de Privacidade</button>
+                    </nav>
+                </div>
+
+                <div class="flex flex-col items-center md:items-end">
+                    <h4 class="text-white font-bold mb-4 uppercase text-xs tracking-widest">WhatsApp Direto</h4>
+                    <a href="https://wa.me/557731990819" class="bg-blue-600 p-2 rounded-full text-white hover:scale-110 transition-transform shadow-lg">
+                        <i data-lucide="message-circle" class="w-6 h-6"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="pt-8 border-t border-slate-800 text-center text-xs">
+                <p>© 2026 Premium Clube | Consultoria Independente</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        // Máscaras de Input
+        const inputTelefone = document.getElementById('telefone');
+        const inputPlaca = document.getElementById('placa');
+
+        inputTelefone.addEventListener('input', (e) => {
+            let v = e.target.value.replace(/\D/g, '');
+            if (v.length > 11) v = v.substring(0, 11);
+            
+            if (v.length > 10) {
+                v = v.replace(/^(\d{2})(\d{5})(\d{4}).*/, '($1) $2-$3');
+            } else if (v.length > 5) {
+                v = v.replace(/^(\d{2})(\d{4})(\d{0,4}).*/, '($1) $2-$3');
+            } else if (v.length > 2) {
+                v = v.replace(/^(\d{2})(\d{0,5})/, '($1) $2');
+            } else if (v.length > 0) {
+                v = v.replace(/^(\d*)/, '($1');
+            }
+            e.target.value = v;
+        });
+
+        inputPlaca.addEventListener('input', (e) => {
+            let v = e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '');
+            if (v.length > 7) v = v.substring(0, 7);
+            
+            if (v.length > 3 && !/\d/.test(v[3])) {
+                // Formato Mercosul (Letra na 4ª posição)
+                v = v.substring(0, 7);
+            } else if (v.length > 3) {
+                // Formato antigo AAA-1234
+                v = v.substring(0, 3) + '-' + v.substring(3);
+            }
+            e.target.value = v;
+        });
+
+        // Envio do Formulário
+        document.getElementById('quoteForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const nome = document.getElementById('nome').value;
+            const telefone = document.getElementById('telefone').value;
+            const placa = document.getElementById('placa').value;
+            const email = document.getElementById('email').value || 'Não informado';
+            
+            const consultorWhatsapp = '557731990819';
+            
+            const mensagem = `*SOLICITAÇÃO DE COTAÇÃO - PREMIUM CLUBE*%0A%0A` +
+                             `*Nome:* ${nome}%0A` +
+                             `*Telefone:* ${telefone}%0A` +
+                             `*Placa:* ${placa}%0A` +
+                             `*E-mail:* ${email}%0A%0A` +
+                             `_Olá, vi seu site e gostaria de uma cotação grátis para o meu veículo._`;
+            
+            window.open(`https://wa.me/${consultorWhatsapp}?text=${mensagem}`, '_blank');
+        });
+
+        function showPage(pageId) {
+            const sections = ['home-page', 'privacy-page', 'terms-page'];
+            sections.forEach(id => {
+                document.getElementById(id).classList.add('hidden-section');
+            });
+            document.getElementById(`${pageId}-page`).classList.remove('hidden-section');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
