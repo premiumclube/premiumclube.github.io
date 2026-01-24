@@ -12,18 +12,18 @@
         body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
         .gradient-brand { background: linear-gradient(135deg, #1e3668 0%, #0f172a 100%); }
         .tab-active { background-color: #1e3668 !important; color: white !important; border-bottom: 4px solid #f47920; }
-        
+
         /* Accordion Custom Styles */
         .faq-item[open] summary svg { transform: rotate(180deg); }
         summary::-webkit-details-marker { display: none; }
-        
+
         /* Back to Top */
         #backToTop { opacity: 0; visibility: hidden; transition: all 0.3s ease; }
         #backToTop.show { opacity: 1; visibility: visible; }
 
         .benefit-card { transition: all 0.3s ease; }
         .benefit-card:hover { transform: translateY(-3px); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); }
-        
+
         .footer-link:hover { text-decoration: underline; color: #f47920; }
     </style>
 </head>
@@ -82,27 +82,27 @@
             <div id="cotacao" class="bg-white rounded-3xl p-8 shadow-2xl text-slate-900 border border-slate-200">
                 <h3 class="text-2xl font-black mb-1 text-slate-800 uppercase italic">Fazer Cotação</h3>
                 <p class="text-slate-500 text-sm mb-6 font-medium tracking-tight">Receba agora mesmo no seu WhatsApp:</p>
-                
+
                 <form id="quoteForm" class="space-y-4">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <input type="text" id="nome" required placeholder="Seu Nome *" class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white outline-none transition-all">
-                        
+
                         <!-- Campo Telefone com Máscara (00) 00000-0000 -->
-                        <input type="text" id="telefone" required placeholder="WhatsApp (DDD) *" 
+                        <input type="text" id="telefone" required placeholder="WhatsApp (DDD) *"
                             maxlength="15"
                             onkeyup="handlePhone(event)"
                             class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white outline-none transition-all">
                     </div>
-                    
+
                     <input type="email" id="email" placeholder="E-mail (Opcional)" class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white outline-none transition-all">
-                    
+
                     <!-- Campo Placa com Máscara AAA-0000 ou AAA0A00 (Mercosul) -->
-                    <input type="text" id="placa" required placeholder="Placa do Veículo *" 
+                    <input type="text" id="placa" required placeholder="Placa do Veículo *"
                         maxlength="8"
                         oninput="this.value = this.value.toUpperCase()"
                         onkeyup="handlePlate(event)"
                         class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white outline-none uppercase font-bold text-center transition-all tracking-widest text-lg">
-                    
+
                     <button type="submit" class="w-full bg-[#25d366] hover:bg-[#1da851] text-white py-4 rounded-xl font-black text-lg flex items-center justify-center gap-3 shadow-lg transition-transform active:scale-95">
                         <i data-lucide="message-square" class="w-6 h-6"></i>
                         OBTER COTAÇÃO GRÁTIS
@@ -156,8 +156,11 @@
                 <div class="p-8 md:p-12">
                     <div class="grid lg:grid-cols-2 gap-12 items-center">
                         <div class="grid grid-cols-2 sm:grid-cols-4 gap-4" id="benefit-icons"></div>
-                        <div class="flex justify-center bg-slate-50 rounded-3xl p-6 min-h-[300px] items-center">
-                            <img id="vehicle-image" src="" alt="Imagem do Veículo" class="max-w-full h-auto drop-shadow-2xl transition-all duration-300">
+                        <div class="flex justify-center bg-white rounded-3xl p-6 min-h-[350px] items-center relative overflow-hidden">
+                            <div class="absolute inset-0 opacity-5 pointer-events-none flex items-center justify-center">
+                                <i data-lucide="shield" class="w-64 h-64 text-[#1e3668]"></i>
+                            </div>
+                            <img id="vehicle-image" src="" alt="Veículo" class="max-w-full h-auto transition-all duration-300 relative z-10">
                         </div>
                     </div>
                 </div>
@@ -281,47 +284,62 @@
     </section>
 
     <!-- Rodapé Otimizado SEO e Seguro Consultor -->
+    <!-- Rodapé Responsivo -->
     <footer class="bg-[#1e3668] text-white pt-20 pb-10 px-6">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 border-b border-white/10 pb-12 mb-10">
-            <div class="col-span-2 md:col-span-1">
-                <img src="assets/logo-tran.png" alt="Premium Clube" class="h-8 md:h-10">
-<br>
-                <p class="text-sm text-slate-300 leading-relaxed font-medium">Consultoria Independente Autorizada Premium Clube. Compromisso com a verdade e suporte total ao associado em todas as etapas.</p>
-            </div>
-            <div>
-                <h4 class="font-black text-lg mb-6 uppercase italic text-orange-400">Links Rápidos</h4>
-                <ul class="space-y-3 text-sm text-slate-300 font-semibold">
-                    <li><a href="#beneficios" class="footer-link">Tabela de Benefícios</a></li>
-                    <li><a href="#faq" class="footer-link">Dúvidas Comuns</a></li>
-                    <li><a href="#cotacao" class="footer-link">Simular Cotação</a></li>
-                    <li><a href="https://premiumclube.org.br/wp-content/uploads/2023/11/REGULAMENTO_PREMIUM_CLUBE.pdf" target="_blank" class="footer-link">Regulamento PDF</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4 class="font-black text-lg mb-6 uppercase italic text-orange-400">Atendimento</h4>
-                <ul class="space-y-4 text-sm text-slate-300">
-                    <li class="flex items-start gap-3"><i data-lucide="phone" class="w-4 h-4 text-orange-500 mt-1"></i> (77) 3199-0819</li>
-                    <li class="flex items-start gap-3"><i data-lucide="clock" class="w-4 h-4 text-orange-500 mt-1"></i> Seg a Sex: 08h às 18h</li>
-                    <li class="flex items-start gap-3"><i data-lucide="award" class="w-4 h-4 text-green-400 mt-1"></i> Proteção Autorizada</li>
-                </ul>
-            </div>
-            <div>
-                <h4 class="font-black text-lg mb-6 uppercase italic text-orange-400">Segurança de Dados</h4>
-                <div class="bg-white/5 p-4 rounded-xl border border-white/10 text-[11px] leading-tight text-slate-400">
-                    <p class="mb-2 font-bold text-slate-200">CONFORMIDADE LGPD</p>
-                    Seus dados pessoais são protegidos e utilizados exclusivamente para a elaboração da sua proposta personalizada. Não compartilhamos informações com terceiros.
-                </div>
-            </div>
-        </div>
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] text-slate-500 uppercase font-black tracking-widest text-center md:text-left">
-            <p>© 2026 Premium Clube Proteção Veicular - Consultoria Autorizada Independente. CNPJ: 21.056.402/0001-38</p>
-            <div class="flex gap-4">
-                <a href="#" class="hover:text-white transition-colors">Avisos Legais</a>
-                <span>|</span>
-                <a href="#" class="hover:text-white transition-colors">Privacidade</a>
-            </div>
-        </div>
-    </footer>
+           <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 border-b border-white/10 pb-12 mb-10">
+               <!-- Coluna 1 -->
+               <div class="flex flex-col items-center md:items-start text-center md:text-left">
+                   <img src="assets/logo-tran.png" alt="Premium Clube">
+                   <br>
+                   <p class="text-sm text-slate-300 leading-relaxed font-medium">Consultoria Independente Autorizada Premium Clube. Compromisso com a verdade e suporte total ao associado em todas as etapas.</p>
+               </div>
+
+               <!-- Coluna 2 -->
+               <div class="flex flex-col items-center md:items-start text-center md:text-left">
+                   <h4 class="font-black text-lg mb-6 uppercase italic text-orange-400">Links Rápidos</h4>
+                   <ul class="space-y-3 text-sm text-slate-300 font-semibold">
+                       <li><a href="#beneficios" class="footer-link">Tabela de Benefícios</a></li>
+                       <li><a href="#faq" class="footer-link">Dúvidas Comuns</a></li>
+                       <li><a href="#cotacao" class="footer-link">Simular Cotação</a></li>
+                       <li><a href="https://premiumclube.org.br/wp-content/uploads/2023/11/REGULAMENTO_PREMIUM_CLUBE.pdf" target="_blank" class="footer-link">Regulamento PDF</a></li>
+                   </ul>
+               </div>
+
+               <!-- Coluna 3 -->
+               <div class="flex flex-col items-center md:items-start text-center md:text-left">
+                   <h4 class="font-black text-lg mb-6 uppercase italic text-orange-400">Atendimento</h4>
+                   <ul class="space-y-4 text-sm text-slate-300">
+                       <li class="flex items-center md:items-start gap-3 justify-center md:justify-start">
+                           <i data-lucide="phone" class="w-4 h-4 text-orange-500 mt-1"></i> (77) 3199-0819
+                       </li>
+                       <li class="flex items-center md:items-start gap-3 justify-center md:justify-start">
+                           <i data-lucide="clock" class="w-4 h-4 text-orange-500 mt-1"></i> Seg a Sex: 08h às 18h
+                       </li>
+                       <li class="flex items-center md:items-start gap-3 justify-center md:justify-start">
+                           <i data-lucide="award" class="w-4 h-4 text-green-400 mt-1"></i> Proteção Autorizada
+                       </li>
+                   </ul>
+               </div>
+
+               <!-- Coluna 4 -->
+               <div class="flex flex-col items-center md:items-start text-center md:text-left">
+                   <h4 class="font-black text-lg mb-6 uppercase italic text-orange-400">Segurança de Dados</h4>
+                   <div class="bg-white/5 p-4 rounded-xl border border-white/10 text-[11px] leading-tight text-slate-400 max-w-xs">
+                       <p class="mb-2 font-bold text-slate-200">CONFORMIDADE LGPD</p>
+                       Seus dados pessoais são protegidos e utilizados exclusivamente para a elaboração da sua proposta personalizada. Não compartilhamos informações com terceiros.
+                   </div>
+               </div>
+           </div>
+
+           <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] text-slate-500 uppercase font-black tracking-widest text-center">
+               <p>© 2026 Premium Clube Proteção Veicular - Consultoria Autorizada Independente. CNPJ: 21.056.402/0001-38</p>
+               <div class="flex gap-4">
+                   <a href="#" class="hover:text-white transition-colors">Avisos Legais</a>
+                   <span>|</span>
+                   <a href="#" class="hover:text-white transition-colors">Privacidade</a>
+               </div>
+           </div>
+       </footer>
 
     <!-- Botão WhatsApp Flutuante -->
     <a href="https://wa.me/557731990819" target="_blank" class="fixed bottom-6 right-6 z-50 bg-[#25d366] text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-transform flex items-center justify-center">
