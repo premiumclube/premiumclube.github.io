@@ -11,7 +11,7 @@
                 j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
                     'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
         })(window, document, 'script', 'dataLayer', 'GTM-KN5P7HQN');
-    
+
         !function (f, b, e, v, n, t, s) {
             if (f.fbq) return; n = f.fbq = function () {
                 n.callMethod ?
@@ -28,14 +28,14 @@
     </script>
 
     <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-17904877543"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17904877543"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
 
-  gtag('config', 'AW-17904877543');
-</script>
+        gtag('config', 'AW-17904877543');
+    </script>
 
     <noscript>
         <img height="1" width="1" style="display:none"
@@ -258,11 +258,28 @@
                 </form>
 
                 <script>
+                    function gtag_report_conversion(url) {
+                        var callback = function () {
+                            if (typeof (url) != 'undefined') {
+                                window.location = url;
+                            }
+                        };
+                        gtag('event', 'conversion', {
+                            'send_to': 'AW-17904877543/hTjVCJasz-wbEOf_2tlC',
+                            'value': 1.0,
+                            'currency': 'BRL',
+                            'event_callback': callback
+                        });
+                        return false;
+                    }
                     // Função Central de Rastreio (Pixel & GTM)
                     function trackLead() {
                         if (typeof fbq !== 'undefined') fbq('track', 'Lead');
                         if (typeof dataLayer !== 'undefined') dataLayer.push({ 'event': 'btn_cotacao_clique' });
-                        console.log("Rastreio: Lead capturado.");
+
+                        gtag_report_conversion();
+
+                        console.log("Rastreio: Lead capturado no FB, GTM e Google Ads.");
                     }
 
                     document.getElementById('quoteForm').addEventListener('submit', function (e) {
