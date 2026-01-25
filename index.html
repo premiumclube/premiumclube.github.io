@@ -10,7 +10,8 @@
             }); var f = d.getElementsByTagName(s)[0],
                 j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
                     'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
-        })(window, document, 'script', 'dataLayer', 'GTM-KN5P7HQN');</script>
+        })(window, document, 'script', 'dataLayer', 'GTM-KN5P7HQN');
+    </script>
     <!-- End Google Tag Manager -->
 
     <!-- Meta Pixel Code -->
@@ -18,7 +19,7 @@
         !function (f, b, e, v, n, t, s) {
             if (f.fbq) return; n = f.fbq = function () {
                 n.callMethod ?
-                n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
             };
             if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
             n.queue = []; t = b.createElement(e); t.async = !0;
@@ -29,8 +30,11 @@
         fbq('init', '2100028070772268');
         fbq('track', 'PageView');
     </script>
-    <noscript><img height="1" width="1" style="display:none"
-            src="https://www.facebook.com/tr?id=2100028070772268&ev=PageView&noscript=1" /></noscript>
+
+    <noscript>
+        <img height="1" width="1" style="display:none"
+            src="https://www.facebook.com/tr?id=2100028070772268&ev=PageView&noscript=1" />
+    </noscript>
     <!-- End Meta Pixel Code -->
 
     <meta charset="UTF-8">
@@ -240,7 +244,8 @@
                         oninput="this.value = this.value.toUpperCase()" onkeyup="handlePlate(event)"
                         class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white outline-none uppercase font-bold text-center transition-all tracking-widest text-sm">
 
-                    <button type="submit" class="w-full bg-[#25d366] hover:bg-[#1da851] text-white py-4 rounded-xl font-black text-sm flex items-center justify-center gap-3 shadow-lg transition-transform active:scale-95">
+                    <button type="submit"
+                        class="w-full bg-[#25d366] hover:bg-[#1da851] text-white py-4 rounded-xl font-black text-sm flex items-center justify-center gap-3 shadow-lg transition-transform active:scale-95">
                         <i data-lucide="message-square" class="w-6 h-6"></i>
                         OBTER COTAÇÃO GRÁTIS
                     </button>
