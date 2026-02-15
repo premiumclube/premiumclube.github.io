@@ -90,7 +90,7 @@
         .form-tab-active {
             background-color: white !important;
             color: #1e3668 !important;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         }
 
         .faq-item[open] summary svg {
@@ -160,7 +160,7 @@
                     Cotação Online
                 </a>
                 <button type="button" id="menuToggle"
-                    class="md:hidden p-2 text-white rounded-lg hover:bg-white/10 transition-colors">
+                    class="md:hidden p-2 text-white rounded-lg hover:bg-white/10 transition-colors" aria-label="Abrir menu">
                     <i data-lucide="menu" id="menuIcon" class="w-5 h-5 block"></i>
                     <i data-lucide="x" id="closeIcon" class="w-5 h-5 hidden"></i>
                 </button>
@@ -168,16 +168,11 @@
         </div>
         <div id="mobileMenu"
             class="flex flex-col hidden md:hidden absolute top-full left-0 right-0 bg-[#1e3668] border-t border-white/10 py-4 px-6 shadow-xl">
-            <a href="#beneficios"
-                class="block py-3 text-white font-semibold hover:text-orange-400 transition-colors border-b border-white/10">Benefícios</a>
-            <a href="#sobre"
-                class="block py-3 text-white font-semibold hover:text-orange-400 transition-colors border-b border-white/10">Sobre</a>
-            <a href="#depoimentos"
-                class="block py-3 text-white font-semibold hover:text-orange-400 transition-colors border-b border-white/10">Depoimentos</a>
-            <a href="#faq"
-                class="block py-3 text-white font-semibold hover:text-orange-400 transition-colors border-b border-white/10">Dúvidas</a>
-            <a href="#cotacao"
-                class="block py-3 text-orange-400 font-black hover:text-orange-300 transition-colors">Cotação Online</a>
+            <a href="#beneficios" class="block py-3 text-white font-semibold border-b border-white/10">Benefícios</a>
+            <a href="#sobre" class="block py-3 text-white font-semibold border-b border-white/10">Sobre</a>
+            <a href="#depoimentos" class="block py-3 text-white font-semibold border-b border-white/10">Depoimentos</a>
+            <a href="#faq" class="block py-3 text-white font-semibold border-b border-white/10">Dúvidas</a>
+            <a href="#cotacao" class="block py-3 text-orange-400 font-black">Cotação Online</a>
         </div>
     </nav>
 
@@ -213,45 +208,44 @@
             </div>
 
             <div id="cotacao" class="bg-white rounded-3xl p-8 shadow-2xl text-slate-900 border border-slate-200">
-                <h3 class="text-2xl font-black mb-1 text-slate-800 uppercase italic">Fazer Cotação</h3>
-                <p id="form-instruction" class="text-slate-500 text-sm mb-6 font-medium tracking-tight uppercase">Escolha como prefere informar:</p>
+                <h3 class="text-2xl font-black mb-1 text-slate-800 uppercase italic">Atendimento Premium</h3>
+                <p class="text-slate-500 text-sm mb-6 font-medium tracking-tight">Escolha como prefere iniciar:</p>
 
                 <form id="smartQuoteForm" class="space-y-4">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <input type="text" id="nome" required placeholder="Seu Nome *"
-                            class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white outline-none transition-all font-semibold">
-
-                        <input type="text" id="telefone" required placeholder="WhatsApp (DDD) *" maxlength="15"
+                        <input type="text" id="smartNome" required placeholder="Seu Nome *"
+                            class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white outline-none transition-all">
+                        <input type="text" id="smartTelefone" required placeholder="WhatsApp (DDD) *" maxlength="15"
                             onkeyup="handlePhone(event)"
-                            class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white outline-none transition-all font-semibold">
+                            class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white outline-none transition-all">
                     </div>
 
                     <div class="flex p-1 bg-slate-100 rounded-2xl overflow-hidden">
-                        <button type="button" id="btnPlaca" onclick="setMetodo('placa')" class="flex-1 py-2.5 text-[10px] font-black rounded-xl transition-all form-tab-active">COM PLACA</button>
-                        <button type="button" id="btnDados" onclick="setMetodo('dados')" class="flex-1 py-2.5 text-[10px] font-black rounded-xl transition-all text-slate-400">SEM PLACA</button>
-                        <button type="button" id="btnDuvida" onclick="setMetodo('duvida')" class="flex-1 py-2.5 text-[10px] font-black rounded-xl transition-all text-slate-400">SÓ DÚVIDAS</button>
+                        <button type="button" id="btnPlaca" onclick="setMetodoForm('placa')" class="flex-1 py-2 text-[10px] font-black rounded-xl transition-all form-tab-active">COM PLACA</button>
+                        <button type="button" id="btnDados" onclick="setMetodoForm('dados')" class="flex-1 py-2 text-[10px] font-black rounded-xl transition-all text-slate-400">SEM PLACA</button>
+                        <button type="button" id="btnDuvida" onclick="setMetodoForm('duvida')" class="flex-1 py-2 text-[10px] font-black rounded-xl transition-all text-slate-400">SÓ DÚVIDAS</button>
                     </div>
 
                     <div id="wrapperPlaca" class="animate-in fade-in duration-300">
-                        <input type="text" id="placa" placeholder="Placa do Veículo (ABC-1234) *" maxlength="8"
+                        <input type="text" id="smartPlaca" placeholder="Placa do Veículo (ABC1D23) *" maxlength="8"
                             oninput="this.value = this.value.toUpperCase()" onkeyup="handlePlate(event)"
-                            class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white outline-none uppercase font-bold text-center transition-all tracking-widest text-sm">
+                            class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 outline-none uppercase font-bold text-center tracking-widest text-sm">
                     </div>
 
                     <div id="wrapperDados" class="hidden animate-in fade-in duration-300">
-                        <textarea id="infoVeiculo" placeholder="Ex: Marca, Modelo, Ano e sua Cidade..." rows="2"
-                            class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white outline-none transition-all text-sm font-semibold"></textarea>
+                        <textarea id="infoVeiculo" placeholder="Ex: Onix 2021, Particular, Salvador-BA" rows="2" 
+                            class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 outline-none text-sm"></textarea>
                     </div>
 
                     <div id="wrapperDuvida" class="hidden animate-in fade-in duration-300">
-                        <textarea id="textoDuvida" placeholder="Como podemos te ajudar hoje?" rows="2"
-                            class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white outline-none transition-all text-sm font-semibold"></textarea>
+                        <textarea id="textoDuvida" placeholder="Como podemos te ajudar hoje?" rows="2" 
+                            class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 outline-none text-sm"></textarea>
                     </div>
 
                     <button type="submit"
                         class="w-full bg-[#25d366] hover:bg-[#1da851] text-white py-4 rounded-xl font-black text-sm flex items-center justify-center gap-3 shadow-lg transition-transform active:scale-95">
                         <i data-lucide="message-square" class="w-6 h-6"></i>
-                        <span id="btn-label">OBTER COTAÇÃO GRÁTIS</span>
+                        <span id="btn-text">OBTER COTAÇÃO GRÁTIS</span>
                     </button>
                 </form>
             </div>
@@ -260,29 +254,21 @@
 
     <section id="beneficios" class="py-20 px-6">
         <div class="max-w-7xl mx-auto">
-            <h2 class="text-4xl font-black text-[#1e3668] mb-12 text-center uppercase italic">Benefícios por Categoria
-            </h2>
+            <h2 class="text-4xl font-black text-[#1e3668] mb-12 text-center uppercase italic">Benefícios por Categoria</h2>
             <div class="bg-white rounded-3xl shadow-xl overflow-hidden border border-slate-100">
                 <div class="flex overflow-x-auto bg-slate-100 border-b scrollbar-hide" id="tab-buttons">
-                    <button onclick="switchTab('carros')" data-tab="carros"
-                        class="tab-btn px-6 py-4 flex-1 text-xs font-black uppercase tracking-widest tab-active whitespace-nowrap">Carros</button>
-                    <button onclick="switchTab('motos')" data-tab="motos"
-                        class="tab-btn px-6 py-4 flex-1 text-xs font-black uppercase tracking-widest whitespace-nowrap">Motos</button>
-                    <button onclick="switchTab('caminhoes')" data-tab="caminhoes"
-                        class="tab-btn px-6 py-4 flex-1 text-xs font-black uppercase tracking-widest whitespace-nowrap">Caminhões</button>
-                    <button onclick="switchTab('autoescola')" data-tab="autoescola"
-                        class="tab-btn px-6 py-4 flex-1 text-xs font-black uppercase tracking-widest whitespace-nowrap">Auto Escolas</button>
-                    <button onclick="switchTab('van')" data-tab="van"
-                        class="tab-btn px-6 py-4 flex-1 text-xs font-black uppercase tracking-widest whitespace-nowrap">Van</button>
-                    <button onclick="switchTab('taxi')" data-tab="taxi"
-                        class="tab-btn px-6 py-4 flex-1 text-xs font-black uppercase tracking-widest whitespace-nowrap">Táxi</button>
+                    <button onclick="switchTab('carros')" data-tab="carros" class="tab-btn px-6 py-4 flex-1 text-xs font-black uppercase tracking-widest tab-active whitespace-nowrap">Carros</button>
+                    <button onclick="switchTab('motos')" data-tab="motos" class="tab-btn px-6 py-4 flex-1 text-xs font-black uppercase tracking-widest whitespace-nowrap">Motos</button>
+                    <button onclick="switchTab('caminhoes')" data-tab="caminhoes" class="tab-btn px-6 py-4 flex-1 text-xs font-black uppercase tracking-widest whitespace-nowrap">Caminhões</button>
+                    <button onclick="switchTab('autoescola')" data-tab="autoescola" class="tab-btn px-6 py-4 flex-1 text-xs font-black uppercase tracking-widest whitespace-nowrap">Auto Escola</button>
+                    <button onclick="switchTab('van')" data-tab="van" class="tab-btn px-6 py-4 flex-1 text-xs font-black uppercase tracking-widest whitespace-nowrap">Van</button>
+                    <button onclick="switchTab('taxi')" data-tab="taxi" class="tab-btn px-6 py-4 flex-1 text-xs font-black uppercase tracking-widest whitespace-nowrap">Táxi</button>
                 </div>
                 <div class="p-8 md:p-12">
                     <div class="grid lg:grid-cols-2 gap-12 items-center">
                         <div class="grid grid-cols-2 sm:grid-cols-4 gap-4" id="benefit-icons"></div>
                         <div class="flex justify-center bg-white rounded-3xl p-6 min-h-[350px] items-center">
-                            <img id="vehicle-image" src="" alt="Veículo"
-                                class="max-w-full h-auto transition-all duration-300">
+                            <img id="vehicle-image" src="" alt="Veículo" class="max-w-full h-auto transition-all duration-300">
                         </div>
                     </div>
                 </div>
@@ -294,10 +280,7 @@
         <div class="max-w-7xl mx-auto flex flex-col lg:flex-row gap-16 items-center">
             <div class="lg:w-1/2">
                 <h2 class="text-3xl font-black text-[#1e3668] mb-6 uppercase italic">Referência em Proteção</h2>
-                <p class="text-slate-600 text-lg leading-relaxed mb-6 italic">
-                    "Democratizamos o acesso à proteção veicular de alta qualidade no Brasil. Com mais de 9 anos de
-                    história, entregamos segurança real para milhares de famílias com suporte total do consultor."
-                </p>
+                <p class="text-slate-600 text-lg leading-relaxed mb-6 italic">"Democratizamos o acesso à proteção veicular de alta qualidade no Brasil..."</p>
                 <div class="grid grid-cols-2 gap-4">
                     <div class="p-6 bg-slate-50 rounded-2xl border-l-4 border-orange-500">
                         <span class="block text-3xl font-black text-[#1e3668]">+60</span>
@@ -310,43 +293,31 @@
                 </div>
             </div>
             <div class="lg:w-1/2">
-                <img src="assets/sobre-premium.png" alt="Consultoria Premium" class="rounded-[2.5rem] shadow-2xl">
+                <img src="assets/sobre-premium.png" alt="Consultoria" class="rounded-[2.5rem] shadow-2xl">
             </div>
         </div>
     </section>
 
-    <section class="py-16 bg-slate-100 px-6">
-        <div class="max-w-4xl mx-auto text-center">
-            <h3 class="text-2xl md:text-3xl font-black text-[#1e3668] mb-8 uppercase italic tracking-tight">Solicite
-                agora sua proteção sem burocracia</h3>
-            <a href="#cotacao"
-                class="inline-flex items-center gap-3 bg-[#f47920] hover:bg-orange-600 text-white px-12 py-5 rounded-2xl font-black text-xl shadow-xl transition-all transform hover:-translate-y-1 active:scale-95 uppercase">
-                <i data-lucide="calculator"></i>
-                Solicite sua cotação grátis
-            </a>
-            <p class="text-slate-500 mt-4 text-sm font-semibold italic">Consultoria especializada para seu veículo</p>
-        </div>
+    <section class="py-16 bg-slate-100 px-6 text-center">
+        <a href="#cotacao" class="inline-flex items-center gap-3 bg-[#f47920] hover:bg-orange-600 text-white px-12 py-5 rounded-2xl font-black text-xl shadow-xl transition-all uppercase">
+            <i data-lucide="calculator"></i> Solicite sua cotação grátis
+        </a>
     </section>
 
-    <section id="depoimentos" class="py-24 bg-slate-50 px-6">
-        <div class="max-w-7xl mx-auto text-center">
-            <h2 class="text-4xl font-black text-[#1e3668] mb-16 uppercase italic">Depoimentos reais</h2>
-            <div class="grid md:grid-cols-3 gap-8 text-left">
-                <div class="bg-white p-8 rounded-3xl shadow-lg border border-slate-100">
-                    <div class="flex gap-1 text-orange-400 mb-4"><i data-lucide="star" class="fill-current w-4 h-4"></i><i data-lucide="star" class="fill-current w-4 h-4"></i><i data-lucide="star" class="fill-current w-4 h-4"></i><i data-lucide="star" class="fill-current w-4 h-4"></i><i data-lucide="star" class="fill-current w-4 h-4"></i></div>
-                    <p class="text-slate-600 italic mb-6">"O atendimento foi excelente. O consultor tirou todas as minhas dúvidas e o valor ficou muito bom."</p>
-                    <span class="block font-bold text-[#1e3668]">Carlos Mendes</span>
-                </div>
-                <div class="bg-white p-8 rounded-3xl shadow-lg border border-slate-100">
-                    <div class="flex gap-1 text-orange-400 mb-4"><i data-lucide="star" class="fill-current w-4 h-4"></i><i data-lucide="star" class="fill-current w-4 h-4"></i><i data-lucide="star" class="fill-current w-4 h-4"></i><i data-lucide="star" class="fill-current w-4 h-4"></i><i data-lucide="star" class="fill-current w-4 h-4"></i></div>
-                    <p class="text-slate-600 italic mb-6">"Precisei de assistência 24h em uma viagem e fui muito bem atendido. Recomendo a Premium."</p>
-                    <span class="block font-bold text-[#1e3668]">Juliana Costa</span>
-                </div>
-                <div class="bg-white p-8 rounded-3xl shadow-lg border border-slate-100">
-                    <div class="flex gap-1 text-orange-400 mb-4"><i data-lucide="star" class="fill-current w-4 h-4"></i><i data-lucide="star" class="fill-current w-4 h-4"></i><i data-lucide="star" class="fill-current w-4 h-4"></i><i data-lucide="star" class="fill-current w-4 h-4"></i><i data-lucide="star" class="fill-current w-4 h-4"></i></div>
-                    <p class="text-slate-600 italic mb-6">"Processo de adesão rápido e transparente. Sem surpresas negativas na hora da vistoria."</p>
-                    <span class="block font-bold text-[#1e3668]">Fabiano Rocha</span>
-                </div>
+    <section id="depoimentos" class="py-24 bg-slate-50 px-6 text-center">
+        <h2 class="text-4xl font-black text-[#1e3668] mb-16 uppercase italic">Depoimentos reais</h2>
+        <div class="grid md:grid-cols-3 gap-8 text-left max-w-7xl mx-auto">
+            <div class="bg-white p-8 rounded-3xl shadow-lg">
+                <p class="text-slate-600 italic mb-6">"O atendimento foi excelente. O consultor tirou todas as minhas dúvidas..."</p>
+                <span class="block font-bold text-[#1e3668]">Carlos Mendes</span>
+            </div>
+            <div class="bg-white p-8 rounded-3xl shadow-lg">
+                <p class="text-slate-600 italic mb-6">"Precisei de assistência 24h em uma viagem e fui muito bem atendido..."</p>
+                <span class="block font-bold text-[#1e3668]">Juliana Costa</span>
+            </div>
+            <div class="bg-white p-8 rounded-3xl shadow-lg">
+                <p class="text-slate-600 italic mb-6">"Processo de adesão rápido e transparente. Sem surpresas negativas..."</p>
+                <span class="block font-bold text-[#1e3668]">Fabiano Rocha</span>
             </div>
         </div>
     </section>
@@ -356,130 +327,122 @@
             <h2 class="text-3xl font-black text-[#1e3668] mb-12 text-center uppercase italic">Dúvidas Frequentes</h2>
             <div class="space-y-4">
                 <details class="faq-item group border border-slate-200 rounded-2xl overflow-hidden shadow-sm">
-                    <summary class="flex justify-between items-center p-6 cursor-pointer bg-slate-50 hover:bg-slate-100 transition-colors list-none">
-                        <span class="font-bold text-[#1e3668]">1. Qual a diferença entre seguro e proteção veicular?</span>
-                        <i data-lucide="chevron-down" class="w-5 h-5 text-orange-500 transition-transform"></i>
+                    <summary class="flex justify-between items-center p-6 cursor-pointer bg-slate-50 list-none font-bold text-[#1e3668]">
+                        1. Qual a diferença entre seguro e proteção? <i data-lucide="chevron-down" class="w-5 h-5 text-orange-500"></i>
                     </summary>
-                    <div class="p-6 bg-white border-t border-slate-100 text-slate-600 text-sm">
-                        O seguro é regulado pela SUSEP e foca em análise de perfil. A proteção veicular (Premium Clube) é um sistema de ajuda mútua, sem burocracia, sem consulta SPC e focado no custo-benefício.
-                    </div>
-                </details>
-                <details class="faq-item group border border-slate-200 rounded-2xl overflow-hidden shadow-sm">
-                    <summary class="flex justify-between items-center p-6 cursor-pointer bg-slate-50 hover:bg-slate-100 transition-colors list-none">
-                        <span class="font-bold text-[#1e3668]">2. Aceitam veículos usados em aplicativos?</span>
-                        <i data-lucide="chevron-down" class="w-5 h-5 text-orange-500 transition-transform"></i>
-                    </summary>
-                    <div class="p-6 bg-white border-t border-slate-100 text-slate-600 text-sm">Sim! Temos coberturas específicas para Uber, 99 e táxis.</div>
+                    <div class="p-6 bg-white border-t text-slate-600 text-sm">O seguro é regulado pela SUSEP...</div>
                 </details>
             </div>
         </div>
     </section>
 
     <footer class="bg-[#1e3668] text-white pt-20 pb-10 px-6">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 border-b border-white/10 pb-12 mb-10">
-            <div class="flex flex-col items-center md:items-start text-center md:text-left">
-                <img src="assets/logo-tran.png" alt="Premium Clube">
-                <p class="text-sm text-slate-300 mt-4">Consultoria Independente Autorizada Premium Clube.</p>
-            </div>
-            <div class="flex flex-col items-center md:items-start">
-                <h4 class="font-black text-lg mb-6 uppercase italic text-orange-400">Links Rápidos</h4>
-                <ul class="space-y-3 text-sm text-slate-300">
-                    <li><a href="#beneficios" class="footer-link">Tabela de Benefícios</a></li>
-                    <li><a href="#faq" class="footer-link">Dúvidas Comuns</a></li>
-                    <li><a href="#cotacao" class="footer-link">Simular Cotação</a></li>
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 border-b border-white/10 pb-12 mb-10 text-center md:text-left">
+            <div><img src="assets/logo-tran.png" alt="Logo"></div>
+            <div>
+                <h4 class="font-black text-lg mb-6 text-orange-400">Links</h4>
+                <ul class="space-y-3 text-sm">
+                    <li><a href="#beneficios" class="footer-link">Tabela</a></li>
+                    <li><a href="#cotacao" class="footer-link">Cotação</a></li>
                 </ul>
             </div>
-            <div class="flex flex-col items-center md:items-start">
-                <h4 class="font-black text-lg mb-6 uppercase italic text-orange-400">Atendimento</h4>
-                <ul class="space-y-4 text-sm text-slate-300">
-                    <li>(77) 3199-0819</li>
-                    <li>Seg a Sex: 08h às 18h</li>
-                </ul>
+            <div>
+                <h4 class="font-black text-lg mb-6 text-orange-400">Atendimento</h4>
+                <p class="text-sm">(77) 3199-0819</p>
             </div>
-            <div class="flex flex-col items-center md:items-start">
-                <h4 class="font-black text-lg mb-6 uppercase italic text-orange-400">Segurança</h4>
-                <div class="bg-white/5 p-4 rounded-xl border border-white/10 text-[11px] text-slate-400">
-                    Seus dados estão protegidos sob a LGPD.
-                </div>
+            <div class="bg-white/5 p-4 rounded-xl border border-white/10 text-[11px] text-slate-400">
+                <p class="font-bold text-slate-200 uppercase mb-2">Conformidade LGPD</p>
+                Seus dados são protegidos.
             </div>
         </div>
-        <p class="text-[10px] text-center text-slate-500">© 2026 Premium Clube Proteção Veicular - CNPJ: 21.056.402/0001-38</p>
+        <div class="max-w-7xl mx-auto text-center text-[10px] text-slate-500 font-black uppercase tracking-widest">
+            © 2026 Premium Clube Proteção Veicular - Consultoria Autorizada Independente. CNPJ: 21.056.402/0001-38
+        </div>
     </footer>
 
-    <a href="https://wa.me/557731990819" target="_blank" class="fixed bottom-6 right-6 z-50 bg-[#25d366] text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-transform"><i data-lucide="message-circle" class="w-8 h-8"></i></a>
-    <button id="backToTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="fixed bottom-24 right-8 z-40 bg-[#1e3668] text-white p-3 rounded-xl shadow-xl hover:bg-orange-500 transition-all"><i data-lucide="arrow-up" class="w-6 h-6"></i></button>
+    <a href="https://wa.me/557731990819" target="_blank" class="fixed bottom-6 right-6 z-50 bg-[#25d366] text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-transform">
+        <i data-lucide="message-circle" class="w-8 h-8"></i>
+    </a>
+
+    <button id="backToTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="fixed bottom-24 right-8 z-40 bg-[#1e3668] text-white p-3 rounded-xl shadow-xl">
+        <i data-lucide="arrow-up" class="w-6 h-6"></i>
+    </button>
 
     <script>
         lucide.createIcons();
 
-        // Banner Logic (Original)
+        // SCRIPTS ORIGINAIS
         let currentSlide = 0;
         const slides = document.querySelectorAll('.banner-slide');
-        setInterval(() => {
+        function nextSlide() {
             slides[currentSlide].classList.remove('active');
             currentSlide = (currentSlide + 1) % slides.length;
             slides[currentSlide].classList.add('active');
-        }, 5000);
+        }
+        setInterval(nextSlide, 5000);
 
-        // --- LÓGICA DO FORMULÁRIO INTELIGENTE ---
-        let metodo = 'placa';
-
-        function setMetodo(m) {
-            metodo = m;
-            const buttons = { placa: document.getElementById('btnPlaca'), dados: document.getElementById('btnDados'), duvida: document.getElementById('btnDuvida') };
+        // LÓGICA DO FORMULÁRIO INTELIGENTE (ATUALIZADA)
+        let metodoForm = 'placa';
+        function setMetodoForm(m) {
+            metodoForm = m;
+            const btns = { placa: document.getElementById('btnPlaca'), dados: document.getElementById('btnDados'), duvida: document.getElementById('btnDuvida') };
             const wrappers = { placa: document.getElementById('wrapperPlaca'), dados: document.getElementById('wrapperDados'), duvida: document.getElementById('wrapperDuvida') };
-            const btnLabel = document.getElementById('btn-label');
-
-            Object.values(buttons).forEach(btn => btn.classList.remove('form-tab-active', 'text-[#1e3668]'));
-            Object.values(buttons).forEach(btn => btn.classList.add('text-slate-400'));
-            buttons[m].classList.add('form-tab-active', 'text-[#1e3668]');
+            const label = document.getElementById('btn-text');
+            
+            Object.values(btns).forEach(b => b.classList.remove('form-tab-active', 'text-[#1e3668]'));
+            Object.values(btns).forEach(b => b.classList.add('text-slate-400'));
+            btns[m].classList.add('form-tab-active', 'text-[#1e3668]');
             
             Object.values(wrappers).forEach(w => w.classList.add('hidden'));
             wrappers[m].classList.remove('hidden');
-
-            btnLabel.innerText = (m === 'duvida') ? 'TIRAR DÚVIDAS NO WHATSAPP' : 'OBTER COTAÇÃO GRÁTIS';
-            document.getElementById('placa').required = (m === 'placa');
+            
+            label.innerText = (m === 'duvida') ? 'TIRAR DÚVIDAS NO WHATSAPP' : 'OBTER COTAÇÃO GRÁTIS';
         }
 
-        // Funções de Rastreio (Originais)
-        function trackLead() {
-            if (typeof fbq !== 'undefined') fbq('track', 'Lead');
-            if (typeof dataLayer !== 'undefined') dataLayer.push({ 'event': 'btn_cotacao_clique' });
-            gtag('event', 'conversion', { 'send_to': 'AW-17904877543/hTjVCJasz-wbEOf_2tlC' });
+        const handlePhone = (event) => {
+            let input = event.target;
+            input.value = input.value.replace(/\D/g, "").replace(/(\d{2})(\d)/, "($1) $2").replace(/(\d{5})(\d)/, "$1-$2");
+        }
+
+        const handlePlate = (event) => {
+            let input = event.target;
+            let v = input.value.replace(/[^a-zA-Z0-9]/g, "");
+            input.value = (v.length > 3 && !/^[A-Z]{3}[0-9][A-Z][0-9]{2}$/.test(v)) ? v.substring(0, 3) + "-" + v.substring(3, 7) : v;
         }
 
         document.getElementById('smartQuoteForm').addEventListener('submit', function (e) {
             e.preventDefault();
-            const nome = document.getElementById('nome').value;
-            const placa = document.getElementById('placa').value;
+            const nome = document.getElementById('smartNome').value;
+            const placa = document.getElementById('smartPlaca').value;
             const info = document.getElementById('infoVeiculo').value;
             const duvida = document.getElementById('textoDuvida').value;
 
-            let corpoMsg = "";
-            if (metodo === 'placa') corpoMsg = `Cotação para Placa: *${placa}*`;
-            else if (metodo === 'dados') corpoMsg = `Cotação para os dados: *${info}*`;
-            else corpoMsg = `Dúvida: *${duvida}*`;
+            let corpo = "";
+            if(metodoForm === 'placa') corpo = `Cotação para Placa: *${placa}*`;
+            else if(metodoForm === 'dados') corpo = `Cotação para: *${info}*`;
+            else corpo = `Dúvida: *${duvida}*`;
 
-            const msg = `Olá! Sou *${nome}*.\n${corpoMsg}`;
-            trackLead();
-            setTimeout(() => { window.open(`https://wa.me/557731990819?text=${encodeURIComponent(msg)}`, '_blank'); }, 400);
+            const msg = `Olá! Sou *${nome}*.\n${corpo}`;
+
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'conversion', { 'send_to': 'AW-17904877543/hTjVCJasz-wbEOf_2tlC' });
+            }
+
+            window.open(`https://wa.me/557731990819?text=${encodeURIComponent(msg)}`, '_blank');
         });
 
-        // Máscaras (Originais)
-        const handlePhone = (e) => {
-            let v = e.target.value.replace(/\D/g, "");
-            v = v.replace(/(\d{2})(\d)/, "($1) $2");
-            v = v.replace(/(\d{5})(\d)/, "$1-$2");
-            e.target.value = v;
-        }
-        const handlePlate = (e) => {
-            let v = e.target.value.replace(/[^a-zA-Z0-9]/g, "");
-            if (v.length > 3 && !/^[A-Z]{3}[0-9][A-Z][0-9]{2}$/.test(v)) { e.target.value = v.substring(0, 3) + "-" + v.substring(3, 7); }
-            else { e.target.value = v; }
-        }
-
-        // Benefícios (Original)
-        const icons = { fipe100: "https://premiumclube.org.br/novo/wp-content/uploads/2023/10/itens_07-1.png", fipe75: "https://premiumclube.org.br/wp-content/uploads/2023/11/itens_07.png", opcionais: "https://premiumclube.org.br/novo/wp-content/uploads/2023/10/itens_05-1.png", terceiros: "https://premiumclube.org.br/novo/wp-content/uploads/2023/10/itens_04-1.png", incendio: "https://premiumclube.org.br/novo/wp-content/uploads/2023/10/itens_06-1.png", roubo: "https://premiumclube.org.br/novo/wp-content/uploads/2023/10/itens_03-1.png", colisao: "https://premiumclube.org.br/novo/wp-content/uploads/2023/10/itens_02-1.png", reserva: "https://premiumclube.org.br/novo/wp-content/uploads/2023/10/itens_01-2.png", brasil: "https://premiumclube.org.br/novo/wp-content/uploads/2023/10/itens_01-1-1.png" };
+        // TABS DE BENEFÍCIOS (ORIGINAL)
+        const icons = {
+            fipe100: "https://premiumclube.org.br/novo/wp-content/uploads/2023/10/itens_07-1.png",
+            fipe75: "https://premiumclube.org.br/wp-content/uploads/2023/11/itens_07.png",
+            opcionais: "https://premiumclube.org.br/novo/wp-content/uploads/2023/10/itens_05-1.png",
+            terceiros: "https://premiumclube.org.br/novo/wp-content/uploads/2023/10/itens_04-1.png",
+            incendio: "https://premiumclube.org.br/novo/wp-content/uploads/2023/10/itens_06-1.png",
+            roubo: "https://premiumclube.org.br/novo/wp-content/uploads/2023/10/itens_03-1.png",
+            colisao: "https://premiumclube.org.br/novo/wp-content/uploads/2023/10/itens_02-1.png",
+            reserva: "https://premiumclube.org.br/novo/wp-content/uploads/2023/10/itens_01-2.png",
+            brasil: "https://premiumclube.org.br/novo/wp-content/uploads/2023/10/itens_01-1-1.png"
+        };
         const benefitData = {
             carros: { img: "https://premiumclube.org.br/novo/wp-content/uploads/2023/10/carro.png", list: [{ src: icons.fipe100, title: "" }, { src: icons.opcionais, title: "" }, { src: icons.terceiros, title: "" }, { src: icons.incendio, title: "" }, { src: icons.roubo, title: "" }, { src: icons.colisao, title: "" }, { src: icons.reserva, title: "" }, { src: icons.brasil, title: "" }] },
             motos: { img: "https://premiumclube.org.br/novo/wp-content/uploads/2023/10/moto.png", list: [{ src: icons.fipe100, title: "" }, { src: icons.opcionais, title: "" }, { src: icons.terceiros, title: "" }, { src: icons.incendio, title: "" }, { src: icons.roubo, title: "" }, { src: icons.colisao, title: "" }, { src: icons.brasil, title: "" }] },
@@ -488,7 +451,6 @@
             van: { img: "https://premiumclube.org.br/novo/wp-content/uploads/2023/10/van.png", list: [{ src: icons.fipe100, title: "" }, { src: icons.opcionais, title: "" }, { src: icons.terceiros, title: "" }, { src: icons.incendio, title: "" }, { src: icons.roubo, title: "" }, { src: icons.colisao, title: "" }, { src: icons.brasil, title: "" }] },
             taxi: { img: "https://premiumclube.org.br/novo/wp-content/uploads/2023/10/taxi.png", list: [{ src: icons.fipe75, title: "" }, { src: icons.opcionais, title: "" }, { src: icons.terceiros, title: "" }, { src: icons.incendio, title: "" }, { src: icons.roubo, title: "" }, { src: icons.colisao, title: "" }, { src: icons.brasil, title: "" }] }
         };
-
         function switchTab(id) {
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('tab-active'));
             document.querySelector(`[data-tab="${id}"]`).classList.add('tab-active');
@@ -498,38 +460,10 @@
             imgBox.style.opacity = "0";
             setTimeout(() => {
                 imgBox.src = tab.img; imgBox.style.opacity = "1";
-                iconBox.innerHTML = tab.list.map(b => `<div class="benefit-card flex flex-col items-center text-center p-3 bg-white border border-slate-100 rounded-2xl h-full shadow-sm hover:border-orange-200"><img src="${b.src}" class="w-40 mb-2"><span class="text-[9px] font-black text-slate-600 uppercase tracking-tighter leading-none">${b.title}</span></div>`).join('');
+                iconBox.innerHTML = tab.list.map(b => `<div class="benefit-card flex flex-col items-center p-3 bg-white border border-slate-100 rounded-2xl h-full shadow-sm"><img src="${b.src}" class="w-40 mb-2"></div>`).join('');
             }, 150);
         }
-
-        // Scroll Suave (Original)
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' });
-                document.getElementById('mobileMenu').classList.add('hidden');
-                document.getElementById('menuIcon').classList.remove('hidden');
-                document.getElementById('closeIcon').classList.add('hidden');
-            });
-        });
-
-        // Menu Toggle (Original)
-        document.getElementById('menuToggle').addEventListener('click', () => {
-            const menu = document.getElementById('mobileMenu');
-            const isOpen = !menu.classList.contains('hidden');
-            menu.classList.toggle('hidden', isOpen);
-            document.getElementById('menuIcon').classList.toggle('hidden', !isOpen);
-            document.getElementById('closeIcon').classList.toggle('hidden', isOpen);
-        });
-
-        window.onscroll = () => {
-            const btn = document.getElementById('backToTop');
-            (document.documentElement.scrollTop > 600) ? btn.classList.add('show') : btn.classList.remove('show');
-        };
-
         window.onload = () => switchTab('carros');
     </script>
 </body>
-
 </html>
