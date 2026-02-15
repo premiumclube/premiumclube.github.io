@@ -7,14 +7,14 @@
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cotação Premium Clube | Proteção Veicular</title>
+    <title>Cotação ou Dúvidas | Premium Clube Proteção Veicular</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap');
         body { font-family: 'Inter', sans-serif; }
         .gradient-brand { background: linear-gradient(135deg, #1e3668 0%, #0f172a 100%); }
-        .input-focus { outline: none; border-color: #f47920; box-shadow: 0 0 0 2px rgba(244, 121, 32, 0.1); }
+        .tab-btn-active { background-color: white; shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1); color: #1e3668; }
     </style>
 </head>
 <body class="bg-slate-50">
@@ -25,42 +25,48 @@
             
             <div class="text-white">
                 <img src="assets/logo-tran.png" alt="Logo" class="h-12 mb-8">
-                <h1 class="text-4xl font-black mb-4 leading-tight">Sua proteção <br><span class="text-orange-500">na palma da mão.</span></h1>
+                <h1 class="text-4xl font-black mb-4 leading-tight">Proteção total <br><span class="text-orange-500">ao seu alcance.</span></h1>
                 <p class="text-slate-300 mb-6 uppercase text-xs font-bold tracking-widest">Roubo • Furto • Colisão • Guincho 24h</p>
-                <ul class="space-y-3 text-sm">
-                    <li class="flex items-center gap-2"><i data-lucide="check-circle" class="text-green-400 w-4 h-4"></i> Sem consulta SPC/Serasa</li>
-                    <li class="flex items-center gap-2"><i data-lucide="check-circle" class="text-green-400 w-4 h-4"></i> Cobertura Nacional</li>
-                </ul>
+                <div class="flex items-center gap-4 text-xs font-semibold">
+                    <span class="flex items-center gap-1"><i data-lucide="check" class="text-green-400 w-4 h-4"></i> Sem SPC</span>
+                    <span class="flex items-center gap-1"><i data-lucide="check" class="text-green-400 w-4 h-4"></i> Brasil Todo</span>
+                </div>
             </div>
 
-            <div class="bg-white p-8 rounded-[2rem] shadow-2xl">
-                <h2 class="text-2xl font-black text-[#1e3668] mb-1">Cotação Rápida</h2>
-                <p class="text-slate-500 text-xs mb-6 font-medium font-medium">Escolha como prefere informar os dados:</p>
+            <div class="bg-white p-8 rounded-[2.5rem] shadow-2xl border border-white/20">
+                <h2 class="text-2xl font-black text-[#1e3668] mb-1 italic uppercase tracking-tighter">Atendimento Premium</h2>
+                <p id="form-instruction" class="text-slate-500 text-xs mb-6 font-medium">Escolha o que você precisa agora:</p>
 
                 <form id="smartForm" class="space-y-4">
-                    <div class="grid grid-cols-2 gap-3">
-                        <input type="text" id="nome" required placeholder="Seu Nome" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:border-orange-400 outline-none">
-                        <input type="text" id="tel" required placeholder="WhatsApp" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:border-orange-400 outline-none">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <input type="text" id="nome" required placeholder="Seu Nome" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm outline-none focus:border-orange-400 transition-all">
+                        <input type="text" id="tel" required placeholder="WhatsApp" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm outline-none focus:border-orange-400 transition-all">
                     </div>
 
-                    <div class="flex p-1 bg-slate-100 rounded-xl">
-                        <button type="button" id="btnPlaca" onclick="setMetodo('placa')" class="flex-1 py-2 text-xs font-bold rounded-lg transition-all bg-white shadow-sm text-[#1e3668]">COM PLACA</button>
-                        <button type="button" id="btnDados" onclick="setMetodo('dados')" class="flex-1 py-2 text-xs font-bold rounded-lg transition-all text-slate-500">SEM PLACA</button>
+                    <div class="flex p-1 bg-slate-100 rounded-2xl overflow-hidden">
+                        <button type="button" id="btnPlaca" onclick="setMetodo('placa')" class="flex-1 py-2 text-[10px] font-black rounded-xl transition-all tab-btn-active">COM PLACA</button>
+                        <button type="button" id="btnDados" onclick="setMetodo('dados')" class="flex-1 py-2 text-[10px] font-black rounded-xl transition-all text-slate-400">SEM PLACA</button>
+                        <button type="button" id="btnDuvida" onclick="setMetodo('duvida')" class="flex-1 py-2 text-[10px] font-black rounded-xl transition-all text-slate-400">SÓ DÚVIDAS</button>
                     </div>
 
                     <div id="wrapperPlaca" class="animate-in fade-in duration-300">
-                        <input type="text" id="placa" placeholder="Digite a Placa (Ex: ABC1D23)" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm uppercase focus:border-orange-400 outline-none">
-                        <p class="text-[10px] text-slate-400 mt-1">* Mais rápido para cotação real</p>
+                        <label class="block text-[10px] font-bold text-slate-400 mb-1 uppercase ml-1 tracking-wider">Número da Placa</label>
+                        <input type="text" id="placa" placeholder="ABC1D23" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm uppercase outline-none focus:border-orange-400 font-bold tracking-widest">
                     </div>
 
-                    <div id="wrapperDados" class="hidden animate-in fade-in duration-300 space-y-3">
-                        <textarea id="infoVeiculo" placeholder="Ex: Onix 2021, Particular, Salvador-BA" rows="2" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:border-orange-400 outline-none"></textarea>
-                        <p class="text-[10px] text-slate-400 italic font-medium">Informe: Modelo, Ano, Uso e Cidade.</p>
+                    <div id="wrapperDados" class="hidden animate-in fade-in duration-300">
+                        <label class="block text-[10px] font-bold text-slate-400 mb-1 uppercase ml-1 tracking-wider">Dados do Veículo</label>
+                        <textarea id="infoVeiculo" placeholder="Ex: Onix 2021, Particular, Salvador-BA" rows="2" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm outline-none focus:border-orange-400 transition-all"></textarea>
                     </div>
 
-                    <button type="submit" class="w-full bg-[#25d366] hover:bg-[#1da851] text-white py-4 rounded-xl font-black text-xs flex items-center justify-center gap-2 shadow-lg transition-all">
+                    <div id="wrapperDuvida" class="hidden animate-in fade-in duration-300">
+                        <label class="block text-[10px] font-bold text-slate-400 mb-1 uppercase ml-1 tracking-wider">Qual sua dúvida?</label>
+                        <textarea id="textoDuvida" placeholder="Como podemos te ajudar hoje?" rows="2" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm outline-none focus:border-orange-400 transition-all"></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full bg-[#25d366] hover:bg-[#1da851] text-white py-4 rounded-xl font-black text-xs flex items-center justify-center gap-2 shadow-lg transition-transform active:scale-95">
                         <i data-lucide="message-circle" class="w-5 h-5"></i>
-                        RECEBER COTAÇÃO NO WHATSAPP
+                        <span id="btn-label">RECEBER COTAÇÃO NO WHATSAPP</span>
                     </button>
                 </form>
             </div>
@@ -73,19 +79,35 @@
 
         function setMetodo(m) {
             metodo = m;
-            const bP = document.getElementById('btnPlaca');
-            const bD = document.getElementById('btnDados');
-            const wP = document.getElementById('wrapperPlaca');
-            const wD = document.getElementById('wrapperDados');
+            const buttons = {
+                placa: document.getElementById('btnPlaca'),
+                dados: document.getElementById('btnDados'),
+                duvida: document.getElementById('btnDuvida')
+            };
+            const wrappers = {
+                placa: document.getElementById('wrapperPlaca'),
+                dados: document.getElementById('wrapperDados'),
+                duvida: document.getElementById('wrapperDuvida')
+            };
+            const btnLabel = document.getElementById('btn-label');
 
-            if (m === 'placa') {
-                bP.classList.add('bg-white', 'shadow-sm', 'text-[#1e3668]'); bP.classList.remove('text-slate-500');
-                bD.classList.remove('bg-white', 'shadow-sm', 'text-[#1e3668]'); bD.classList.add('text-slate-500');
-                wP.classList.remove('hidden'); wD.classList.add('hidden');
+            // Resetar botões
+            Object.values(buttons).forEach(btn => btn.classList.remove('bg-white', 'shadow-sm', 'text-[#1e3668]', 'tab-btn-active'));
+            Object.values(buttons).forEach(btn => btn.classList.add('text-slate-400'));
+            
+            // Ativar selecionado
+            buttons[m].classList.add('bg-white', 'shadow-sm', 'text-[#1e3668]', 'tab-btn-active');
+            buttons[m].classList.remove('text-slate-400');
+
+            // Alternar campos
+            Object.values(wrappers).forEach(w => w.classList.add('hidden'));
+            wrappers[m].classList.remove('hidden');
+
+            // Mudar texto do botão principal
+            if (m === 'duvida') {
+                btnLabel.innerText = 'TIRAR DÚVIDAS NO WHATSAPP';
             } else {
-                bD.classList.add('bg-white', 'shadow-sm', 'text-[#1e3668]'); bD.classList.remove('text-slate-500');
-                bP.classList.remove('bg-white', 'shadow-sm', 'text-[#1e3668]'); bP.classList.add('text-slate-500');
-                wD.classList.remove('hidden'); wP.classList.add('hidden');
+                btnLabel.innerText = 'RECEBER COTAÇÃO NO WHATSAPP';
             }
         }
 
@@ -101,9 +123,14 @@
             const tel = document.getElementById('tel').value;
             const placa = document.getElementById('placa').value;
             const info = document.getElementById('infoVeiculo').value;
+            const duvida = document.getElementById('textoDuvida').value;
 
-            let corpoMsg = metodo === 'placa' ? `Placa: ${placa}` : `Dados: ${info}`;
-            const msg = `Olá! Meu nome é *${nome}*. Gostaria de uma cotação.\n${corpoMsg}`;
+            let corpoMsg = "";
+            if (metodo === 'placa') corpoMsg = `Quero cotação para a Placa: *${placa}*`;
+            else if (metodo === 'dados') corpoMsg = `Quero cotação para: *${info}*`;
+            else corpoMsg = `Tenho uma dúvida: *${duvida}*`;
+
+            const msg = `Olá! Meu nome é *${nome}*.\n${corpoMsg}`;
 
             // Rastreio Google Ads
             if (typeof gtag !== 'undefined') {
