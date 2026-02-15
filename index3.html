@@ -31,6 +31,7 @@
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
+
         gtag('config', 'AW-17904877543');
     </script>
 
@@ -40,250 +41,494 @@
     </noscript>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premium Clube | Proteção Veicular</title>
+    <title>Premium Clube | Proteção Veicular - Consultoria Autorizada</title>
+    <meta name="description"
+        content="Proteção veicular completa com a Premium Clube. Assistência 24h, cobertura contra roubo, furto e colisão. Solicite sua cotação com um consultor autorizado.">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
+        .banner-slide {
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .banner-slide.active {
+            opacity: 1;
+            position: relative;
+        }
+
+        .banner-slider {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap');
-        body { font-family: 'Inter', sans-serif; }
-        .tab-active { background: #f47920; color: white; border-color: #f47920; }
-        .tab-btn-active { background-color: white; color: #1e3668; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-        .benefit-card { transition: all 0.3s ease; }
-        .gradient-brand { background: linear-gradient(135deg, #1e3668 0%, #0f172a 100%); }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        .gradient-brand {
+            background: linear-gradient(135deg, #1e3668 0%, #0f172a 100%);
+        }
+
+        .tab-active {
+            background-color: #1e3668 !important;
+            color: white !important;
+            border-bottom: 4px solid #f47920;
+        }
+
+        /* Estilo para abas do formulário */
+        .form-tab-active {
+            background-color: white !important;
+            color: #1e3668 !important;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .faq-item[open] summary svg {
+            transform: rotate(180deg);
+        }
+
+        summary::-webkit-details-marker {
+            display: none;
+        }
+
+        #backToTop {
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        #backToTop.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .benefit-card {
+            transition: all 0.3s ease;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .footer-link:hover {
+            text-decoration: underline;
+            color: #f47920;
+        }
     </style>
 </head>
 
 <body class="bg-slate-50 text-slate-900">
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KN5P7HQN" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KN5P7HQN" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
 
-    <nav class="bg-white py-4 px-6 border-b border-slate-100 sticky top-0 z-50 shadow-sm">
-        <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <img src="assets/logo-tran.png" alt="Premium Clube" class="h-10 md:h-12">
-            <div class="hidden md:flex gap-8 text-xs font-black text-[#1e3668] italic uppercase tracking-tighter">
-                <a href="#beneficios" class="hover:text-orange-500 transition-colors">Benefícios</a>
-                <a href="#como-funciona" class="hover:text-orange-500 transition-colors">Como funciona</a>
-                <a href="#duvidas" class="hover:text-orange-500 transition-colors">Dúvidas</a>
+    <nav class="sticky top-0 z-50 bg-[#1e3668] border-b border-white/10 py-3 px-4 sm:py-4 sm:px-6 shadow-xl">
+        <div class="max-w-7xl mx-auto flex justify-between items-center gap-2">
+            <div class="flex items-center gap-2 sm:gap-3 flex-shrink-0 min-w-0">
+                <img src="assets/logo-tran.png" alt="Premium Clube Logo" class="h-7 sm:h-8 md:h-10 flex-shrink-0">
+                <div id="reputation-ra"
+                    class="hidden sm:flex min-w-[110px] sm:min-w-[137px] min-h-[40px] sm:min-h-[48px] items-center flex-shrink-0">
+                    <a href="https://www.reclameaqui.com.br/empresa/premium-clube-de-beneficios/?utm_source=referral&amp;utm_medium=embbed&amp;utm_campaign=reputacao&amp;utm_term=horizontal"
+                        target="_blank" rel="noopener" title="Selo Reclame Aqui - Premium Clube"
+                        class="inline-flex items-center gap-1.5 sm:gap-2 hover:opacity-90 transition-opacity">
+                        <img src="https://s3.amazonaws.com/raichu-beta/selos/assets/images/ra-1000.svg" alt="RA 1000"
+                            class="h-7 sm:h-9 w-auto" loading="lazy">
+                        <img src="https://s3.amazonaws.com/raichu-beta/selos/assets/images/reclame-aqui-logo.svg"
+                            alt="Reclame Aqui" class="h-3 sm:h-3.5 w-16 sm:w-20" loading="lazy">
+                    </a>
+                </div>
             </div>
-            <a href="#cotacao" class="bg-[#1e3668] text-white px-6 py-2 rounded-full text-[10px] font-black italic uppercase tracking-tighter hover:bg-orange-500 transition-all">Cotar Agora</a>
+            <div class="hidden md:flex gap-6 text-white text-sm font-semibold">
+                <a href="#beneficios" class="hover:text-orange-400 transition-colors">Benefícios</a>
+                <a href="#sobre" class="hover:text-orange-400 transition-colors">Sobre</a>
+                <a href="#depoimentos" class="hover:text-orange-400 transition-colors">Depoimentos</a>
+                <a href="#faq" class="hover:text-orange-400 transition-colors">Dúvidas</a>
+            </div>
+            <div class="flex items-center gap-2 flex-shrink-0">
+                <a href="#cotacao"
+                    class="bg-[#f47920] hover:bg-orange-600 text-white px-3 py-1.5 sm:px-5 sm:py-2 rounded-full text-[10px] sm:text-xs font-black uppercase tracking-wider transition-all whitespace-nowrap">
+                    Cotação Online
+                </a>
+                <button type="button" id="menuToggle"
+                    class="md:hidden p-2 text-white rounded-lg hover:bg-white/10 transition-colors">
+                    <i data-lucide="menu" id="menuIcon" class="w-5 h-5 block"></i>
+                    <i data-lucide="x" id="closeIcon" class="w-5 h-5 hidden"></i>
+                </button>
+            </div>
+        </div>
+        <div id="mobileMenu"
+            class="flex flex-col hidden md:hidden absolute top-full left-0 right-0 bg-[#1e3668] border-t border-white/10 py-4 px-6 shadow-xl">
+            <a href="#beneficios"
+                class="block py-3 text-white font-semibold hover:text-orange-400 transition-colors border-b border-white/10">Benefícios</a>
+            <a href="#sobre"
+                class="block py-3 text-white font-semibold hover:text-orange-400 transition-colors border-b border-white/10">Sobre</a>
+            <a href="#depoimentos"
+                class="block py-3 text-white font-semibold hover:text-orange-400 transition-colors border-b border-white/10">Depoimentos</a>
+            <a href="#faq"
+                class="block py-3 text-white font-semibold hover:text-orange-400 transition-colors border-b border-white/10">Dúvidas</a>
+            <a href="#cotacao"
+                class="block py-3 text-orange-400 font-black hover:text-orange-300 transition-colors">Cotação Online</a>
         </div>
     </nav>
 
-    <main>
-        <section class="gradient-brand py-16 md:py-24 px-6 text-white overflow-hidden relative" id="cotacao">
-            <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                <div class="relative z-10">
-                    <span class="bg-orange-500 text-white py-1 px-3 rounded-md text-[10px] font-black uppercase italic tracking-widest mb-4 inline-block">Proteção Veicular 24h</span>
-                    <h1 class="text-4xl md:text-7xl font-black mb-6 leading-[0.9] italic uppercase tracking-tighter">
-                        Sua tranquilidade <br><span class="text-[#f47920]">é nossa prioridade.</span>
-                    </h1>
-                    <p class="text-lg md:text-xl text-slate-300 mb-8 max-w-lg font-medium leading-relaxed">
-                        Proteção completa contra roubo, furto, colisão e assistência 24h em todo o Brasil. Sem consulta ao SPC e Serasa.
-                    </p>
-                </div>
-
-                <div class="bg-white p-6 md:p-8 rounded-[40px] shadow-2xl text-slate-900 border border-white relative z-10">
-                    <h2 class="text-3xl font-black mb-2 text-[#1e3668] italic uppercase tracking-tighter">Cotação Expressa</h2>
-                    <p id="form-instruction" class="text-slate-500 text-xs mb-6 font-medium uppercase tracking-widest">Escolha como prefere iniciar:</p>
-
-                    <form id="smartForm" class="space-y-4">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                            <div>
-                                <label class="block text-[10px] font-black text-slate-400 mb-1 uppercase tracking-tighter ml-1">Seu Nome</label>
-                                <input type="text" id="nome" required placeholder="Como te chamamos?" class="w-full px-5 py-4 rounded-2xl bg-slate-50 border border-slate-100 outline-none focus:border-orange-400 transition-all text-sm font-bold">
-                            </div>
-                            <div>
-                                <label class="block text-[10px] font-black text-slate-400 mb-1 uppercase tracking-tighter ml-1">WhatsApp</label>
-                                <input type="text" id="tel" required placeholder="(00) 00000-0000" class="w-full px-5 py-4 rounded-2xl bg-slate-50 border border-slate-100 outline-none focus:border-orange-400 transition-all text-sm font-bold">
-                            </div>
-                        </div>
-
-                        <div class="flex p-1 bg-slate-100 rounded-2xl overflow-hidden">
-                            <button type="button" id="btnPlaca" onclick="setMetodo('placa')" class="flex-1 py-2 text-[10px] font-black rounded-xl transition-all tab-btn-active">COM PLACA</button>
-                            <button type="button" id="btnDados" onclick="setMetodo('dados')" class="flex-1 py-2 text-[10px] font-black rounded-xl transition-all text-slate-400">SEM PLACA</button>
-                            <button type="button" id="btnDuvida" onclick="setMetodo('duvida')" class="flex-1 py-2 text-[10px] font-black rounded-xl transition-all text-slate-400">SÓ DÚVIDAS</button>
-                        </div>
-
-                        <div id="wrapperPlaca" class="animate-in fade-in duration-300">
-                            <label class="block text-[10px] font-black text-slate-400 mb-1 uppercase tracking-tighter ml-1 text-orange-500">Placa do Veículo</label>
-                            <input type="text" id="placa" placeholder="ABC1D23" class="w-full px-5 py-4 rounded-2xl bg-slate-50 border border-slate-100 outline-none focus:border-orange-400 transition-all text-sm font-black tracking-widest uppercase">
-                        </div>
-
-                        <div id="wrapperDados" class="hidden animate-in fade-in duration-300">
-                            <label class="block text-[10px] font-black text-slate-400 mb-1 uppercase tracking-tighter ml-1">Dados do Veículo</label>
-                            <textarea id="infoVeiculo" placeholder="Ex: Onix 2021, Particular, Salvador-BA" rows="2" class="w-full px-5 py-4 rounded-2xl bg-slate-50 border border-slate-100 outline-none focus:border-orange-400 transition-all text-sm font-bold"></textarea>
-                        </div>
-
-                        <div id="wrapperDuvida" class="hidden animate-in fade-in duration-300">
-                            <label class="block text-[10px] font-black text-slate-400 mb-1 uppercase tracking-tighter ml-1">Qual sua dúvida?</label>
-                            <textarea id="textoDuvida" placeholder="Como podemos te ajudar hoje?" rows="2" class="w-full px-5 py-4 rounded-2xl bg-slate-50 border border-slate-100 outline-none focus:border-orange-400 transition-all text-sm font-bold"></textarea>
-                        </div>
-
-                        <button type="submit" class="w-full bg-[#25d366] hover:bg-[#1da851] text-white py-5 rounded-2xl font-black text-xs italic uppercase tracking-widest flex items-center justify-center gap-3 shadow-xl shadow-green-500/20 transition-all active:scale-95">
-                            <i data-lucide="message-circle" class="w-6 h-6"></i>
-                            <span id="btn-label">RECEBER COTAÇÃO NO WHATSAPP</span>
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </section>
-
-        <section class="py-20 px-6 bg-white" id="beneficios">
-            <div class="max-w-7xl mx-auto">
-                <div class="text-center mb-16">
-                    <h2 class="text-3xl md:text-5xl font-black text-[#1e3668] italic uppercase tracking-tighter mb-4">Benefícios Exclusivos</h2>
-                    <p class="text-slate-500 font-medium uppercase tracking-widest text-sm italic">O que você ganha sendo Premium</p>
-                </div>
-
-                <div class="flex flex-wrap justify-center gap-2 mb-12">
-                    <button onclick="switchTab('car')" data-tab="car" class="tab-btn tab-active px-8 py-3 rounded-full text-[10px] font-black italic uppercase tracking-widest border-2 border-slate-100 transition-all">Automóvel</button>
-                    <button onclick="switchTab('moto')" data-tab="moto" class="tab-btn px-8 py-3 rounded-full text-[10px] font-black italic uppercase tracking-widest border-2 border-slate-100 transition-all">Motocicleta</button>
-                    <button onclick="switchTab('util')" data-tab="util" class="tab-btn px-8 py-3 rounded-full text-[10px] font-black italic uppercase tracking-widest border-2 border-slate-100 transition-all">Utilitário/App</button>
-                </div>
-
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                    <div class="lg:col-span-5 order-2 lg:order-1">
-                        <div id="benefit-icons" class="grid grid-cols-2 md:grid-cols-3 gap-3">
-                            </div>
-                    </div>
-                    <div class="lg:col-span-7 order-1 lg:order-2 flex justify-center">
-                        <img id="vehicle-image" src="assets/veiculos/carro-01.png" alt="Veículo" class="max-w-full h-auto drop-shadow-2xl transition-all duration-500 scale-110">
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer class="bg-[#1e3668] py-12 px-6 text-white border-t border-white/10">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
-            <img src="assets/logo-tran.png" alt="Premium Clube" class="h-8 opacity-50 grayscale brightness-200">
-            <p class="text-[10px] font-bold uppercase tracking-widest text-white/40">© 2026 Premium Clube Proteção Veicular - Consultoria Autorizada Independente.</p>
+    <section class="w-full bg-[#1e3668] relative overflow-hidden">
+        <div class="max-w-[1920px] mx-auto relative" id="bannerSlider">
+            <img src="assets/Topo-HOME-1.png" alt="Banner 1" class="banner-slide active w-full h-auto block">
+            <img src="assets/Topo-HOME-2-2.png" alt="Banner 2" class="banner-slide w-full h-auto block">
+            <img src="assets/Topo-SUSEP_HOME.png" alt="Banner 3" class="banner-slide w-full h-auto block">
         </div>
+    </section>
+
+    <header class="gradient-brand text-white pt-16 pb-24 px-6">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+                <span class="inline-block py-1 px-3 rounded-md bg-orange-500 text-white text-[10px] font-bold uppercase mb-4">Consultoria Autorizada</span>
+                <h1 class="text-4xl md:text-5xl font-black mb-6 leading-tight">
+                    Mais que uma proteção, <br><span class="text-[#f47920]">sua segurança garantida.</span>
+                </h1>
+                <p class="text-lg text-slate-300 mb-8 max-w-xl">
+                    Sem burocracia, sem análise de perfil e com assistência 24h em todo o território nacional. Junte-se
+                    a milhares de associados satisfeitos.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <div class="flex items-center gap-3 bg-white/5 p-4 rounded-xl border border-white/10">
+                        <i data-lucide="shield-check" class="text-green-400"></i>
+                        <span class="text-sm font-medium">Cobertura Total</span>
+                    </div>
+                    <div class="flex items-center gap-3 bg-white/5 p-4 rounded-xl border border-white/10">
+                        <i data-lucide="map-pin" class="text-green-400"></i>
+                        <span class="text-sm font-medium">Abrangência Nacional</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="cotacao" class="bg-white rounded-3xl p-8 shadow-2xl text-slate-900 border border-slate-200">
+                <h3 class="text-2xl font-black mb-1 text-slate-800 uppercase italic">Fazer Cotação</h3>
+                <p id="form-instruction" class="text-slate-500 text-sm mb-6 font-medium tracking-tight uppercase">Escolha como prefere informar:</p>
+
+                <form id="smartQuoteForm" class="space-y-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <input type="text" id="nome" required placeholder="Seu Nome *"
+                            class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white outline-none transition-all font-semibold">
+
+                        <input type="text" id="telefone" required placeholder="WhatsApp (DDD) *" maxlength="15"
+                            onkeyup="handlePhone(event)"
+                            class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white outline-none transition-all font-semibold">
+                    </div>
+
+                    <div class="flex p-1 bg-slate-100 rounded-2xl overflow-hidden">
+                        <button type="button" id="btnPlaca" onclick="setMetodo('placa')" class="flex-1 py-2.5 text-[10px] font-black rounded-xl transition-all form-tab-active">COM PLACA</button>
+                        <button type="button" id="btnDados" onclick="setMetodo('dados')" class="flex-1 py-2.5 text-[10px] font-black rounded-xl transition-all text-slate-400">SEM PLACA</button>
+                        <button type="button" id="btnDuvida" onclick="setMetodo('duvida')" class="flex-1 py-2.5 text-[10px] font-black rounded-xl transition-all text-slate-400">SÓ DÚVIDAS</button>
+                    </div>
+
+                    <div id="wrapperPlaca" class="animate-in fade-in duration-300">
+                        <input type="text" id="placa" placeholder="Placa do Veículo (ABC-1234) *" maxlength="8"
+                            oninput="this.value = this.value.toUpperCase()" onkeyup="handlePlate(event)"
+                            class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white outline-none uppercase font-bold text-center transition-all tracking-widest text-sm">
+                    </div>
+
+                    <div id="wrapperDados" class="hidden animate-in fade-in duration-300">
+                        <textarea id="infoVeiculo" placeholder="Ex: Marca, Modelo, Ano e sua Cidade..." rows="2"
+                            class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white outline-none transition-all text-sm font-semibold"></textarea>
+                    </div>
+
+                    <div id="wrapperDuvida" class="hidden animate-in fade-in duration-300">
+                        <textarea id="textoDuvida" placeholder="Como podemos te ajudar hoje?" rows="2"
+                            class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white outline-none transition-all text-sm font-semibold"></textarea>
+                    </div>
+
+                    <button type="submit"
+                        class="w-full bg-[#25d366] hover:bg-[#1da851] text-white py-4 rounded-xl font-black text-sm flex items-center justify-center gap-3 shadow-lg transition-transform active:scale-95">
+                        <i data-lucide="message-square" class="w-6 h-6"></i>
+                        <span id="btn-label">OBTER COTAÇÃO GRÁTIS</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </header>
+
+    <section id="beneficios" class="py-20 px-6">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-4xl font-black text-[#1e3668] mb-12 text-center uppercase italic">Benefícios por Categoria
+            </h2>
+            <div class="bg-white rounded-3xl shadow-xl overflow-hidden border border-slate-100">
+                <div class="flex overflow-x-auto bg-slate-100 border-b scrollbar-hide" id="tab-buttons">
+                    <button onclick="switchTab('carros')" data-tab="carros"
+                        class="tab-btn px-6 py-4 flex-1 text-xs font-black uppercase tracking-widest tab-active whitespace-nowrap">Carros</button>
+                    <button onclick="switchTab('motos')" data-tab="motos"
+                        class="tab-btn px-6 py-4 flex-1 text-xs font-black uppercase tracking-widest whitespace-nowrap">Motos</button>
+                    <button onclick="switchTab('caminhoes')" data-tab="caminhoes"
+                        class="tab-btn px-6 py-4 flex-1 text-xs font-black uppercase tracking-widest whitespace-nowrap">Caminhões</button>
+                    <button onclick="switchTab('autoescola')" data-tab="autoescola"
+                        class="tab-btn px-6 py-4 flex-1 text-xs font-black uppercase tracking-widest whitespace-nowrap">Auto Escolas</button>
+                    <button onclick="switchTab('van')" data-tab="van"
+                        class="tab-btn px-6 py-4 flex-1 text-xs font-black uppercase tracking-widest whitespace-nowrap">Van</button>
+                    <button onclick="switchTab('taxi')" data-tab="taxi"
+                        class="tab-btn px-6 py-4 flex-1 text-xs font-black uppercase tracking-widest whitespace-nowrap">Táxi</button>
+                </div>
+                <div class="p-8 md:p-12">
+                    <div class="grid lg:grid-cols-2 gap-12 items-center">
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4" id="benefit-icons"></div>
+                        <div class="flex justify-center bg-white rounded-3xl p-6 min-h-[350px] items-center">
+                            <img id="vehicle-image" src="" alt="Veículo"
+                                class="max-w-full h-auto transition-all duration-300">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="sobre" class="py-24 bg-white px-6 border-y border-slate-100">
+        <div class="max-w-7xl mx-auto flex flex-col lg:flex-row gap-16 items-center">
+            <div class="lg:w-1/2">
+                <h2 class="text-3xl font-black text-[#1e3668] mb-6 uppercase italic">Referência em Proteção</h2>
+                <p class="text-slate-600 text-lg leading-relaxed mb-6 italic">
+                    "Democratizamos o acesso à proteção veicular de alta qualidade no Brasil. Com mais de 9 anos de
+                    história, entregamos segurança real para milhares de famílias com suporte total do consultor."
+                </p>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="p-6 bg-slate-50 rounded-2xl border-l-4 border-orange-500">
+                        <span class="block text-3xl font-black text-[#1e3668]">+60</span>
+                        <span class="text-xs font-bold text-slate-500 uppercase">Lojas Físicas</span>
+                    </div>
+                    <div class="p-6 bg-slate-50 rounded-2xl border-l-4 border-blue-500">
+                        <span class="block text-3xl font-black text-[#1e3668]">+270</span>
+                        <span class="text-xs font-bold text-slate-500 uppercase">Colaboradores</span>
+                    </div>
+                </div>
+            </div>
+            <div class="lg:w-1/2">
+                <img src="assets/sobre-premium.png" alt="Consultoria Premium" class="rounded-[2.5rem] shadow-2xl">
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 bg-slate-100 px-6">
+        <div class="max-w-4xl mx-auto text-center">
+            <h3 class="text-2xl md:text-3xl font-black text-[#1e3668] mb-8 uppercase italic tracking-tight">Solicite
+                agora sua proteção sem burocracia</h3>
+            <a href="#cotacao"
+                class="inline-flex items-center gap-3 bg-[#f47920] hover:bg-orange-600 text-white px-12 py-5 rounded-2xl font-black text-xl shadow-xl transition-all transform hover:-translate-y-1 active:scale-95 uppercase">
+                <i data-lucide="calculator"></i>
+                Solicite sua cotação grátis
+            </a>
+            <p class="text-slate-500 mt-4 text-sm font-semibold italic">Consultoria especializada para seu veículo</p>
+        </div>
+    </section>
+
+    <section id="depoimentos" class="py-24 bg-slate-50 px-6">
+        <div class="max-w-7xl mx-auto text-center">
+            <h2 class="text-4xl font-black text-[#1e3668] mb-16 uppercase italic">Depoimentos reais</h2>
+            <div class="grid md:grid-cols-3 gap-8 text-left">
+                <div class="bg-white p-8 rounded-3xl shadow-lg border border-slate-100">
+                    <div class="flex gap-1 text-orange-400 mb-4"><i data-lucide="star" class="fill-current w-4 h-4"></i><i data-lucide="star" class="fill-current w-4 h-4"></i><i data-lucide="star" class="fill-current w-4 h-4"></i><i data-lucide="star" class="fill-current w-4 h-4"></i><i data-lucide="star" class="fill-current w-4 h-4"></i></div>
+                    <p class="text-slate-600 italic mb-6">"O atendimento foi excelente. O consultor tirou todas as minhas dúvidas e o valor ficou muito bom."</p>
+                    <span class="block font-bold text-[#1e3668]">Carlos Mendes</span>
+                </div>
+                <div class="bg-white p-8 rounded-3xl shadow-lg border border-slate-100">
+                    <div class="flex gap-1 text-orange-400 mb-4"><i data-lucide="star" class="fill-current w-4 h-4"></i><i data-lucide="star" class="fill-current w-4 h-4"></i><i data-lucide="star" class="fill-current w-4 h-4"></i><i data-lucide="star" class="fill-current w-4 h-4"></i><i data-lucide="star" class="fill-current w-4 h-4"></i></div>
+                    <p class="text-slate-600 italic mb-6">"Precisei de assistência 24h em uma viagem e fui muito bem atendido. Recomendo a Premium."</p>
+                    <span class="block font-bold text-[#1e3668]">Juliana Costa</span>
+                </div>
+                <div class="bg-white p-8 rounded-3xl shadow-lg border border-slate-100">
+                    <div class="flex gap-1 text-orange-400 mb-4"><i data-lucide="star" class="fill-current w-4 h-4"></i><i data-lucide="star" class="fill-current w-4 h-4"></i><i data-lucide="star" class="fill-current w-4 h-4"></i><i data-lucide="star" class="fill-current w-4 h-4"></i><i data-lucide="star" class="fill-current w-4 h-4"></i></div>
+                    <p class="text-slate-600 italic mb-6">"Processo de adesão rápido e transparente. Sem surpresas negativas na hora da vistoria."</p>
+                    <span class="block font-bold text-[#1e3668]">Fabiano Rocha</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq" class="py-24 bg-white px-6">
+        <div class="max-w-3xl mx-auto">
+            <h2 class="text-3xl font-black text-[#1e3668] mb-12 text-center uppercase italic">Dúvidas Frequentes</h2>
+            <div class="space-y-4">
+                <details class="faq-item group border border-slate-200 rounded-2xl overflow-hidden shadow-sm">
+                    <summary class="flex justify-between items-center p-6 cursor-pointer bg-slate-50 hover:bg-slate-100 transition-colors list-none">
+                        <span class="font-bold text-[#1e3668]">1. Qual a diferença entre seguro e proteção veicular?</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-orange-500 transition-transform"></i>
+                    </summary>
+                    <div class="p-6 bg-white border-t border-slate-100 text-slate-600 text-sm">
+                        O seguro é regulado pela SUSEP e foca em análise de perfil. A proteção veicular (Premium Clube) é um sistema de ajuda mútua, sem burocracia, sem consulta SPC e focado no custo-benefício.
+                    </div>
+                </details>
+                <details class="faq-item group border border-slate-200 rounded-2xl overflow-hidden shadow-sm">
+                    <summary class="flex justify-between items-center p-6 cursor-pointer bg-slate-50 hover:bg-slate-100 transition-colors list-none">
+                        <span class="font-bold text-[#1e3668]">2. Aceitam veículos usados em aplicativos?</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-orange-500 transition-transform"></i>
+                    </summary>
+                    <div class="p-6 bg-white border-t border-slate-100 text-slate-600 text-sm">Sim! Temos coberturas específicas para Uber, 99 e táxis.</div>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-[#1e3668] text-white pt-20 pb-10 px-6">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 border-b border-white/10 pb-12 mb-10">
+            <div class="flex flex-col items-center md:items-start text-center md:text-left">
+                <img src="assets/logo-tran.png" alt="Premium Clube">
+                <p class="text-sm text-slate-300 mt-4">Consultoria Independente Autorizada Premium Clube.</p>
+            </div>
+            <div class="flex flex-col items-center md:items-start">
+                <h4 class="font-black text-lg mb-6 uppercase italic text-orange-400">Links Rápidos</h4>
+                <ul class="space-y-3 text-sm text-slate-300">
+                    <li><a href="#beneficios" class="footer-link">Tabela de Benefícios</a></li>
+                    <li><a href="#faq" class="footer-link">Dúvidas Comuns</a></li>
+                    <li><a href="#cotacao" class="footer-link">Simular Cotação</a></li>
+                </ul>
+            </div>
+            <div class="flex flex-col items-center md:items-start">
+                <h4 class="font-black text-lg mb-6 uppercase italic text-orange-400">Atendimento</h4>
+                <ul class="space-y-4 text-sm text-slate-300">
+                    <li>(77) 3199-0819</li>
+                    <li>Seg a Sex: 08h às 18h</li>
+                </ul>
+            </div>
+            <div class="flex flex-col items-center md:items-start">
+                <h4 class="font-black text-lg mb-6 uppercase italic text-orange-400">Segurança</h4>
+                <div class="bg-white/5 p-4 rounded-xl border border-white/10 text-[11px] text-slate-400">
+                    Seus dados estão protegidos sob a LGPD.
+                </div>
+            </div>
+        </div>
+        <p class="text-[10px] text-center text-slate-500">© 2026 Premium Clube Proteção Veicular - CNPJ: 21.056.402/0001-38</p>
     </footer>
+
+    <a href="https://wa.me/557731990819" target="_blank" class="fixed bottom-6 right-6 z-50 bg-[#25d366] text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-transform"><i data-lucide="message-circle" class="w-8 h-8"></i></a>
+    <button id="backToTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="fixed bottom-24 right-8 z-40 bg-[#1e3668] text-white p-3 rounded-xl shadow-xl hover:bg-orange-500 transition-all"><i data-lucide="arrow-up" class="w-6 h-6"></i></button>
 
     <script>
         lucide.createIcons();
+
+        // Banner Logic (Original)
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.banner-slide');
+        setInterval(() => {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }, 5000);
 
         // --- LÓGICA DO FORMULÁRIO INTELIGENTE ---
         let metodo = 'placa';
 
         function setMetodo(m) {
             metodo = m;
-            const buttons = {
-                placa: document.getElementById('btnPlaca'),
-                dados: document.getElementById('btnDados'),
-                duvida: document.getElementById('btnDuvida')
-            };
-            const wrappers = {
-                placa: document.getElementById('wrapperPlaca'),
-                dados: document.getElementById('wrapperDados'),
-                duvida: document.getElementById('wrapperDuvida')
-            };
+            const buttons = { placa: document.getElementById('btnPlaca'), dados: document.getElementById('btnDados'), duvida: document.getElementById('btnDuvida') };
+            const wrappers = { placa: document.getElementById('wrapperPlaca'), dados: document.getElementById('wrapperDados'), duvida: document.getElementById('wrapperDuvida') };
             const btnLabel = document.getElementById('btn-label');
 
-            Object.values(buttons).forEach(btn => btn.classList.remove('tab-btn-active', 'text-[#1e3668]'));
+            Object.values(buttons).forEach(btn => btn.classList.remove('form-tab-active', 'text-[#1e3668]'));
             Object.values(buttons).forEach(btn => btn.classList.add('text-slate-400'));
-            buttons[m].classList.add('tab-btn-active', 'text-[#1e3668]');
+            buttons[m].classList.add('form-tab-active', 'text-[#1e3668]');
             
             Object.values(wrappers).forEach(w => w.classList.add('hidden'));
             wrappers[m].classList.remove('hidden');
 
-            btnLabel.innerText = (m === 'duvida') ? 'TIRAR DÚVIDAS NO WHATSAPP' : 'RECEBER COTAÇÃO NO WHATSAPP';
+            btnLabel.innerText = (m === 'duvida') ? 'TIRAR DÚVIDAS NO WHATSAPP' : 'OBTER COTAÇÃO GRÁTIS';
+            document.getElementById('placa').required = (m === 'placa');
         }
 
-        // Máscara WhatsApp
-        document.getElementById('tel').addEventListener('input', e => {
-            let x = e.target.value.replace(/\D/g, '').match(/(\d{0,2})(\d{0,5})(\d{0,4})/);
-            e.target.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
-        });
+        // Funções de Rastreio (Originais)
+        function trackLead() {
+            if (typeof fbq !== 'undefined') fbq('track', 'Lead');
+            if (typeof dataLayer !== 'undefined') dataLayer.push({ 'event': 'btn_cotacao_clique' });
+            gtag('event', 'conversion', { 'send_to': 'AW-17904877543/hTjVCJasz-wbEOf_2tlC' });
+        }
 
-        // Envio de Formulário
-        document.getElementById('smartForm').addEventListener('submit', function (e) {
+        document.getElementById('smartQuoteForm').addEventListener('submit', function (e) {
             e.preventDefault();
             const nome = document.getElementById('nome').value;
-            const tel = document.getElementById('tel').value;
             const placa = document.getElementById('placa').value;
             const info = document.getElementById('infoVeiculo').value;
             const duvida = document.getElementById('textoDuvida').value;
 
             let corpoMsg = "";
-            if (metodo === 'placa') corpoMsg = `Quero cotação para a Placa: *${placa}*`;
-            else if (metodo === 'dados') corpoMsg = `Quero cotação para: *${info}*`;
-            else corpoMsg = `Tenho uma dúvida: *${duvida}*`;
+            if (metodo === 'placa') corpoMsg = `Cotação para Placa: *${placa}*`;
+            else if (metodo === 'dados') corpoMsg = `Cotação para os dados: *${info}*`;
+            else corpoMsg = `Dúvida: *${duvida}*`;
 
-            const msg = `Olá! Meu nome é *${nome}*.\n${corpoMsg}`;
-
-            // Rastreio Google Ads Conversion
-            if (typeof gtag !== 'undefined') {
-                gtag('event', 'conversion', { 'send_to': 'AW-17904877543/hTjVCJasz-wbEOf_2tlC' });
-            }
-
-            window.location.href = `https://wa.me/557731990819?text=${encodeURIComponent(msg)}`;
+            const msg = `Olá! Sou *${nome}*.\n${corpoMsg}`;
+            trackLead();
+            setTimeout(() => { window.open(`https://wa.me/557731990819?text=${encodeURIComponent(msg)}`, '_blank'); }, 400);
         });
 
-        // --- LÓGICA DE TABS DE BENEFÍCIOS (MANTIDA ORIGINAL) ---
+        // Máscaras (Originais)
+        const handlePhone = (e) => {
+            let v = e.target.value.replace(/\D/g, "");
+            v = v.replace(/(\d{2})(\d)/, "($1) $2");
+            v = v.replace(/(\d{5})(\d)/, "$1-$2");
+            e.target.value = v;
+        }
+        const handlePlate = (e) => {
+            let v = e.target.value.replace(/[^a-zA-Z0-9]/g, "");
+            if (v.length > 3 && !/^[A-Z]{3}[0-9][A-Z][0-9]{2}$/.test(v)) { e.target.value = v.substring(0, 3) + "-" + v.substring(3, 7); }
+            else { e.target.value = v; }
+        }
+
+        // Benefícios (Original)
+        const icons = { fipe100: "https://premiumclube.org.br/novo/wp-content/uploads/2023/10/itens_07-1.png", fipe75: "https://premiumclube.org.br/wp-content/uploads/2023/11/itens_07.png", opcionais: "https://premiumclube.org.br/novo/wp-content/uploads/2023/10/itens_05-1.png", terceiros: "https://premiumclube.org.br/novo/wp-content/uploads/2023/10/itens_04-1.png", incendio: "https://premiumclube.org.br/novo/wp-content/uploads/2023/10/itens_06-1.png", roubo: "https://premiumclube.org.br/novo/wp-content/uploads/2023/10/itens_03-1.png", colisao: "https://premiumclube.org.br/novo/wp-content/uploads/2023/10/itens_02-1.png", reserva: "https://premiumclube.org.br/novo/wp-content/uploads/2023/10/itens_01-2.png", brasil: "https://premiumclube.org.br/novo/wp-content/uploads/2023/10/itens_01-1-1.png" };
         const benefitData = {
-            car: {
-                img: 'assets/veiculos/carro-01.png',
-                list: [
-                    { src: 'assets/icones/carro-protegido.png', title: 'Carro Protegido' },
-                    { src: 'assets/icones/roubo-furto.png', title: 'Roubo e Furto' },
-                    { src: 'assets/icones/colisao.png', title: 'Colisão' },
-                    { src: 'assets/icones/terceiros.png', title: 'Danos Terceiros' },
-                    { src: 'assets/icones/fenomenos-da-natureza.png', title: 'Fenômenos Natureza' },
-                    { src: 'assets/icones/assistencia-24h.png', title: 'Assistência 24h' }
-                ]
-            },
-            moto: {
-                img: 'assets/veiculos/moto-01.png',
-                list: [
-                    { src: 'assets/icones/moto-protegida.png', title: 'Moto Protegida' },
-                    { src: 'assets/icones/roubo-furto.png', title: 'Roubo e Furto' },
-                    { src: 'assets/icones/assistencia-24h.png', title: 'Assistência 24h' },
-                    { src: 'assets/icones/colisao.png', title: 'Colisão' },
-                    { src: 'assets/icones/terceiros.png', title: 'Danos Terceiros' },
-                    { src: 'assets/icones/fenomenos-da-natureza.png', title: 'Fenômenos Natureza' }
-                ]
-            },
-            util: {
-                img: 'assets/veiculos/utilitario.png',
-                list: [
-                    { src: 'assets/icones/uber.png', title: 'Ideal para App' },
-                    { src: 'assets/icones/roubo-furto.png', title: 'Roubo e Furto' },
-                    { src: 'assets/icones/assistencia-24h.png', title: 'Assistência 24h' },
-                    { src: 'assets/icones/colisao.png', title: 'Colisão' },
-                    { src: 'assets/icones/terceiros.png', title: 'Danos Terceiros' },
-                    { src: 'assets/icones/fenomenos-da-natureza.png', title: 'Fenômenos Natureza' }
-                ]
-            }
+            carros: { img: "https://premiumclube.org.br/novo/wp-content/uploads/2023/10/carro.png", list: [{ src: icons.fipe100, title: "" }, { src: icons.opcionais, title: "" }, { src: icons.terceiros, title: "" }, { src: icons.incendio, title: "" }, { src: icons.roubo, title: "" }, { src: icons.colisao, title: "" }, { src: icons.reserva, title: "" }, { src: icons.brasil, title: "" }] },
+            motos: { img: "https://premiumclube.org.br/novo/wp-content/uploads/2023/10/moto.png", list: [{ src: icons.fipe100, title: "" }, { src: icons.opcionais, title: "" }, { src: icons.terceiros, title: "" }, { src: icons.incendio, title: "" }, { src: icons.roubo, title: "" }, { src: icons.colisao, title: "" }, { src: icons.brasil, title: "" }] },
+            caminhoes: { img: "https://premiumclube.org.br/novo/wp-content/uploads/2023/10/caminhao.png", list: [{ src: icons.fipe100, title: "" }, { src: icons.opcionais, title: "" }, { src: icons.terceiros, title: "" }, { src: icons.incendio, title: "" }, { src: icons.roubo, title: "" }, { src: icons.colisao, title: "" }, { src: icons.brasil, title: "" }] },
+            autoescola: { img: "https://premiumclube.org.br/novo/wp-content/uploads/2023/10/auto-escola.png", list: [{ src: icons.fipe100, title: "" }, { src: icons.opcionais, title: "" }, { src: icons.terceiros, title: "" }, { src: icons.incendio, title: "" }, { src: icons.roubo, title: "" }, { src: icons.colisao, title: "" }, { src: icons.brasil, title: "" }] },
+            van: { img: "https://premiumclube.org.br/novo/wp-content/uploads/2023/10/van.png", list: [{ src: icons.fipe100, title: "" }, { src: icons.opcionais, title: "" }, { src: icons.terceiros, title: "" }, { src: icons.incendio, title: "" }, { src: icons.roubo, title: "" }, { src: icons.colisao, title: "" }, { src: icons.brasil, title: "" }] },
+            taxi: { img: "https://premiumclube.org.br/novo/wp-content/uploads/2023/10/taxi.png", list: [{ src: icons.fipe75, title: "" }, { src: icons.opcionais, title: "" }, { src: icons.terceiros, title: "" }, { src: icons.incendio, title: "" }, { src: icons.roubo, title: "" }, { src: icons.colisao, title: "" }, { src: icons.brasil, title: "" }] }
         };
 
         function switchTab(id) {
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('tab-active'));
-            const activeBtn = document.querySelector(`[data-tab="${id}"]`);
-            if(activeBtn) activeBtn.classList.add('tab-active');
-            
+            document.querySelector(`[data-tab="${id}"]`).classList.add('tab-active');
             const tab = benefitData[id];
             const iconBox = document.getElementById('benefit-icons');
             const imgBox = document.getElementById('vehicle-image');
-            
             imgBox.style.opacity = "0";
-            imgBox.style.transform = "translateX(20px)";
-            
             setTimeout(() => {
-                imgBox.src = tab.img;
-                imgBox.style.opacity = "1";
-                imgBox.style.transform = "translateX(0)";
-                iconBox.innerHTML = tab.list.map(b => `
-                    <div class="benefit-card flex flex-col items-center text-center p-3 bg-white border border-slate-100 rounded-2xl h-full shadow-sm hover:border-orange-200">
-                        <img src="${b.src}" class="w-20 mb-2">
-                        <span class="text-[9px] font-black text-slate-600 uppercase tracking-tighter leading-none">${b.title}</span>
-                    </div>
-                `).join('');
-            }, 200);
+                imgBox.src = tab.img; imgBox.style.opacity = "1";
+                iconBox.innerHTML = tab.list.map(b => `<div class="benefit-card flex flex-col items-center text-center p-3 bg-white border border-slate-100 rounded-2xl h-full shadow-sm hover:border-orange-200"><img src="${b.src}" class="w-40 mb-2"><span class="text-[9px] font-black text-slate-600 uppercase tracking-tighter leading-none">${b.title}</span></div>`).join('');
+            }, 150);
         }
 
-        // Inicializar tabs
-        switchTab('car');
+        // Scroll Suave (Original)
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' });
+                document.getElementById('mobileMenu').classList.add('hidden');
+                document.getElementById('menuIcon').classList.remove('hidden');
+                document.getElementById('closeIcon').classList.add('hidden');
+            });
+        });
+
+        // Menu Toggle (Original)
+        document.getElementById('menuToggle').addEventListener('click', () => {
+            const menu = document.getElementById('mobileMenu');
+            const isOpen = !menu.classList.contains('hidden');
+            menu.classList.toggle('hidden', isOpen);
+            document.getElementById('menuIcon').classList.toggle('hidden', !isOpen);
+            document.getElementById('closeIcon').classList.toggle('hidden', isOpen);
+        });
+
+        window.onscroll = () => {
+            const btn = document.getElementById('backToTop');
+            (document.documentElement.scrollTop > 600) ? btn.classList.add('show') : btn.classList.remove('show');
+        };
+
+        window.onload = () => switchTab('carros');
     </script>
 </body>
 
