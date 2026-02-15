@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-KN5P7HQN');
+
+        !function (f, b, e, v, n, t, s) {
+            if (f.fbq) return; n = f.fbq = function () {
+                n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+            };
+            if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+            n.queue = []; t = b.createElement(e); t.async = !0;
+            t.src = v; s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s)
+        }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '2100028070772268');
+        fbq('track', 'PageView');
+    </script>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17904877543"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'AW-17904877543');
+    </script>
+
+    <noscript>
+        <img height="1" width="1" style="display:none"
+            src="https://www.facebook.com/tr?id=2100028070772268&ev=PageView&noscript=1" />
+    </noscript>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cotação ou Dúvidas | Premium Clube Proteção Veicular</title>
+    <meta name="description" content="Faça sua cotação rápida ou tire suas dúvidas diretamente com um consultor autorizado Premium Clube.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        .gradient-brand { background: linear-gradient(135deg, #1e3668 0%, #0f172a 100%); }
+    </style>
+</head>
+
+<body class="flex flex-col min-h-screen">
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KN5P7HQN" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <nav class="bg-[#1e3668] border-b border-white/10 py-4 px-6 shadow-md">
+        <div class="max-w-5xl mx-auto flex justify-between items-center">
+            <img src="assets/logo-tran.png" alt="Premium Clube Logo" class="h-8 md:h-10">
+            <div class="flex items-center gap-2 text-white/80 text-xs font-semibold">
+                <span class="flex h-2 w-2 rounded-full bg-green-500 animate-pulse"></span> Consultores Online
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-grow flex items-center justify-center py-12 px-4 gradient-brand">
+        <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+            
+            <div class="text-white">
+                <span class="inline-block py-1 px-3 rounded-md bg-orange-500 text-white text-[10px] font-bold uppercase mb-4">Atendimento Humano</span>
+                <h1 class="text-3xl md:text-5xl font-black mb-6 leading-tight">
+                    Faça sua cotação <br><span class="text-[#f47920]">ou tire suas dúvidas.</span>
+                </h1>
+                <p class="text-lg text-slate-300 mb-8">
+                    Não é um robô. Você falará diretamente com um consultor especializado para proteger seu veículo hoje mesmo.
+                </p>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-white/5 p-3 rounded-xl border border-white/10">
+                        <i data-lucide="zap" class="text-orange-400 w-5 h-5 mb-2"></i>
+                        <p class="text-xs font-bold uppercase">Cotação em 1 min</p>
+                    </div>
+                    <div class="bg-white/5 p-3 rounded-xl border border-white/10">
+                        <i data-lucide="user-check" class="text-orange-400 w-5 h-5 mb-2"></i>
+                        <p class="text-xs font-bold uppercase">Consultor Autorizado</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-3xl p-8 shadow-2xl text-slate-900 border border-slate-200">
+                <h3 class="text-2xl font-black mb-2 text-[#1e3668] uppercase italic">Como podemos ajudar?</h3>
+                <p class="text-slate-500 text-sm mb-6 font-medium">Preencha abaixo para iniciar no WhatsApp:</p>
+
+                <form id="quoteForm" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-600 mb-1">Seu Nome</label>
+                        <input type="text" id="nome" required placeholder="Como podemos te chamar?"
+                            class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-orange-400 outline-none transition-all">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-600 mb-1">Seu WhatsApp (DDD)</label>
+                        <input type="text" id="telefone" required placeholder="(00) 00000-0000" maxlength="15" onkeyup="handlePhone(event)"
+                            class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-orange-400 outline-none transition-all">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-600 mb-1">Qual o seu objetivo?</label>
+                        <select id="objetivo" required class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-orange-400 outline-none transition-all text-slate-700 cursor-pointer">
+                            <option value="" disabled selected>Escolha uma opção...</option>
+                            <option value="Cotação Particular">Quero cotação para Carro Particular</option>
+                            <option value="Cotação Uber/App">Quero cotação para Uber / 99</option>
+                            <option value="Cotação Moto">Quero cotação para Motocicleta</option>
+                            <option value="Apenas tirar dúvidas">Só quero tirar algumas dúvidas</option>
+                        </select>
+                    </div>
+
+                    <button type="submit"
+                        class="w-full bg-[#25d366] hover:bg-[#1da851] text-white py-4 rounded-xl font-black text-sm flex items-center justify-center gap-3 shadow-lg transition-transform active:scale-95 mt-4">
+                        <i data-lucide="message-square" class="w-6 h-6"></i>
+                        FALAR COM CONSULTOR AGORA
+                    </button>
+                    
+                    <p class="text-[10px] text-center text-slate-400 mt-3 flex items-center justify-center gap-1">
+                        <i data-lucide="lock" class="w-3 h-3"></i> Atendimento humano e seguro (LGPD).
+                    </p>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-white py-6 border-t border-slate-200 text-center text-xs text-slate-500">
+        <div class="max-w-5xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-2">
+            <p>© 2026 Premium Clube Proteção Veicular - Consultoria Autorizada.</p>
+            <p>CNPJ: 21.056.402/0001-38</p>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        // Máscara de Telefone
+        const handlePhone = (event) => {
+            let input = event.target;
+            let value = input.value.replace(/\D/g, "");
+            value = value.replace(/(\d{2})(\d)/, "($1) $2");
+            value = value.replace(/(\d{5})(\d)/, "$1-$2");
+            input.value = value;
+        }
+
+        // Função de Rastreio
+        function trackLead() {
+            if (typeof fbq !== 'undefined') fbq('track', 'Lead');
+            if (typeof dataLayer !== 'undefined') dataLayer.push({ 'event': 'btn_cotacao_clique' });
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'conversion', {
+                    'send_to': 'AW-17904877543/hTjVCJasz-wbEOf_2tlC',
+                    'value': 1.0,
+                    'currency': 'BRL'
+                });
+            }
+        }
+
+        // Ação do Formulário
+        document.getElementById('quoteForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const nome = document.getElementById('nome').value;
+            const objetivo = document.getElementById('objetivo').value;
+            
+            let msg = "";
+            if(objetivo === "Apenas tirar dúvidas") {
+                msg = `Olá! Meu nome é *${nome}*. Gostaria de tirar algumas dúvidas sobre a proteção veicular.`;
+            } else {
+                msg = `Olá! Meu nome é *${nome}*. Gostaria de uma *${objetivo}*. Pode me ajudar?`;
+            }
+
+            trackLead();
+
+            setTimeout(() => {
+                window.location.href = `https://wa.me/557731990819?text=${encodeURIComponent(msg)}`;
+            }, 400);
+        });
+    </script>
+</body>
+</html>
