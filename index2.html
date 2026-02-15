@@ -37,8 +37,8 @@
     </noscript>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cotação Expressa | Premium Clube Proteção Veicular</title>
-    <meta name="description" content="Solicite sua cotação rápida com um consultor autorizado.">
+    <title>Cotação ou Dúvidas | Premium Clube Proteção Veicular</title>
+    <meta name="description" content="Faça sua cotação rápida ou tire suas dúvidas diretamente com um consultor autorizado Premium Clube.">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
@@ -54,9 +54,8 @@
     <nav class="bg-[#1e3668] border-b border-white/10 py-4 px-6 shadow-md">
         <div class="max-w-5xl mx-auto flex justify-between items-center">
             <img src="assets/logo-tran.png" alt="Premium Clube Logo" class="h-8 md:h-10">
-            <div class="hidden sm:flex items-center gap-2 text-white/80 text-xs font-semibold">
-                <i data-lucide="shield-check" class="w-4 h-4 text-green-400"></i> Site Seguro
-            </div>
+            <div id="status-atendimento" class="flex items-center gap-2 text-white/80 text-xs font-semibold">
+                </div>
         </div>
     </nav>
 
@@ -64,57 +63,61 @@
         <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
             
             <div class="text-white">
-                <span class="inline-block py-1 px-3 rounded-md bg-orange-500 text-white text-[10px] font-bold uppercase mb-4">Cotação Rápida</span>
+                <span id="badge-atendimento" class="inline-block py-1 px-3 rounded-md bg-orange-500 text-white text-[10px] font-bold uppercase mb-4">Atendimento Humano</span>
                 <h1 class="text-3xl md:text-5xl font-black mb-6 leading-tight">
-                    Proteja seu veículo <br><span class="text-[#f47920]">sem burocracia.</span>
+                    Faça sua cotação <br><span class="text-[#f47920]">ou tire suas dúvidas.</span>
                 </h1>
                 <p class="text-lg text-slate-300 mb-8">
-                    Preencha os dados ao lado para falar agora com um consultor autorizado. Sem consulta ao SPC/Serasa e com cobertura nacional.
+                    Não é um robô. Você falará diretamente com um consultor especializado para proteger seu veículo hoje mesmo.
                 </p>
-                <ul class="space-y-4 font-medium text-slate-200">
-                    <li class="flex items-center gap-3"><i data-lucide="check-circle" class="text-green-400 w-5 h-5"></i> Assistência 24h em todo Brasil</li>
-                    <li class="flex items-center gap-3"><i data-lucide="check-circle" class="text-green-400 w-5 h-5"></i> Roubo, Furto e Colisão</li>
-                    <li class="flex items-center gap-3"><i data-lucide="check-circle" class="text-green-400 w-5 h-5"></i> Ideal para Motoristas de App</li>
-                </ul>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-white/5 p-3 rounded-xl border border-white/10">
+                        <i data-lucide="zap" class="text-orange-400 w-5 h-5 mb-2"></i>
+                        <p class="text-xs font-bold uppercase">Cotação em 1 min</p>
+                    </div>
+                    <div class="bg-white/5 p-3 rounded-xl border border-white/10">
+                        <i data-lucide="user-check" class="text-orange-400 w-5 h-5 mb-2"></i>
+                        <p class="text-xs font-bold uppercase">Consultor Autorizado</p>
+                    </div>
+                </div>
             </div>
 
             <div class="bg-white rounded-3xl p-8 shadow-2xl text-slate-900 border border-slate-200">
-                <h3 class="text-2xl font-black mb-2 text-[#1e3668] uppercase italic">Receber Cotação</h3>
-                <p class="text-slate-500 text-sm mb-6 font-medium">Você será redirecionado para nosso WhatsApp em segundos.</p>
+                <h3 id="form-title" class="text-2xl font-black mb-2 text-[#1e3668] uppercase italic">Como podemos ajudar?</h3>
+                <p id="form-subtitle" class="text-slate-500 text-sm mb-6 font-medium">Preencha abaixo para iniciar no WhatsApp:</p>
 
                 <form id="quoteForm" class="space-y-4">
                     <div>
-                        <label class="block text-xs font-bold text-slate-600 mb-1">Como podemos te chamar?</label>
-                        <input type="text" id="nome" required placeholder="Digite seu nome"
+                        <label class="block text-xs font-bold text-slate-600 mb-1">Seu Nome</label>
+                        <input type="text" id="nome" required placeholder="Como podemos te chamar?"
                             class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-orange-400 outline-none transition-all">
                     </div>
 
                     <div>
-                        <label class="block text-xs font-bold text-slate-600 mb-1">Seu melhor WhatsApp</label>
+                        <label class="block text-xs font-bold text-slate-600 mb-1">Seu WhatsApp (DDD)</label>
                         <input type="text" id="telefone" required placeholder="(00) 00000-0000" maxlength="15" onkeyup="handlePhone(event)"
                             class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-orange-400 outline-none transition-all">
                     </div>
 
                     <div>
-                        <label class="block text-xs font-bold text-slate-600 mb-1">Como você usa o veículo?</label>
-                        <select id="usoVeiculo" required class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-orange-400 outline-none transition-all text-slate-700 cursor-pointer">
-                            <option value="" disabled selected>Selecione uma opção...</option>
-                            <option value="Uso Particular (Carro de Passeio)">Uso Particular (Carro de Passeio)</option>
-                            <option value="Motorista de App (Uber/99)">Motorista de App (Uber / 99)</option>
-                            <option value="Táxi">Táxi</option>
-                            <option value="Motocicleta">Motocicleta</option>
-                            <option value="Veículo de Frota/Empresa">Veículo de Frota / Empresa</option>
+                        <label class="block text-xs font-bold text-slate-600 mb-1">Qual o seu objetivo?</label>
+                        <select id="objetivo" required class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-orange-400 outline-none transition-all text-slate-700 cursor-pointer">
+                            <option value="" disabled selected>Escolha uma opção...</option>
+                            <option value="Cotação Particular">Quero cotação para Carro Particular</option>
+                            <option value="Cotação Uber/App">Quero cotação para Uber / 99</option>
+                            <option value="Cotação Moto">Quero cotação para Motocicleta</option>
+                            <option value="Apenas tirar dúvidas">Só quero tirar algumas dúvidas</option>
                         </select>
                     </div>
 
-                    <button type="submit"
+                    <button type="submit" id="submit-btn"
                         class="w-full bg-[#25d366] hover:bg-[#1da851] text-white py-4 rounded-xl font-black text-sm flex items-center justify-center gap-3 shadow-lg transition-transform active:scale-95 mt-4">
                         <i data-lucide="message-square" class="w-6 h-6"></i>
-                        CHAMAR NO WHATSAPP
+                        <span id="btn-text">FALAR COM CONSULTOR AGORA</span>
                     </button>
                     
                     <p class="text-[10px] text-center text-slate-400 mt-3 flex items-center justify-center gap-1">
-                        <i data-lucide="lock" class="w-3 h-3"></i> Seus dados estão seguros conosco (LGPD).
+                        <i data-lucide="lock" class="w-3 h-3"></i> Atendimento humano e seguro (LGPD).
                     </p>
                 </form>
             </div>
@@ -123,13 +126,34 @@
 
     <footer class="bg-white py-6 border-t border-slate-200 text-center text-xs text-slate-500">
         <div class="max-w-5xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-2">
-            <p>© 2026 Premium Clube Proteção Veicular - Consultoria Autorizada Independente.</p>
+            <p>© 2026 Premium Clube Proteção Veicular - Consultoria Autorizada.</p>
             <p>CNPJ: 21.056.402/0001-38</p>
         </div>
     </footer>
 
     <script>
         lucide.createIcons();
+
+        // --- LÓGICA DE HORÁRIO DE ATENDIMENTO ---
+        const agora = new Date();
+        const horaAtual = agora.getHours();
+        const estaOnline = horaAtual >= 10 && horaAtual < 22;
+
+        const statusDiv = document.getElementById('status-atendimento');
+        const btnText = document.getElementById('btn-text');
+        const badge = document.getElementById('badge-atendimento');
+        const formSubtitle = document.getElementById('form-subtitle');
+
+        if (estaOnline) {
+            statusDiv.innerHTML = '<span class="flex h-2 w-2 rounded-full bg-green-500 animate-pulse"></span> Consultores Online';
+            btnText.innerText = 'FALAR COM CONSULTOR AGORA';
+        } else {
+            statusDiv.innerHTML = '<span class="flex h-2 w-2 rounded-full bg-slate-500"></span> Atendimento: 10h às 22h';
+            btnText.innerText = 'AGENDAR COTAÇÃO NO WHATSAPP';
+            badge.innerText = 'Agende sua Cotação';
+            badge.classList.replace('bg-orange-500', 'bg-slate-600');
+            formSubtitle.innerText = 'Deixe seus dados para agendar seu atendimento:';
+        }
 
         // Máscara de Telefone
         const handlePhone = (event) => {
@@ -140,7 +164,7 @@
             input.value = value;
         }
 
-        // Função de Rastreio (Dispara Evento de Conversão 'Lead' no Meta e Google)
+        // Função de Rastreio
         function trackLead() {
             if (typeof fbq !== 'undefined') fbq('track', 'Lead');
             if (typeof dataLayer !== 'undefined') dataLayer.push({ 'event': 'btn_cotacao_clique' });
@@ -151,24 +175,26 @@
                     'currency': 'BRL'
                 });
             }
-            console.log("Evento Lead Registrado com Sucesso!");
         }
 
         // Ação do Formulário
         document.getElementById('quoteForm').addEventListener('submit', function (e) {
             e.preventDefault();
 
-            // Pega os dados
             const nome = document.getElementById('nome').value;
-            const usoVeiculo = document.getElementById('usoVeiculo').value;
+            const objetivo = document.getElementById('objetivo').value;
             
-            // Monta a mensagem personalizada
-            const msg = `Olá! Meu nome é *${nome}*. Gostaria de uma cotação para o meu veículo. O uso principal dele é: *${usoVeiculo}*.`;
+            let msg = "";
+            const prefixoAtendimento = estaOnline ? "" : "[AGENDAMENTO FORA DE HORÁRIO] ";
 
-            // 1. Dispara os Pixels para avisar o Meta/Google que achamos um cliente bom!
+            if(objetivo === "Apenas tirar dúvidas") {
+                msg = `${prefixoAtendimento}Olá! Meu nome é *${nome}*. Gostaria de tirar algumas dúvidas sobre a proteção veicular.`;
+            } else {
+                msg = `${prefixoAtendimento}Olá! Meu nome é *${nome}*. Gostaria de uma *${objetivo}*. Pode me ajudar?`;
+            }
+
             trackLead();
 
-            // 2. Redireciona para o WhatsApp após um breve delay de 400ms para garantir que o Pixel carregou
             setTimeout(() => {
                 window.location.href = `https://wa.me/557731990819?text=${encodeURIComponent(msg)}`;
             }, 400);
