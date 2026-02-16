@@ -330,7 +330,8 @@
             trackLead();
 
             setTimeout(() => {
-                window.open(`https://wa.me/557731990819?text=${encodeURIComponent(msg)}`, '_blank');
+                window.location.href = `obrigado.html?text=${encodeURIComponent(msg)}`;
+                //window.open(`https://wa.me/557731990819?text=${encodeURIComponent(msg)}`, '_blank');
             }, 400);
         });
 
