@@ -2,6 +2,17 @@
 <html lang="pt-BR">
 <head>
     <script>(function (w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-KN5P7HQN');</script>
+    
+    <script>
+        !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+        n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+        document,'script','https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '2100028070772268');
+        fbq('track', 'PageView');
+    </script>
+    
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17904877543"></script>
     <script> window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'AW-17904877543'); </script>
     
@@ -31,7 +42,24 @@
                     <span class="flex items-center gap-1"><i data-lucide="check" class="text-green-400 w-4 h-4"></i> Sem SPC</span>
                     <span class="flex items-center gap-1"><i data-lucide="check" class="text-green-400 w-4 h-4"></i> Brasil Todo</span>
                 </div>
-            </div>
+
+                <div class="mt-10 flex flex-wrap gap-3">
+                    <div class="flex items-center gap-3 bg-white/10 px-4 py-3 rounded-xl border border-white/20 backdrop-blur-sm">
+                        <i data-lucide="award" class="text-yellow-400 w-6 h-6"></i>
+                        <div class="text-left">
+                            <p class="text-[9px] text-slate-300 uppercase leading-none mb-1 tracking-widest">Satisfação Garantida</p>
+                            <p class="text-sm font-black text-white leading-none">Selo Reclame Aqui</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3 bg-white/10 px-4 py-3 rounded-xl border border-white/20 backdrop-blur-sm">
+                        <i data-lucide="shield-check" class="text-blue-400 w-6 h-6"></i>
+                        <div class="text-left">
+                            <p class="text-[9px] text-slate-300 uppercase leading-none mb-1 tracking-widest">Em Conformidade</p>
+                            <p class="text-sm font-black text-white leading-none">Normas SUSEP</p>
+                        </div>
+                    </div>
+                </div>
+                </div>
 
             <div class="bg-white p-8 rounded-[2.5rem] shadow-2xl border border-white/20">
                 <h2 class="text-2xl font-black text-[#1e3668] mb-1 italic uppercase tracking-tighter">Atendimento Premium</h2>
@@ -117,6 +145,7 @@
             e.target.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
         });
 
+        // Evento de Submit Atualizado
         document.getElementById('smartForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const nome = document.getElementById('nome').value;
@@ -132,12 +161,20 @@
 
             const msg = `Olá! Meu nome é *${nome}*.\n${corpoMsg}`;
 
-            // Rastreio Google Ads
+            // 1. Rastreio Meta Ads
+            if (typeof fbq !== 'undefined') {
+                fbq('track', 'Lead');
+            }
+
+            // 2. Rastreio Google Ads
             if (typeof gtag !== 'undefined') {
                 gtag('event', 'conversion', {'send_to': 'AW-17904877543/hTjVCJasz-wbEOf_2tlC'});
             }
 
-            window.location.href = `https://wa.me/557731990819?text=${encodeURIComponent(msg)}`;
+            // 3. Redirecionamento para Obrigado (A mágica acontece aqui)
+            setTimeout(() => {
+                window.location.href = `thnks-lp.html?text=${encodeURIComponent(msg)}`;
+            }, 400); // 400ms de atraso para garantir que as Tags disparem
         });
     </script>
 </body>
