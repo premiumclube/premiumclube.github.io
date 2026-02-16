@@ -719,7 +719,8 @@
             const nome = document.getElementById('nome').value;
             const placa = document.getElementById('placa').value;
             const msg = `Olá! Sou *${nome}*. Gostaria de uma cotação para o veículo de placa *${placa}*.`;
-            window.open(`https://wa.me/557731990819?text=${encodeURIComponent(msg)}`, '_blank');
+            //window.open(`https://wa.me/557731990819?text=${encodeURIComponent(msg)}`, '_blank');
+            window.location.href = `obrigado.html?text=${encodeURIComponent(msg)}`;
         });
 
         window.onload = () => switchTab('carros');
