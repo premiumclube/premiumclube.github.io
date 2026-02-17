@@ -179,7 +179,7 @@
             else if (metodo === 'dados') corpoMsg = `Quero cotação para: *${info}*`;
             else corpoMsg = `Tenho uma dúvida: *${duvida}*`;
 
-            const msg = `Olá! Meu nome é *${nome}*.\n${corpoMsg}`;
+            const msg = `Olá! Meu nome é *${nome}*.%0A%0A${corpoMsg}`;
 
             // 1. Rastreio Meta Ads
             if (typeof fbq !== 'undefined') {
