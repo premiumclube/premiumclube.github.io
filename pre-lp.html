@@ -155,9 +155,9 @@
             const duvida = document.getElementById('textoDuvida').value;
 
             let corpoMsg = "";
-            if (metodo === 'placa') corpoMsg = `Quero cotação para a Placa: *${placa}*`;
-            else if (metodo === 'dados') corpoMsg = `Quero cotação para: *${info}*`;
-            else corpoMsg = `Tenho uma dúvida: *${duvida}*`;
+            if (metodo === 'placa') corpoMsg = ` Quero cotação para a Placa: *${placa}*`;
+            else if (metodo === 'dados') corpoMsg = ` Quero cotação para: *${info}*`;
+            else corpoMsg = ` Tenho uma dúvida: *${duvida}*`;
 
             const msg = `Olá! Meu nome é *${nome}*.\n${corpoMsg}`;
 
