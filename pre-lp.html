@@ -48,7 +48,7 @@
                         <i data-lucide="award" class="text-yellow-400 w-6 h-6"></i>
                         <div class="text-left">
                             <p class="text-[9px] text-slate-300 uppercase leading-none mb-1 tracking-widest">Satisfação Garantida</p>
-                            <p class="text-sm font-black text-white leading-none">Selo Reclame Aqui</p>
+                            <p class="text-sm font-black text-white leading-none">Selo RA1000 - Reclame Aqui</p>
                         </div>
                     </div>
                     <div class="flex items-center gap-3 bg-white/10 px-4 py-3 rounded-xl border border-white/20 backdrop-blur-sm">
@@ -155,11 +155,11 @@
             const duvida = document.getElementById('textoDuvida').value;
 
             let corpoMsg = "";
-            if (metodo === 'placa') corpoMsg = ` Quero cotação para a Placa: *${placa}*`;
-            else if (metodo === 'dados') corpoMsg = ` Quero cotação para: *${info}*`;
+            if (metodo === 'placa') corpoMsg = `Quero cotação para a Placa: *${placa}*`;
+            else if (metodo === 'dados') corpoMsg = `Quero cotação para: *${info}*`;
             else corpoMsg = ` Tenho uma dúvida: *${duvida}*`;
 
-            const msg = `Olá! Meu nome é *${nome}*.\n${corpoMsg}`;
+            const msg = `Olá! Meu nome é *${nome}*. \n\n${corpoMsg}`;
 
             // 1. Rastreio Meta Ads
             if (typeof fbq !== 'undefined') {
