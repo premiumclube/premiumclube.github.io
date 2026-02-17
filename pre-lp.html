@@ -25,7 +25,7 @@
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap');
         body { font-family: 'Inter', sans-serif; }
         .gradient-brand { background: linear-gradient(135deg, #1e3668 0%, #0f172a 100%); }
-        .tab-btn-active { background-color: white; shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1); color: #1e3668; }
+        .tab-btn-active { background-color: white; box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1); color: #1e3668; }
     </style>
 </head>
 <body class="bg-slate-50">
@@ -81,7 +81,7 @@
 
                     <div id="wrapperPlaca" class="animate-in fade-in duration-300">
                         <label class="block text-[10px] font-bold text-slate-400 mb-1 uppercase ml-1 tracking-wider">Número da Placa</label>
-                        <input type="text" id="placa" placeholder="ABC1D23" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm uppercase outline-none focus:border-orange-400 font-bold tracking-widest">
+                        <input type="text" id="placa" placeholder="ABC-1D23" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm uppercase outline-none focus:border-orange-400 font-bold tracking-widest">
                     </div>
 
                     <div id="wrapperDados" class="hidden animate-in fade-in duration-300">
@@ -141,10 +141,25 @@
             }
         }
 
+        // MÁSCARA NOME: Permite apenas letras e espaços
+        document.getElementById('nome').addEventListener('input', function(e) {
+            e.target.value = e.target.value.replace(/[^a-zA-ZÀ-ÿ\s]/g, '');
+        });
+
         // Máscara WhatsApp
         document.getElementById('tel').addEventListener('input', e => {
             let x = e.target.value.replace(/\D/g, '').match(/(\d{0,2})(\d{0,5})(\d{0,4})/);
             e.target.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
+        });
+
+        // MÁSCARA PLACA: Formato visual maiúsculo com hífen
+        document.getElementById('placa').addEventListener('input', function(e) {
+            let value = e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '');
+            if (value.length > 3) {
+                e.target.value = value.substring(0, 3) + '-' + value.substring(3, 7);
+            } else {
+                e.target.value = value;
+            }
         });
 
         // Evento de Submit Atualizado
@@ -152,16 +167,19 @@
             e.preventDefault();
             const nome = document.getElementById('nome').value;
             const tel = document.getElementById('tel').value;
-            const placa = document.getElementById('placa').value;
+            const placaRaw = document.getElementById('placa').value;
             const info = document.getElementById('infoVeiculo').value;
             const duvida = document.getElementById('textoDuvida').value;
 
-            let corpoMsg = "";
-            if (metodo === 'placa') corpoMsg = `Quero cotação para a Placa: *${placa}*`;
-            else if (metodo === 'dados') corpoMsg = `Quero cotação para: *${info}*`;
-            else corpoMsg = ` Tenho uma dúvida: *${duvida}*`;
+            // Limpa a placa para enviar ao WhatsApp (remove hifens e espaços, tudo maiúsculo)
+            const placaLimpa = placaRaw.toUpperCase().replace(/[^A-Z0-9]/g, '');
 
-            const msg = `Olá! Meu nome é *${nome}*. \n\n${corpoMsg}`;
+            let corpoMsg = "";
+            if (metodo === 'placa') corpoMsg = `Quero cotação para a Placa: *${placaLimpa}*`;
+            else if (metodo === 'dados') corpoMsg = `Quero cotação para: *${info}*`;
+            else corpoMsg = `Tenho uma dúvida: *${duvida}*`;
+
+            const msg = `Olá! Meu nome é *${nome}*.\n${corpoMsg}`;
 
             // 1. Rastreio Meta Ads
             if (typeof fbq !== 'undefined') {
@@ -173,10 +191,10 @@
                 gtag('event', 'conversion', {'send_to': 'AW-17904877543/hTjVCJasz-wbEOf_2tlC'});
             }
 
-            // 3. Redirecionamento para Obrigado (A mágica acontece aqui)
+            // 3. Redirecionamento para Obrigado 
             setTimeout(() => {
-                window.location.href = `thnks-lp.html?text=${encodeURIComponent(msg)}`;
-            }, 400); // 400ms de atraso para garantir que as Tags disparem
+                window.location.href = `obrigado.html?text=${encodeURIComponent(msg)}`;
+            }, 400); 
         });
     </script>
 </body>
