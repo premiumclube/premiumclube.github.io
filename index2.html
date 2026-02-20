@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <script>(function (w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-KN5P7HQN');</script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17904877543"></script>
+    <script> window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'AW-17904877543'); </script>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cotação ou Dúvidas | Premium Clube Proteção Veicular</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-brand { background: linear-gradient(135deg, #1e3668 0%, #0f172a 100%); }
+        .tab-btn-active { background-color: white; shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1); color: #1e3668; }
+    </style>
+</head>
+<body class="bg-slate-50">
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KN5P7HQN" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <main class="gradient-brand min-h-screen flex items-center justify-center py-12 px-4">
+        <div class="max-w-4xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            
+            <div class="text-white">
+                <img src="assets/logo-tran.png" alt="Logo" class="h-12 mb-8">
+                <h1 class="text-4xl font-black mb-4 leading-tight">Proteção total <br><span class="text-orange-500">ao seu alcance.</span></h1>
+                <p class="text-slate-300 mb-6 uppercase text-xs font-bold tracking-widest">Roubo • Furto • Colisão • Guincho 24h</p>
+                <div class="flex items-center gap-4 text-xs font-semibold">
+                    <span class="flex items-center gap-1"><i data-lucide="check" class="text-green-400 w-4 h-4"></i> Sem SPC</span>
+                    <span class="flex items-center gap-1"><i data-lucide="check" class="text-green-400 w-4 h-4"></i> Brasil Todo</span>
+                </div>
+            </div>
+
+            <div class="bg-white p-8 rounded-[2.5rem] shadow-2xl border border-white/20">
+                <h2 class="text-2xl font-black text-[#1e3668] mb-1 italic uppercase tracking-tighter">Atendimento Premium</h2>
+                <p id="form-instruction" class="text-slate-500 text-xs mb-6 font-medium">Escolha o que você precisa agora:</p>
+
+                <form id="smartForm" class="space-y-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <input type="text" id="nome" required placeholder="Seu Nome" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm outline-none focus:border-orange-400 transition-all">
+                        <input type="text" id="tel" required placeholder="WhatsApp" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm outline-none focus:border-orange-400 transition-all">
+                    </div>
+
+                    <div class="flex p-1 bg-slate-100 rounded-2xl overflow-hidden">
+                        <button type="button" id="btnPlaca" onclick="setMetodo('placa')" class="flex-1 py-2 text-[10px] font-black rounded-xl transition-all tab-btn-active">COM PLACA</button>
+                        <button type="button" id="btnDados" onclick="setMetodo('dados')" class="flex-1 py-2 text-[10px] font-black rounded-xl transition-all text-slate-400">SEM PLACA</button>
+                        <button type="button" id="btnDuvida" onclick="setMetodo('duvida')" class="flex-1 py-2 text-[10px] font-black rounded-xl transition-all text-slate-400">SÓ DÚVIDAS</button>
+                    </div>
+
+                    <div id="wrapperPlaca" class="animate-in fade-in duration-300">
+                        <label class="block text-[10px] font-bold text-slate-400 mb-1 uppercase ml-1 tracking-wider">Número da Placa</label>
+                        <input type="text" id="placa" placeholder="ABC1D23" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm uppercase outline-none focus:border-orange-400 font-bold tracking-widest">
+                    </div>
+
+                    <div id="wrapperDados" class="hidden animate-in fade-in duration-300">
+                        <label class="block text-[10px] font-bold text-slate-400 mb-1 uppercase ml-1 tracking-wider">Dados do Veículo</label>
+                        <textarea id="infoVeiculo" placeholder="Ex: Onix 2021, Particular, Salvador-BA" rows="2" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm outline-none focus:border-orange-400 transition-all"></textarea>
+                    </div>
+
+                    <div id="wrapperDuvida" class="hidden animate-in fade-in duration-300">
+                        <label class="block text-[10px] font-bold text-slate-400 mb-1 uppercase ml-1 tracking-wider">Qual sua dúvida?</label>
+                        <textarea id="textoDuvida" placeholder="Como podemos te ajudar hoje?" rows="2" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm outline-none focus:border-orange-400 transition-all"></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full bg-[#25d366] hover:bg-[#1da851] text-white py-4 rounded-xl font-black text-xs flex items-center justify-center gap-2 shadow-lg transition-transform active:scale-95">
+                        <i data-lucide="message-circle" class="w-5 h-5"></i>
+                        <span id="btn-label">RECEBER COTAÇÃO NO WHATSAPP</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        lucide.createIcons();
+        let metodo = 'placa';
+
+        function setMetodo(m) {
+            metodo = m;
+            const buttons = {
+                placa: document.getElementById('btnPlaca'),
+                dados: document.getElementById('btnDados'),
+                duvida: document.getElementById('btnDuvida')
+            };
+            const wrappers = {
+                placa: document.getElementById('wrapperPlaca'),
+                dados: document.getElementById('wrapperDados'),
+                duvida: document.getElementById('wrapperDuvida')
+            };
+            const btnLabel = document.getElementById('btn-label');
+
+            // Resetar botões
+            Object.values(buttons).forEach(btn => btn.classList.remove('bg-white', 'shadow-sm', 'text-[#1e3668]', 'tab-btn-active'));
+            Object.values(buttons).forEach(btn => btn.classList.add('text-slate-400'));
+            
+            // Ativar selecionado
+            buttons[m].classList.add('bg-white', 'shadow-sm', 'text-[#1e3668]', 'tab-btn-active');
+            buttons[m].classList.remove('text-slate-400');
+
+            // Alternar campos
+            Object.values(wrappers).forEach(w => w.classList.add('hidden'));
+            wrappers[m].classList.remove('hidden');
+
+            // Mudar texto do botão principal
+            if (m === 'duvida') {
+                btnLabel.innerText = 'TIRAR DÚVIDAS NO WHATSAPP';
+            } else {
+                btnLabel.innerText = 'RECEBER COTAÇÃO NO WHATSAPP';
+            }
+        }
+
+        // Máscara WhatsApp
+        document.getElementById('tel').addEventListener('input', e => {
+            let x = e.target.value.replace(/\D/g, '').match(/(\d{0,2})(\d{0,5})(\d{0,4})/);
+            e.target.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
+        });
+
+        document.getElementById('smartForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const nome = document.getElementById('nome').value;
+            const tel = document.getElementById('tel').value;
+            const placa = document.getElementById('placa').value;
+            const info = document.getElementById('infoVeiculo').value;
+            const duvida = document.getElementById('textoDuvida').value;
+
+            let corpoMsg = "";
+            if (metodo === 'placa') corpoMsg = `Quero cotação para a Placa: *${placa}*`;
+            else if (metodo === 'dados') corpoMsg = `Quero cotação para: *${info}*`;
+            else corpoMsg = `Tenho uma dúvida: *${duvida}*`;
+
+            const msg = `Olá! Meu nome é *${nome}*.\n${corpoMsg}`;
+
+            // Rastreio Google Ads
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'conversion', {'send_to': 'AW-17904877543/hTjVCJasz-wbEOf_2tlC'});
+            }
+
+            window.location.href = `https://wa.me/557731990819?text=${encodeURIComponent(msg)}`;
+        });
+    </script>
+</body>
+</html>
