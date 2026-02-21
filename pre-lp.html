@@ -165,7 +165,8 @@
         // Evento de Submit Atualizado
         document.getElementById('smartForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            const nome = document.getElementById('nome').value;
+            let nomeRaw = document.getElementById('nome').value.trim();
+            const nome = nomeRaw.charAt(0).toUpperCase() + nomeRaw.slice(1);
             const tel = document.getElementById('tel').value;
             const placaRaw = document.getElementById('placa').value;
             const info = document.getElementById('infoVeiculo').value;
