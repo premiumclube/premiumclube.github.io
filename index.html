@@ -226,9 +226,15 @@
                     </div>
 
                     <div class="flex p-1 bg-slate-100 rounded-2xl overflow-hidden">
-                        <button type="button" id="btnPlaca" onclick="setMetodoForm('placa')" class="flex-1 py-2 text-[10px] font-black rounded-xl transition-all bg-white text-[#1e3668] shadow-sm">COM PLACA</button>
-                        <button type="button" id="btnDados" onclick="setMetodoForm('dados')" class="flex-1 py-2 text-[10px] font-black rounded-xl transition-all text-slate-400">SEM PLACA</button>
-                        <button type="button" id="btnDuvida" onclick="setMetodoForm('duvida')" class="flex-1 py-2 text-[10px] font-black rounded-xl transition-all text-slate-400">SÓ DÚVIDAS</button>
+                        <button type="button" id="btnPlaca" onclick="setMetodoForm('placa')"
+                            class="flex-1 py-2 text-[10px] font-black rounded-xl transition-all bg-white text-[#1e3668] shadow-sm">COM
+                            PLACA</button>
+                        <button type="button" id="btnDados" onclick="setMetodoForm('dados')"
+                            class="flex-1 py-2 text-[10px] font-black rounded-xl transition-all text-slate-400">SEM
+                            PLACA</button>
+                        <button type="button" id="btnDuvida" onclick="setMetodoForm('duvida')"
+                            class="flex-1 py-2 text-[10px] font-black rounded-xl transition-all text-slate-400">SÓ
+                            DÚVIDAS</button>
                     </div>
 
                     <div id="wrapperPlaca" class="block animate-in fade-in duration-300">
@@ -238,12 +244,12 @@
                     </div>
 
                     <div id="wrapperDados" class="hidden animate-in fade-in duration-300">
-                        <textarea id="infoVeiculo" placeholder="Qual o modelo, ano e sua cidade?" rows="2" 
+                        <textarea id="infoVeiculo" placeholder="Qual o modelo, ano e sua cidade?" rows="2"
                             class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white outline-none text-sm transition-all"></textarea>
                     </div>
 
                     <div id="wrapperDuvida" class="hidden animate-in fade-in duration-300">
-                        <textarea id="textoDuvida" placeholder="Como podemos te ajudar hoje?" rows="2" 
+                        <textarea id="textoDuvida" placeholder="Como podemos te ajudar hoje?" rows="2"
                             class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white outline-none text-sm transition-all"></textarea>
                     </div>
 
@@ -523,7 +529,7 @@
             currentSlide = (currentSlide + 1) % slides.length;
             slides[currentSlide].classList.add('active');
         }
-        setInterval(nextSlide, 5000); 
+        setInterval(nextSlide, 5000);
 
         // --- Scroll Suave & Mobile Menu ---
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -577,11 +583,11 @@
             const wrappers = { placa: document.getElementById('wrapperPlaca'), dados: document.getElementById('wrapperDados'), duvida: document.getElementById('wrapperDuvida') };
             const label = document.getElementById('btn-text');
             const placaInput = document.getElementById('placa');
-            
+
             Object.values(btns).forEach(b => { b.classList.remove('bg-white', 'text-[#1e3668]', 'shadow-sm'); b.classList.add('text-slate-400'); });
             btns[m].classList.add('bg-white', 'text-[#1e3668]', 'shadow-sm');
             btns[m].classList.remove('text-slate-400');
-            
+
             Object.values(wrappers).forEach(w => w.classList.add('hidden'));
             wrappers[m].classList.remove('hidden');
 
@@ -592,7 +598,7 @@
         function trackLead() {
             // Disparo Meta
             if (typeof fbq !== 'undefined') fbq('track', 'Lead');
-            
+
             // Disparo Google Ads (Lead)
             gtag('event', 'conversion', {
                 'send_to': 'AW-17904877543/hTjVCJasz-wbEOf_2tlC',
@@ -606,11 +612,12 @@
         // Único Listener do Formulário
         document.getElementById('quoteForm').addEventListener('submit', function (e) {
             e.preventDefault();
-            const nome = document.getElementById('nome').value;
+            let nomeRaw = document.getElementById('nome').value.trim();
+            const nome = nomeRaw.charAt(0).toUpperCase() + nomeRaw.slice(1);
             // LIMPEZA DA PLACA: Remove tudo que não for letra ou número
             const placaRaw = document.getElementById('placa').value;
             const placaLimpa = placaRaw.replace(/[^a-zA-Z0-9]/g, "");
-            
+
             const info = document.getElementById('infoVeiculo').value;
             const duvida = document.getElementById('textoDuvida').value;
 
