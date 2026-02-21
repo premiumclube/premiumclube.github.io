@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adesão Concluída | Premium Clube</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-brand { background: linear-gradient(135deg, #1e3668 0%, #0f172a 100%); }
+    </style>
+
+    <script>
+      // LÓGICA DE TRADUÇÃO DO VALOR BASEADO NO SEU APP
+      function calcularValorAdesao() {
+          const urlParams = new URLSearchParams(window.location.search);
+          const plano = (urlParams.get('plan') || 'PC').toUpperCase();
+          
+          const valoresFixos = { 
+              'PA': 120, 
+              'PB': 150, 
+              'PC': 200, 
+              'PD': 250 
+          };
+          
+          // Se for um dos fixos (PA até PD), retorna o valor direto
+          if (valoresFixos[plano]) {
+              return valoresFixos[plano];
+          }
+
+          // Lógica de acréscimo de 50,00 após PD (PD = 250)
+          const charCodeD = "D".charCodeAt(0); // 68
+          const charCodeAlvo = plano.charCodeAt(0); 
+          
+          if (charCodeAlvo > charCodeD) {
+              const diferenca = charCodeAlvo - charCodeD;
+              return 250 + (diferenca * 50);
+          }
+          
+          return 200; // Valor padrão caso o código seja inválido
+      }
+
+      const valorFinal = calcularValorAdesao();
+
+      // --- GOOGLE ADS ---
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'AW-11404877543');
+
+      gtag('event', 'conversion', {
+          'send_to': 'AW-11404877543/Gkd5CJ3MmvwbEOf_2tlC',
+          'value': valorFinal,
+          'currency': 'BRL'
+      });
+
+      // --- META PIXEL (CÓDIGO COMPLETO SEM ABREVIAÇÕES) ---
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      
+      fbq('init', '2100028070772268');
+      fbq('track', 'PageView');
+      fbq('track', 'Purchase', { 
+          value: valorFinal, 
+          currency: 'BRL' 
+      });
+    </script>
+    <noscript>
+      <img height="1" width="1" style="display:none" 
+           src="https://www.facebook.com/tr?id=2100028070772268&ev=PageView&noscript=1"/>
+    </noscript>
+</head>
+<body class="bg-slate-50 min-h-screen flex items-center justify-center p-4">
+
+    <div class="max-w-md w-full bg-white rounded-[2.5rem] shadow-2xl overflow-hidden border border-slate-100 text-center p-10">
+        <div class="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
+            <i data-lucide="shield-check" class="w-12 h-12"></i>
+        </div>
+        
+        <h1 class="text-[#1e3668] text-2xl font-black uppercase italic tracking-tighter mb-4 leading-tight">
+            Adesão Recebida com Sucesso!
+        </h1>
+        
+        <p class="text-slate-500 text-sm mb-8 leading-relaxed">
+            Parabéns! Seus dados e documentos entraram em nossa fila de auditoria. Em breve, um consultor entrará em contato para finalizar a ativação da sua proteção veicular.
+        </p>
+
+        <div class="space-y-4">
+            <a href="https://premiumclube.app.br" class="inline-flex items-center justify-center w-full bg-[#1e3668] text-white py-4 rounded-2xl font-black text-xs uppercase tracking-widest shadow-lg hover:bg-orange-500 transition-all gap-2">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i> Voltar para o Site
+            </a>
+            <div class="pt-4 border-t border-slate-100">
+                <p class="text-[9px] text-slate-400 font-bold uppercase tracking-widest leading-none">
+                    Premium Clube Proteção Veicular<br>
+                    Sua segurança é nossa prioridade.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+
+</body>
+</html>
