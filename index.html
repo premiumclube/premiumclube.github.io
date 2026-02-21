@@ -578,59 +578,55 @@
             const label = document.getElementById('btn-text');
             const placaInput = document.getElementById('placa');
             
-            // Alternar estilo dos botões
             Object.values(btns).forEach(b => { b.classList.remove('bg-white', 'text-[#1e3668]', 'shadow-sm'); b.classList.add('text-slate-400'); });
             btns[m].classList.add('bg-white', 'text-[#1e3668]', 'shadow-sm');
             btns[m].classList.remove('text-slate-400');
             
-            // Alternar visibilidade dos campos
             Object.values(wrappers).forEach(w => w.classList.add('hidden'));
             wrappers[m].classList.remove('hidden');
 
-            // Ajustar obrigatoriedade e texto
             placaInput.required = (m === 'placa');
             label.innerText = (m === 'duvida') ? 'TIRAR DÚVIDAS NO WHATSAPP' : 'OBTER COTAÇÃO GRÁTIS';
         }
 
-        function gtag_report_conversion(url) {
-            var callback = function () {
-                if (typeof (url) != 'undefined') { window.location = url; }
-            };
+        function trackLead() {
+            // Disparo Meta
+            if (typeof fbq !== 'undefined') fbq('track', 'Lead');
+            
+            // Disparo Google Ads (Lead)
             gtag('event', 'conversion', {
                 'send_to': 'AW-17904877543/hTjVCJasz-wbEOf_2tlC',
                 'value': 1.0,
-                'currency': 'BRL',
-                'event_callback': callback
+                'currency': 'BRL'
             });
-            return false;
-        }
 
-        function trackLead() {
-            if (typeof fbq !== 'undefined') fbq('track', 'Lead');
             if (typeof dataLayer !== 'undefined') dataLayer.push({ 'event': 'btn_cotacao_clique' });
-            gtag_report_conversion();
         }
 
         // Único Listener do Formulário
         document.getElementById('quoteForm').addEventListener('submit', function (e) {
             e.preventDefault();
             const nome = document.getElementById('nome').value;
-            const placa = document.getElementById('placa').value;
+            // LIMPEZA DA PLACA: Remove tudo que não for letra ou número
+            const placaRaw = document.getElementById('placa').value;
+            const placaLimpa = placaRaw.replace(/[^a-zA-Z0-9]/g, "");
+            
             const info = document.getElementById('infoVeiculo').value;
             const duvida = document.getElementById('textoDuvida').value;
 
             let corpoMsg = "";
-            if (metodoAtivo === 'placa') corpoMsg = ` Gostaria de uma cotação para o veículo de placa *${placa}*`;
+            if (metodoAtivo === 'placa') corpoMsg = ` Gostaria de uma cotação para o veículo de placa *${placaLimpa}*`;
             else if (metodoAtivo === 'dados') corpoMsg = ` Gostaria de uma cotação para: *${info}*`;
             else corpoMsg = ` Tenho uma dúvida: *${duvida}*`;
 
-            const msg = `Oi! Me chamo *${nome}*.%0A%0A${corpoMsg}`;
+            const msg = `Oi! Me chamo ${nome}%0A%0A${corpoMsg}`;
 
-            //trackLead();
+            trackLead();
 
             setTimeout(() => {
-                window.location.href = `thnks-lp.html?text=${encodeURIComponent(msg)}`;
-            }, 400);
+                // Redireciona para sua página de processamento de cotação
+                window.location.href = `solicitarcotacao.html?text=${encodeURIComponent(msg)}`;
+            }, 500);
         });
 
         // Máscaras de Input
