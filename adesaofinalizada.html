@@ -11,8 +11,7 @@
         body { font-family: 'Inter', sans-serif; }
         .gradient-brand { background: linear-gradient(135deg, #1e3668 0%, #0f172a 100%); }
     </style>
-
-    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17904877543"></script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17904877543"></script>
     <script>
       function calcularValorAdesao() {
           const urlParams = new URLSearchParams(window.location.search);
@@ -26,18 +25,23 @@
       }
 
       const valorFinal = calcularValorAdesao();
+      // Gera um ID aleatório para o Google não reclamar da falta de Transaction ID
+      const transactionId = "ADM-" + Math.floor(Math.random() * 1000000);
 
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'AW-17904877543');
 
+      // DISPARO GOOGLE ADS COM ID DE TRANSAÇÃO
       gtag('event', 'conversion', {
           'send_to': 'AW-17904877543/Gkd5CJ3MmvwbEOf_2tlC',
           'value': valorFinal,
-          'currency': 'BRL'
+          'currency': 'BRL',
+          'transaction_id': transactionId // <--- ISSO RESOLVE O AVISO
       });
 
+      // DISPARO META PIXEL
       !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
       n.callMethod.apply(n,arguments):n.queue.push(arguments)};
       if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
@@ -47,7 +51,7 @@
       'https://connect.facebook.net/en_US/fbevents.js');
       fbq('init', '2100028070772268');
       fbq('track', 'PageView');
-      fbq('track', 'Purchase', { value: valorFinal, currency: 'BRL' });
+      fbq('track', 'Purchase', { value: valorFinal, currency: 'BRL', external_id: transactionId });
     </script>
 </head>
 <body class="bg-slate-50 min-h-screen pb-10">
