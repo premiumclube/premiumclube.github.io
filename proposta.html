@@ -1,138 +1,368 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sua Proposta Exclusiva | Premium Clube</title>
+    <title>Proposta Comercial | Premium Clube</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; }
-        .pulse { animation: pulse 2s infinite; }
-        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f1f5f9;
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        #social-notify {
+            transform: translateX(-120%);
+            transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        #social-notify.show {
+            transform: translateX(0);
+        }
+
+        .progress-bar {
+            transition: width 1s linear;
+        }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-900 pb-20">
-    <div class="bg-red-600 text-white text-center py-2 text-[10px] font-black uppercase tracking-widest sticky top-0 z-50">
-        Oferta expira em: <span id="timer">01:59:59</span>
+
+<body class="text-slate-900 pb-20">
+
+    <div class="bg-[#1e3668] sticky top-0 z-50 shadow-xl">
+        <div class="max-w-4xl mx-auto px-4 py-3 flex flex-col items-center">
+            <div class="flex items-center gap-3 text-white mb-2">
+                <i data-lucide="clock-alert" class="w-5 h-5 text-orange-500 animate-pulse"></i>
+                <span class="text-xs font-black uppercase tracking-widest">Oferta exclusiva expira em: <span id="timer"
+                        class="text-orange-400 text-sm"> - : - : -</span></span>
+            </div>
+            <div class="w-full bg-white/10 h-2 rounded-full overflow-hidden">
+                <div id="progress" class="progress-bar bg-orange-500 h-full" style="width: 100%"></div>
+            </div>
+        </div>
     </div>
 
-    <header class="bg-[#1e3668] p-6 shadow-xl">
-        <div class="max-w-4xl mx-auto flex justify-between items-center text-white">
-            <h1 class="font-black italic text-xl">PREMIUM <span class="text-orange-500">CLUBE</span></h1>
-            <span class="text-[9px] border border-white/20 px-2 py-1 rounded uppercase font-bold">Proposta Digital</span>
+    <header class="bg-white border-b py-6 px-4">
+        <div
+            class="max-w-4xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left">
+            <div>
+                <h1 class="text-2xl font-black text-[#1e3668] uppercase italic leading-tight">Cotação de Proteção
+                    Veicular</h1>
+                <p class="text-slate-500 font-bold uppercase text-xs tracking-widest mt-1">Protocolo: <span
+                        id="prop-id">#8837175</span></p>
+            </div>
+            <img src="assets/logo-tran.png" class="h-10" alt="Premium Clube" onerror="this.style.display='none'">
         </div>
     </header>
 
-    <main class="max-w-4xl mx-auto p-4 md:p-8" id="view" style="display:none;">
-        <div class="text-center mb-10">
-            <h2 class="text-3xl font-black text-[#1e3668] uppercase italic leading-none">Olá, <span id="c-nome" class="text-orange-500"></span>!</h2>
-            <p class="text-slate-500 mt-2">Condição exclusiva para o seu <span id="v-modelo" class="font-bold text-slate-800"></span></p>
+    <main class="max-w-4xl mx-auto p-4 md:p-8" id="content" style="display:none;">
+
+        <div
+            class="bg-white rounded-3xl p-6 shadow-sm border border-slate-200 mb-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="flex items-center gap-4 border-b md:border-b-0 md:border-r pb-4 md:pb-0 border-slate-100">
+                <div class="bg-slate-100 p-3 rounded-2xl"><i data-lucide="user" class="text-[#1e3668]"></i></div>
+                <div>
+                    <p class="text-[11px] font-black text-slate-400 uppercase tracking-widest">Solicitante</p>
+                    <p class="text-lg font-bold text-[#1e3668]" id="c-nome"></p>
+                </div>
+            </div>
+            <div class="flex items-center gap-4">
+                <div class="bg-slate-100 p-3 rounded-2xl"><i data-lucide="car" class="text-[#1e3668]"></i></div>
+                <div>
+                    <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Veículo Selecionado</p>
+                    <p class="text-lg font-bold text-[#1e3668]" id="v-modelo"></p>
+                </div>
+            </div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div class="md:col-span-2 space-y-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="md:col-span-2 space-y-8">
                 <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-200">
-                    <h3 class="text-[10px] font-black uppercase text-slate-400 mb-4 tracking-tighter">Dados do Veículo</h3>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div><p class="text-[10px] text-slate-400 uppercase">Placa</p><p class="font-bold text-[#1e3668]" id="v-placa"></p></div>
-                        <div><p class="text-[10px] text-slate-400 uppercase">FIPE</p><p class="font-black text-xl text-green-600" id="v-fipe"></p></div>
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4">
+                        <div>
+                            <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Proteção
+                                Casco (Tabela FIPE)</p>
+                            <p class="text-3xl font-black text-green-600" id="v-fipe"></p>
+                        </div>
+                        <div class="text-left sm:text-right bg-slate-50 p-3 rounded-xl border w-full sm:w-auto">
+                            <p class="text-sm font-black text-[#1e3668] uppercase tracking-tight">Placa: <span
+                                    id="v-placa" class="text-slate-600 ml-1"></span></p>
+                            <p class="text-sm font-black text-[#1e3668] uppercase tracking-tight">Ano/Modelo: <span
+                                    id="v-ano" class="text-slate-600 ml-1"></span></p>
+                        </div>
                     </div>
                 </div>
 
-                <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-200">
-                    <h3 class="text-[10px] font-black uppercase text-slate-400 mb-4">O que está garantido</h3>
-                    <ul class="space-y-3 text-sm" id="list-p"></ul>
-                    <div id="box-ex" class="mt-6 pt-4 border-t border-dashed border-slate-200">
-                        <p class="text-[10px] font-black text-orange-500 uppercase mb-2">Opcionais Solicitados</p>
-                        <ul class="space-y-2 text-xs font-bold text-[#1e3668]" id="list-ex"></ul>
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-200">
+                    <h3 class="font-black text-[#1e3668] uppercase text-sm mb-6 border-b pb-4">Benefícios e Coberturas
+                    </h3>
+                    <ul class="grid grid-cols-1 sm:grid-cols-2 gap-4" id="list-protecoes"></ul>
+
+                    <div id="box-extras" class="mt-8 pt-6 border-t border-dashed border-slate-300">
+                        <p class="text-xs font-black text-orange-500 uppercase mb-4 italic tracking-widest">Opcionais
+                            adicionados:</p>
+                        <ul class="space-y-3" id="list-extras"></ul>
                     </div>
                 </div>
             </div>
 
             <div>
-                <div class="bg-[#1e3668] p-8 rounded-3xl shadow-2xl text-white text-center sticky top-20">
-                    <p class="text-xs text-white/50 line-through font-bold" id="f-de"></p>
-                    <p class="text-5xl font-black text-white my-2" id="f-por"></p>
-                    <div class="bg-orange-500 text-[9px] font-black px-2 py-1 rounded inline-block uppercase mb-6" id="f-regra"></div>
-                    
-                    <div class="space-y-3 mb-8 text-left text-xs bg-white/10 p-4 rounded-2xl">
-                        <div class="flex justify-between"><span>Adesão:</span> <span class="font-bold" id="f-adesao"></span></div>
-                        <div class="flex justify-between text-green-400"><span>Terceiros:</span> <span class="font-bold uppercase italic">Sem Franquia</span></div>
+                <div class="bg-[#1e3668] p-6 rounded-[40px] shadow-2xl text-white sticky top-32 text-center">
+                    <p class="text-xs font-bold text-slate-400 uppercase mb-2">Mensalidade Premium</p>
+                    <p class="text-xl text-white/40 line-through font-bold" id="f-de"></p>
+                    <p class="text-[40px] font-black text-white my-3" id="f-por"></p>
+                    <div class="bg-orange-500 text-[12px] font-black px-3 py-1 rounded-[20px] inline-block uppercase mb-8"
+                        id="f-regra"></div>
+                    <div class="space-y-4 mb-8 text-sm bg-white/5 p-3 rounded-3xl border border-white/10">
+                        <div class="flex justify-between">
+                            <span class="text-slate-400">Taxa de Adesão:</span>
+                            <span class="font-bold" id="f-adesao"></span>
+                        </div>
+                        <div class="flex flex-col text-left pt-2 border-t border-white/10">
+                            <span class="text-green-400 font-black text-[10px] uppercase italic tracking-tighter">Bônus
+                                Exclusivo:</span>
+                            <span class="text-xs font-bold uppercase mt-1">ISENTO DE COTA DE PARTICIPAÇÃO PARA
+                                TERCEIROS</span>
+                        </div>
                     </div>
 
-                    <button onclick="irZap()" class="w-full bg-[#25d366] hover:bg-green-600 text-white font-black py-4 rounded-2xl shadow-xl transition-all pulse uppercase italic">
+                    <button onclick="irZap()"
+                        class="w-full bg-[#25d366] hover:bg-green-600 text-white font-black py-5 rounded-2xl shadow-xl transition-all pulse uppercase italic text-lg flex items-center justify-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="w-6 h-6">
+                            <path
+                                d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+                        </svg>
                         Ativar Agora
                     </button>
+                    <p class="text-[10px] text-white/40 mt-4 uppercase font-bold tracking-widest">Condição Garantida
+                        apenas por tempo limitado</p>
                 </div>
             </div>
         </div>
     </main>
 
+    <div id="social-notify"
+        class="fixed bottom-6 left-6 z-[60] bg-white p-4 rounded-2xl shadow-2xl border border-slate-200 flex items-center gap-4 max-w-sm">
+        <div class="bg-green-100 p-2 rounded-full text-green-600"><i data-lucide="shield-check" class="w-6 h-6"></i>
+        </div>
+        <div>
+            <p id="social-text" class="text-sm font-bold text-[#1e3668] leading-tight"></p>
+            <p class="text-[10px] text-slate-400 uppercase font-black mt-1 italic">Solicitação recebida há 2 minutos</p>
+        </div>
+    </div>
+
     <script>
         lucide.createIcons();
-        let config = {};
+        let payload = {};
 
-        function load() {
-            const params = new URLSearchParams(window.location.search);
-            const rawData = params.get('data');
-            if(!rawData) { alert("Link inválido!"); return; }
+        function init() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const data64 = urlParams.get('data');
+            if (!data64) return;
 
             try {
-                const payload = JSON.parse(decodeURIComponent(atob(rawData)));
-                config = payload;
-                const d = payload.dados.configuracao_proposta || payload.dados;
-                const fin = d.financeiro || {};
+                const raw = JSON.parse(decodeURIComponent(atob(data64)));
+                payload = raw;
+                const d = raw.dados.configuracao_proposta || raw.dados;
+                const f = d.financeiro || {};
 
-                // Injeção de Dados
-                document.getElementById('c-nome').innerText = payload.cliente.nome.split(' ')[0];
+                document.getElementById('c-nome').innerText = payload.cliente.nome;
                 document.getElementById('v-modelo').innerText = d.veiculo.modelo;
                 document.getElementById('v-placa').innerText = d.veiculo.placa;
+                document.getElementById('v-ano').innerText = d.veiculo.ano;
                 document.getElementById('v-fipe').innerText = d.veiculo.valor_fipe;
+                document.getElementById('prop-id').innerText = "#" + (d.cotacao_numero || "8837175");
 
-                // Financeiro Inteligente
-                document.getElementById('f-de').innerText = fin.mensalidade.valor_de || fin.mensalidade.valor_original;
-                document.getElementById('f-por').innerText = fin.mensalidade.valor_por || fin.mensalidade.valor_atual;
-                document.getElementById('f-regra').innerText = fin.mensalidade.regra_desconto || fin.mensalidade.detalhe_desconto;
-                document.getElementById('f-adesao').innerText = fin.contratacao.taxa_unica;
+                document.getElementById('f-de').innerText = f.mensalidade.valor_de || f.mensalidade.valor_original;
+                document.getElementById('f-por').innerText = f.mensalidade.valor_por || f.mensalidade.valor_atual;
+                document.getElementById('f-regra').innerText = f.mensalidade.regra_desconto || f.mensalidade.detalhe_desconto;
+                document.getElementById('f-adesao').innerText = f.contratacao.taxa_unica;
 
-                // Listas
-                const lP = document.getElementById('list-p');
-                (d.protecoes_inclusas || []).forEach(i => {
-                    lP.innerHTML += `<li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-green-500"></i> ${i.item}</li>`;
+                const lP = document.getElementById('list-protecoes');
+                (d.protecoes_inclusas || []).forEach(item => {
+                    lP.innerHTML += `<li class="flex items-center gap-3 text-sm font-bold text-slate-700 uppercase italic"><i data-lucide="check-circle" class="w-5 h-5 text-green-500 flex-shrink-0"></i> ${item.item}</li>`;
                 });
 
-                const lE = document.getElementById('list-ex');
-                const ex = [...(payload.extras || []), ...(d.opcionais_selecionados || [])];
-                if(ex.length > 0) {
-                    ex.forEach(e => {
-                        const txt = typeof e === 'string' ? e : (e.nome || e.item);
-                        lE.innerHTML += `<li class="flex items-center gap-2"><i data-lucide="plus" class="w-3 h-3 text-orange-500"></i> ${txt}</li>`;
-                    });
-                } else { document.getElementById('box-ex').style.display = 'none'; }
+                // Filtragem para evitar duplicados
+                const lE = document.getElementById('list-extras');
+                const uniqueExtras = new Set();
 
-                document.getElementById('view').style.display = 'block';
+                // Adiciona opcionais do JSON
+                // if(d.opcionais_selecionados) {
+                //     d.opcionais_selecionados.forEach(e => uniqueExtras.add(e.nome || e.item));
+                // }
+                // Adiciona opcionais do Gerador
+                if (payload.extras) {
+                    payload.extras.forEach(e => uniqueExtras.add(e));
+                }
+
+                if (uniqueExtras.size > 0) {
+                    uniqueExtras.forEach(txt => {
+                        lE.innerHTML += `<li class="flex items-center gap-3 text-sm font-black text-[#1e3668] uppercase italic"><i data-lucide="plus-circle" class="w-4 h-4 text-orange-500"></i> ${txt}</li>`;
+                    });
+                } else { document.getElementById('box-extras').style.display = 'none'; }
+
+                document.getElementById('content').style.display = 'block';
                 lucide.createIcons();
-                startTimer();
-            } catch(e) { console.error(e); }
+                runTimer();
+                socialProof(d.veiculo.cidade, d.veiculo.modelo);
+            } catch (e) { console.error(e); }
         }
 
-        function startTimer() {
-            let s = 7199;
-            setInterval(() => {
-                let m = Math.floor(s/60);
-                let h = Math.floor(m/60);
-                document.getElementById('timer').innerText = `0${h}:${(m%60).toString().padStart(2,'0')}:${(s%60).toString().padStart(2,'0')}`;
-                s--;
+        function runTimer() {
+            const DURACAO_TOTAL = 10; // 2 horas em segundos
+            let tempoFinal = localStorage.getItem('oferta_expira_em');
+
+            // Se não houver um tempo salvo, define um agora
+            if (!tempoFinal) {
+                tempoFinal = Math.floor(Date.now() / 1000) + DURACAO_TOTAL;
+                localStorage.setItem('oferta_expira_em', tempoFinal);
+            }
+
+            const interval = setInterval(() => {
+                const agora = Math.floor(Date.now() / 1000);
+                let restante = tempoFinal - agora;
+
+                if (restante <= 0) {
+                    clearInterval(interval);
+                    document.getElementById('timer').innerText = "00:00:00";
+                    document.getElementById('progress').style.width = "0%";
+                    exibirTelaExpirada();
+                    return;
+                }
+
+                // Cálculo de H:M:S
+                let h = Math.floor(restante / 3600);
+                let m = Math.floor((restante % 3600) / 60);
+                let s = restante % 60;
+
+                document.getElementById('timer').innerText =
+                    `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+
+                // Barra de progresso baseada no tempo real restante
+                const percentual = (restante / DURACAO_TOTAL) * 100;
+                document.getElementById('progress').style.width = percentual + "%";
             }, 1000);
         }
 
-        function irZap() {
-            const m = `Olá! Sou ${config.cliente.nome}. Quero ativar a proteção do meu ${config.dados.veiculo.modelo || config.dados.configuracao_proposta.veiculo.modelo}. Como procedemos?`;
-            window.location.href = `https://wa.me/557731990819?text=${encodeURIComponent(m)}`;
+        function exibirTelaExpirada() {
+            const mainContent = document.querySelector('main');
+            mainContent.innerHTML = `
+                <div class="max-w-xl mx-auto mt-20 p-8 bg-white rounded-[40px] shadow-2xl text-center border border-slate-200">
+                    <div class="bg-red-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i data-lucide="clock-off" class="text-red-600 w-10 h-10"></i>
+                    </div>
+                    <h2 class="text-2xl font-black text-[#1e3668] uppercase italic mb-4">Proposta Expirada</h2>
+                    <p class="text-slate-500 font-bold mb-8">Esta oferta exclusiva não está mais disponível. Por favor, entre em contato com seu consultor para uma nova cotação.</p>
+                    <button onclick="irZap()" class="w-full bg-[#25d366] hover:bg-green-600 text-white font-black py-5 rounded-2xl shadow-xl transition-all uppercase italic text-lg flex items-center justify-center gap-2">
+                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6">
+                            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                        </svg>
+                        Falar com Consultor
+                    </button>
+                </div>
+            `;
+            lucide.createIcons();
         }
-        load();
+
+        function socialProof(cidadeCliente, modelo) {
+            const nomes = [
+                "Carlos Silva", "Ricardo M.", "Fernanda G.", "André Santos", "Marcos V.",
+                "Patrícia L.", "Roberto Souza", "Juliana F.", "Cláudio Ferreira", "Mônica P.",
+                "Lucas Oliveira", "Beatriz H.", "Sérgio Lima", "Vanessa R.", "Tiago Mendes",
+                "Aline Castro", "Felipe J.", "Camila Rocha", "Gustavo N.", "Renata B.",
+                "Eduardo P.", "Sabrina W.", "Marcelo T.", "Tatiane S.", "Rodrigo A.",
+                "Larissa K.", "Hugo D.", "Priscila M.", "Bruno C.", "Daniela V."
+            ];
+            const modelos = [
+                // Populares e Entrada
+                "ONIX", "HB20", "KA", "GOL", "PRISMA", "ARGO", "MOBI", "KWID", "UNO", "PALIO",
+                "SANDERO", "LOGAN", "VOYAGE", "FIESTA", "UP!", "ETIOS", "MARCH",
+
+                // Sedãs e Utilitários de Trabalho
+                "STRADA", "SAVEIRO", "VIRTUS", "CRONOS", "CITY", "COBALT", "VERSA", "MONTANA",
+
+                // Régua Alta (SUVs e Médios)
+                "COROLLA", "CIVIC", "COMPASS", "RENEGADE", "HR-V", "CRETA", "T-CROSS", "TRACKER",
+                "NIVUS", "KICKS", "DUSTER",
+                modelo
+            ];
+            const cidades = [
+                "Salvador", "Belo Horizonte", "São Paulo", "Rio de Janeiro", "Curitiba",
+                "Brasília", "Fortaleza", "Manaus", "Recife", "Porto Alegre",
+                "Goiânia", "Belém", "Guarulhos", "Campinas", "São Luís",
+                "São Gonçalo", "Maceió", "Duque de Caxias", "Natal", "Teresina",
+                cidadeCliente
+            ];
+
+            function exibirProximo() {
+                // Tempo aleatório para a próxima exibição (entre 10 e 18 segundos)
+                const proximoDelay = Math.floor(Math.random() * (14 - 8 + 1) + 10) * 1000;
+
+                setTimeout(() => {
+                    const n = nomes[Math.floor(Math.random() * nomes.length)];
+                    const c = cidades[Math.floor(Math.random() * cidades.length)];
+                    const m = modelos[Math.floor(Math.random() * modelos.length)];
+
+                    // Tempo aleatório da "solicitação" (entre 3 e 30 segundos atrás)
+                    const segundosAtras = Math.floor(Math.random() * (30 - 3 + 1)) + 3;
+
+                    document.getElementById('social-text').innerHTML = `<span class="text-orange-600">${n}</span> acaba de ativar a proteção para um <span class="text-orange-600">${m}</span> em ${c}`;
+
+                    const legenda = document.querySelector('#social-notify p.text-\\[10px\\]');
+                    legenda.innerText = `Solicitação recebida há ${segundosAtras} segundos`;
+
+                    const notify = document.getElementById('social-notify');
+                    notify.classList.add('show');
+
+                    setTimeout(() => notify.classList.remove('show'), 6000);
+
+                    // Chama a função novamente para criar o loop com tempo variável
+                    exibirProximo();
+                }, proximoDelay);
+            }
+
+            // Inicia o primeiro ciclo
+            exibirProximo();
+        }
+        function irZap() {
+            const agora = Math.floor(Date.now() / 1000);
+            const tempoFinal = localStorage.getItem('oferta_expira_em');
+            let msg = "";
+
+            // Verifica se o tempo expirou
+            if (tempoFinal && agora > tempoFinal) {
+                msg = `Olá! Minha cotação para o ${payload.dados.veiculo.modelo || payload.dados.configuracao_proposta.veiculo.modelo} expirou! Gostaria de fazer uma nova.`;
+            } else {
+                msg = `Olá! Analisei a cotação oficial do meu ${payload.dados.veiculo.modelo || payload.dados.configuracao_proposta.veiculo.modelo} e quero ativar com essa condição especial!`;
+            }
+
+            window.location.href = `https://wa.me/557731990819?text=${encodeURIComponent(msg)}`;
+        }
+        init();
     </script>
 </body>
+
 </html>
