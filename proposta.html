@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sua Proposta Exclusiva | Premium Clube</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .pulse { animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 pb-20">
+    <div class="bg-red-600 text-white text-center py-2 text-[10px] font-black uppercase tracking-widest sticky top-0 z-50">
+        Oferta expira em: <span id="timer">01:59:59</span>
+    </div>
+
+    <header class="bg-[#1e3668] p-6 shadow-xl">
+        <div class="max-w-4xl mx-auto flex justify-between items-center text-white">
+            <h1 class="font-black italic text-xl">PREMIUM <span class="text-orange-500">CLUBE</span></h1>
+            <span class="text-[9px] border border-white/20 px-2 py-1 rounded uppercase font-bold">Proposta Digital</span>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto p-4 md:p-8" id="view" style="display:none;">
+        <div class="text-center mb-10">
+            <h2 class="text-3xl font-black text-[#1e3668] uppercase italic leading-none">Olá, <span id="c-nome" class="text-orange-500"></span>!</h2>
+            <p class="text-slate-500 mt-2">Condição exclusiva para o seu <span id="v-modelo" class="font-bold text-slate-800"></span></p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="md:col-span-2 space-y-6">
+                <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-200">
+                    <h3 class="text-[10px] font-black uppercase text-slate-400 mb-4 tracking-tighter">Dados do Veículo</h3>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div><p class="text-[10px] text-slate-400 uppercase">Placa</p><p class="font-bold text-[#1e3668]" id="v-placa"></p></div>
+                        <div><p class="text-[10px] text-slate-400 uppercase">FIPE</p><p class="font-black text-xl text-green-600" id="v-fipe"></p></div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-200">
+                    <h3 class="text-[10px] font-black uppercase text-slate-400 mb-4">O que está garantido</h3>
+                    <ul class="space-y-3 text-sm" id="list-p"></ul>
+                    <div id="box-ex" class="mt-6 pt-4 border-t border-dashed border-slate-200">
+                        <p class="text-[10px] font-black text-orange-500 uppercase mb-2">Opcionais Solicitados</p>
+                        <ul class="space-y-2 text-xs font-bold text-[#1e3668]" id="list-ex"></ul>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="bg-[#1e3668] p-8 rounded-3xl shadow-2xl text-white text-center sticky top-20">
+                    <p class="text-xs text-white/50 line-through font-bold" id="f-de"></p>
+                    <p class="text-5xl font-black text-white my-2" id="f-por"></p>
+                    <div class="bg-orange-500 text-[9px] font-black px-2 py-1 rounded inline-block uppercase mb-6" id="f-regra"></div>
+                    
+                    <div class="space-y-3 mb-8 text-left text-xs bg-white/10 p-4 rounded-2xl">
+                        <div class="flex justify-between"><span>Adesão:</span> <span class="font-bold" id="f-adesao"></span></div>
+                        <div class="flex justify-between text-green-400"><span>Terceiros:</span> <span class="font-bold uppercase italic">Sem Franquia</span></div>
+                    </div>
+
+                    <button onclick="irZap()" class="w-full bg-[#25d366] hover:bg-green-600 text-white font-black py-4 rounded-2xl shadow-xl transition-all pulse uppercase italic">
+                        Ativar Agora
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        lucide.createIcons();
+        let config = {};
+
+        function load() {
+            const params = new URLSearchParams(window.location.search);
+            const rawData = params.get('data');
+            if(!rawData) { alert("Link inválido!"); return; }
+
+            try {
+                const payload = JSON.parse(decodeURIComponent(atob(rawData)));
+                config = payload;
+                const d = payload.dados.configuracao_proposta || payload.dados;
+                const fin = d.financeiro || {};
+
+                // Injeção de Dados
+                document.getElementById('c-nome').innerText = payload.cliente.nome.split(' ')[0];
+                document.getElementById('v-modelo').innerText = d.veiculo.modelo;
+                document.getElementById('v-placa').innerText = d.veiculo.placa;
+                document.getElementById('v-fipe').innerText = d.veiculo.valor_fipe;
+
+                // Financeiro Inteligente
+                document.getElementById('f-de').innerText = fin.mensalidade.valor_de || fin.mensalidade.valor_original;
+                document.getElementById('f-por').innerText = fin.mensalidade.valor_por || fin.mensalidade.valor_atual;
+                document.getElementById('f-regra').innerText = fin.mensalidade.regra_desconto || fin.mensalidade.detalhe_desconto;
+                document.getElementById('f-adesao').innerText = fin.contratacao.taxa_unica;
+
+                // Listas
+                const lP = document.getElementById('list-p');
+                (d.protecoes_inclusas || []).forEach(i => {
+                    lP.innerHTML += `<li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-green-500"></i> ${i.item}</li>`;
+                });
+
+                const lE = document.getElementById('list-ex');
+                const ex = [...(payload.extras || []), ...(d.opcionais_selecionados || [])];
+                if(ex.length > 0) {
+                    ex.forEach(e => {
+                        const txt = typeof e === 'string' ? e : (e.nome || e.item);
+                        lE.innerHTML += `<li class="flex items-center gap-2"><i data-lucide="plus" class="w-3 h-3 text-orange-500"></i> ${txt}</li>`;
+                    });
+                } else { document.getElementById('box-ex').style.display = 'none'; }
+
+                document.getElementById('view').style.display = 'block';
+                lucide.createIcons();
+                startTimer();
+            } catch(e) { console.error(e); }
+        }
+
+        function startTimer() {
+            let s = 7199;
+            setInterval(() => {
+                let m = Math.floor(s/60);
+                let h = Math.floor(m/60);
+                document.getElementById('timer').innerText = `0${h}:${(m%60).toString().padStart(2,'0')}:${(s%60).toString().padStart(2,'0')}`;
+                s--;
+            }, 1000);
+        }
+
+        function irZap() {
+            const m = `Olá! Sou ${config.cliente.nome}. Quero ativar a proteção do meu ${config.dados.veiculo.modelo || config.dados.configuracao_proposta.veiculo.modelo}. Como procedemos?`;
+            window.location.href = `https://wa.me/557731990819?text=${encodeURIComponent(m)}`;
+        }
+        load();
+    </script>
+</body>
+</html>
