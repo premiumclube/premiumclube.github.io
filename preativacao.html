@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Status da Contratação | Premium Clube</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f1f5f9; }
+        .pulse-orange { animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.05); opacity: 0.8; } 100% { transform: scale(1); opacity: 1; } }
+    </style>
+</head>
+<body class="text-slate-900 pb-20">
+    <div class="bg-[#1e3668] text-white p-6 text-center rounded-b-[3rem] shadow-xl">
+        <div class="bg-orange-500 text-[10px] font-black uppercase px-3 py-1 rounded-full inline-block mb-2 pulse-orange">Aguardando Conclusão</div>
+        <h1 class="text-2xl font-black uppercase italic italic">Cotação Pré-Aprovada</h1>
+        <p class="text-slate-300 text-xs font-bold mt-1">Protocolo: <span id="prop-id">#8837175</span></p>
+    </div>
+
+    <div class="max-w-md mx-auto px-4 -mt-4">
+        <div class="bg-white rounded-3xl p-6 shadow-lg border border-orange-100 text-center mb-6">
+            <p class="text-[10px] font-black uppercase text-slate-400 mb-2">Sua reserva expira em:</p>
+            <div id="countdown" class="text-3xl font-black text-[#1e3668] tracking-tighter">00:00:00</div>
+        </div>
+
+        <div class="bg-white rounded-3xl p-6 shadow-lg mb-6">
+            <h2 class="text-[#1e3668] font-black uppercase italic mb-4 flex items-center gap-2">
+                <i data-lucide="clipboard-check" class="text-orange-500"></i> Check-list de Ativação
+            </h2>
+            <div id="check-list" class="space-y-4">
+                </div>
+        </div>
+
+        <div class="bg-orange-50 border-2 border-orange-200 rounded-[2rem] p-6 text-center mb-6">
+            <i data-lucide="alert-circle" class="w-10 h-10 text-orange-600 mx-auto mb-3"></i>
+            <h3 class="text-orange-900 font-black uppercase italic text-sm">Documentação Pendente</h3>
+            <p class="text-orange-700 text-[11px] font-bold mt-2 leading-relaxed uppercase">
+                Para garantir o desconto de R$ 50,00 e o bônus de adesão, finalize o envio dos itens marcados acima.
+            </p>
+        </div>
+
+        <button onclick="irZap()" class="w-full bg-green-600 hover:bg-green-700 text-white font-black py-6 rounded-[2rem] shadow-xl transition-all uppercase italic text-xl flex items-center justify-center gap-3">
+            <i data-lucide="message-circle"></i> Finalizar Contratação
+        </button>
+    </div>
+
+    <script>
+        // Lógica de captura de dados (igual à proposta.html)
+        const params = new URLSearchParams(window.location.search);
+        const data = params.get('data');
+        const payload = JSON.parse(decodeURIComponent(atob(data)));
+
+        document.getElementById('prop-id').innerText = '#' + (payload.dados.cotacao_numero || '8837175');
+
+        // Renderizar Check-list
+        const docs = [
+            { id: 'cnh', label: 'Foto da CNH (fora da capinha)' },
+            { id: 'doc', label: 'Foto do documento do veiculo' },
+            { id: 'end', label: 'Foto do comprovante de endereço' },
+            { id: 'email', label: 'E-mail' },
+            { id: 'tel', label: 'Telefone de contato' },
+            { id: 'venc', label: 'Melhor dia de vencimento' }
+        ];
+
+        const listContainer = document.getElementById('check-list');
+        docs.forEach(doc => {
+            const isChecked = payload.checks && payload.checks.includes(doc.id);
+            listContainer.innerHTML += `
+                <div class="flex items-center gap-3 ${isChecked ? 'opacity-50' : ''}">
+                    <div class="w-6 h-6 rounded-full border-2 ${isChecked ? 'bg-green-500 border-green-500' : 'border-slate-300'} flex items-center justify-center">
+                        ${isChecked ? '<i data-lucide="check" class="text-white w-4 h-4"></i>' : ''}
+                    </div>
+                    <span class="text-xs font-bold ${isChecked ? 'line-through text-slate-400' : 'text-slate-700'} uppercase">${doc.label}</span>
+                </div>
+            `;
+        });
+
+        // Countdown Dinâmico
+        let segundos = (payload.expiraDias || 2) * 86400;
+        const timer = setInterval(() => {
+            const h = Math.floor(segundos / 3600);
+            const m = Math.floor((segundos % 3600) / 60);
+            const s = segundos % 60;
+            document.getElementById('countdown').innerText = 
+                `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+            if (segundos <= 0) clearInterval(timer);
+            segundos--;
+        }, 1000);
+
+        function irZap() {
+            window.location.href = `https://wa.me/${payload.cliente.tel || '55XXXXXXXXXXX'}?text=Olá! Segue a documentação pendente para finalizar minha proteção.`;
+        }
+        lucide.createIcons();
+    </script>
+</body>
+</html>
