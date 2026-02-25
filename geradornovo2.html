@@ -111,42 +111,50 @@
                 </div>
             </div>
 
-<div class="bg-orange-50 p-6 rounded-3xl border border-orange-200 mt-6">
-    <h3 class="text-orange-800 font-black uppercase italic text-sm mb-4 flex items-center gap-2">
-        <i data-lucide="lock" class="w-4 h-4"></i> Reserva de Proposta (Pendente)
-    </h3>
-    
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
-        <label class="flex items-center gap-2 text-[10px] font-bold uppercase cursor-pointer">
-            <input type="checkbox" class="doc-check" value="cnh"> CNH Enviada
-        </label>
-        <label class="flex items-center gap-2 text-[10px] font-bold uppercase cursor-pointer">
-            <input type="checkbox" class="doc-check" value="doc"> Doc. Veículo Enviado
-        </label>
-        <label class="flex items-center gap-2 text-[10px] font-bold uppercase cursor-pointer">
-            <input type="checkbox" class="doc-check" value="end"> Comprovante Enviado
-        </label>
-        <label class="flex items-center gap-2 text-[10px] font-bold uppercase cursor-pointer">
-            <input type="checkbox" class="doc-check" value="email"> E-mail Informado
-        </label>
-        <label class="flex items-center gap-2 text-[10px] font-bold uppercase cursor-pointer">
-            <input type="checkbox" class="doc-check" value="tel"> Telefone Informado
-        </label>
-        <label class="flex items-center gap-2 text-[10px] font-bold uppercase cursor-pointer">
-            <input type="checkbox" class="doc-check" value="venc"> Vencimento Definido
-        </label>
-    </div>
+            <div class="bg-orange-50 p-6 rounded-3xl border border-orange-200 mt-6">
+                <h3 class="text-orange-800 font-black uppercase italic text-sm mb-4 flex items-center gap-2">
+                    <i data-lucide="lock" class="w-4 h-4"></i> Reserva de Proposta (Pendente)
+                </h3>
 
-    <div class="flex items-center gap-4">
-        <div class="flex-1">
-            <label class="block text-[9px] font-black uppercase text-orange-400 mb-1">Expira em quantos dias?</label>
-            <input type="number" id="expiraDias" value="2" class="w-full p-2 rounded-lg border-none font-bold outline-none">
-        </div>
-        <button onclick="gerarPreAtivacao()" class="flex-[2] bg-orange-600 text-white font-black py-3 rounded-xl uppercase italic text-xs shadow-lg hover:bg-orange-700 transition-all">
-            Gerar Link de Pré-Ativação
-        </button>
-    </div>
-</div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
+                    <label class="flex items-center gap-2 text-[10px] font-bold uppercase cursor-pointer">
+                        <input type="checkbox" class="doc-check" value="cnh"> CNH Enviada
+                    </label>
+                    <label class="flex items-center gap-2 text-[10px] font-bold uppercase cursor-pointer">
+                        <input type="checkbox" class="doc-check" value="doc"> Doc. Veículo Enviado
+                    </label>
+                    <label class="flex items-center gap-2 text-[10px] font-bold uppercase cursor-pointer">
+                        <input type="checkbox" class="doc-check" value="end"> Comprovante Enviado
+                    </label>
+                    <label class="flex items-center gap-2 text-[10px] font-bold uppercase cursor-pointer">
+                        <input type="checkbox" class="doc-check" value="email"> E-mail Informado
+                    </label>
+                    <label class="flex items-center gap-2 text-[10px] font-bold uppercase cursor-pointer">
+                        <input type="checkbox" class="doc-check" value="tel"> Telefone Informado
+                    </label>
+                    <label class="flex items-center gap-2 text-[10px] font-bold uppercase cursor-pointer">
+                        <input type="checkbox" class="doc-check" value="venc"> Vencimento Definido
+                    </label>
+                    <label class="flex items-center gap-2 text-[10px] font-bold uppercase cursor-pointer">
+                        <input type="checkbox" id="checkRastreador" class="extras-check"
+                            value="rastreador_bonus">
+                        Bônus Rastreador FIPE 40k+
+                    </label>
+                </div>
+
+                <div class="flex items-center gap-4">
+                    <div class="flex-1">
+                        <label class="block text-[9px] font-black uppercase text-orange-400 mb-1">Expira em quantos
+                            dias?</label>
+                        <input type="number" id="expiraDias" value="2"
+                            class="w-full p-2 rounded-lg border-none font-bold outline-none">
+                    </div>
+                    <button onclick="gerarPreAtivacao()"
+                        class="flex-[2] bg-orange-600 text-white font-black py-3 rounded-xl uppercase italic text-xs shadow-lg hover:bg-orange-700 transition-all">
+                        Gerar Link de Pré-Ativação
+                    </button>
+                </div>
+            </div>
 
             <button onclick="gerarProposta()"
                 class="w-full bg-[#1e3668] text-white font-black py-6 rounded-[2rem] shadow-xl hover:scale-[1.01] transition-all uppercase italic text-xl flex items-center justify-center gap-3">
@@ -169,27 +177,56 @@
 
     <script>
         function gerarPreAtivacao() {
-    const nome = document.getElementById('nomeCliente').value;
-    const tel = document.getElementById('telCliente').value;
-    const jsonRaw = document.getElementById('rawInput').value;
+            // 1. Captura os elementos básicos
+            const nome = document.getElementById('nomeCliente').value;
+            const tel = document.getElementById('telCliente').value;
+            const pdf = document.getElementById('pdfLink').value;
+            const expiraDias = document.getElementById('expiraDias').value || 2;
+            const jsonRaw = document.getElementById('rawInput').value;
 
-    try {
-        const payload = {
-            cliente: { nome, tel },
-            dados: JSON.parse(jsonRaw),
-            checks: Array.from(document.querySelectorAll('.doc-check:checked')).map(c => c.value),
-            expiraDias: document.getElementById('expiraDias').value
-        };
+            // 2. O bloco TRY deve envolver o PARSE do JSON para evitar travamentos
+            try {
+                if (!jsonRaw || jsonRaw.trim() === "") {
+                    throw new Error("Cole o texto e clique em INTERPRETAR primeiro!");
+                }
 
-        const base64 = btoa(encodeURIComponent(JSON.stringify(payload)));
-        const urlBase = window.location.href.split('geradornovo.html')[0];
-        const finalUrl = `${urlBase}preativacao.html?data=${base64}`;
+                const d = JSON.parse(jsonRaw);
+                const cotacaoId = d.cotacao_numero || "8837175";
 
-        navigator.clipboard.writeText(finalUrl);
-        alert('Link de PRÉ-ATIVAÇÃO copiado! Envie para o cliente que está aguardando o carro.');
-        window.open(finalUrl, '_blank');
-    } catch(e) { alert('Erro ao gerar. Certifique-se que interpretou o texto antes.'); }
-}
+                // 3. Lógica do Cronômetro (Persistência)
+                const chaveTempo = 'oferta_expira_em_' + cotacaoId;
+                if (!localStorage.getItem(chaveTempo)) {
+                    const tempoFinal = Math.floor(Date.now() / 1000) + (expiraDias * 86400);
+                    localStorage.setItem(chaveTempo, tempoFinal);
+                }
+
+                // 4. Montagem do Payload
+                const payload = {
+                    cliente: { nome, tel, pdf },
+                    dados: d,
+                    // Captura os documentos marcados (CNH, Doc, etc)
+                    checks: Array.from(document.querySelectorAll('.doc-check:checked')).map(c => c.value),
+                    // Captura TODOS os checkboxes que tenham a classe .extras-check (incluindo o Rastreador)
+                    extras: Array.from(document.querySelectorAll('.extras-check:checked')).map(c => c.value),
+                    expiraDias: expiraDias
+                };
+
+                // 5. Gera a URL
+                const base64 = btoa(encodeURIComponent(JSON.stringify(payload)));
+                // Ajustado para aceitar tanto geradornovo.html quanto geradornovo2.html
+                const urlBase = window.location.href.split('gerador')[0];
+                const finalUrl = `${urlBase}preativacao.html?data=${base64}`;
+
+                // 6. Copia e abre
+                navigator.clipboard.writeText(finalUrl);
+                alert('Link de PRÉ-ATIVAÇÃO copiado com sucesso!');
+                window.open(finalUrl, '_blank');
+
+            } catch (e) {
+                alert('Erro: ' + e.message);
+                console.error("Erro na geração:", e);
+            }
+        }
         lucide.createIcons();
         function checkAuth() {
             const hash = "ODk2OA==";
@@ -207,59 +244,77 @@
             if (!txt || txt.trim().startsWith('{')) return;
 
             try {
-                const extrair = (regex) => {
+                const extrair = (regex, index = 1) => {
                     const match = txt.match(regex);
-                    return match ? match[1].trim() : "";
+                    return match && match[index] ? match[index].trim() : "";
                 };
 
-                // Identificar dinamicamente as proteções presentes no texto
+                // Captura da Categoria (Lógica para pegar o que estiver entre "Categoria:" e "Cidade:")
+                const categoriaMatch = txt.match(/Categoria:\s*([\s\S]*?)\s*Cidade:/i);
+                const categoria = categoriaMatch ? categoriaMatch[1].replace(/\n/g, ' ').trim() : "";
+
+                // Captura das Proteções Dinâmicas
                 const protecoes = [];
+                if (txt.includes("Casco")) protecoes.push({ item: extrair(/(Casco\s*\d+%\s*FIPE)/i, 0) || "Casco 100% FIPE" });
 
-                // 1. Sempre inclusos (Padrão)
-                protecoes.push({ item: "Roubo, Furto e Incêndio" });
-                protecoes.push({ item: "Colisão" });
+                const r3Match = txt.match(/Cobertura terceiros\s*\n?R\$\s*([\d.,]+)/i);
+                if (r3Match) protecoes.push({ item: `Terceiros R$ ${r3Match[1]}` });
 
-                // 2. FIPE Dinâmica (Pega 100%, 75%, etc)
-                const fipeMatch = txt.match(/(Casco\s*\d+%\s*FIPE)/i);
-                if (fipeMatch) protecoes.push({ item: fipeMatch[1] });
-                else protecoes.push({ item: "Casco 100% FIPE" }); // Fallback se não achar
-
-                // 3. Terceiros Dinâmico (Captura o valor que estiver abaixo de "Cobertura terceiros")
-                const terceirosMatch = txt.match(/Cobertura terceiros\s*\n?R\$\s*([\d.,]+)/i);
-                if (terceirosMatch) protecoes.push({ item: `Cobertura Terceiros R$ ${terceirosMatch[1]}` });
-
-                // 4. Carro Reserva (Só adiciona se encontrar o termo no texto)
                 if (txt.toLowerCase().includes("carro reserva")) {
-                    const diasReserva = txt.match(/(\d+)\s*dias/i);
-                    const textoReserva = diasReserva ? `Carro Reserva (${diasReserva[1]} dias)` : "Carro Reserva";
-                    protecoes.push({ item: textoReserva });
+                    const dias = txt.match(/até\s*(\d+)\s*dias/i);
+                    protecoes.push({ item: dias ? `Carro Reserva ${dias[1]} dias` : "Carro Reserva" });
                 }
 
+                // Adicionais fixos que sempre constam no texto
+                if (txt.includes("Roubo") || txt.includes("FIPE")) protecoes.push({ item: "Roubo, Furto e Incêndio" });
+
                 const mockJson = {
-                    cotacao_numero: extrair(/Cotação:\s*(\d+)/),
+                    consultor: extrair(/Consultor:\s*(.*)/i),
+                    data_hora: extrair(/Data\/hora:\s*(.*)/i),
+                    cotacao_numero: extrair(/Cotação:\s*(\d+)/i),
                     veiculo: {
-                        modelo: extrair(/Modelo:\s*(.*)/),
-                        placa: extrair(/Placa:\s*(\w+)/),
-                        ano: extrair(/Ano:\s*(.*)/),
-                        valor_fipe: extrair(/FIPE:.*?\nR\$\s*([\d.,]+)/s) || extrair(/R\$\s*([\d.,]+)/),
-                        cidade: extrair(/Cidade:\s*(.*)/)
+                        modelo: extrair(/Modelo:\s*(.*)/i),
+                        placa: extrair(/Placa:\s*(.*)/i) || "SEM PLACA",
+                        ano: extrair(/Ano:\s*(.*)/i),
+                        valor_fipe: extrair(/Valor FIPE\s*\n?R\$\s*([\d.,]+)/i) || extrair(/R\$\s*([\d.,]+)/i),
+                        cidade: extrair(/Cidade:\s*(.*)/i),
+                        uf: extrair(/UF:\s*(.*)/i),
+                        categoria: categoria
                     },
                     financeiro: {
                         mensalidade: {
-                            valor_original: "R$ " + extrair(/De:\s*\n?R\$\s*([\d.,]+)/),
-                            valor_atual: "R$ " + extrair(/Por:\s*\n?R\$\s*([\d.,]+)/),
-                            detalhe_desconto: extrair(/Desconto\s*(.*)/)
+                            valor_original: "R$ " + extrair(/De:\s*\n?R\$\s*([\d.,]+)/i),
+                            valor_atual: "R$ " + extrair(/Por:\s*\n?R\$\s*([\d.,]+)/i),
+                            detalhe_desconto: extrair(/Desconto\s*([\s\S]*?)\s*Contratação/i).split('\n')[0].trim() || "Promocional"
                         },
                         contratacao: {
-                            taxa_unica: "R$ " + extrair(/Taxa única\s*.*?\n?R\$\s*([\d.,]+)/s) || "R$ 350,00",
-                            cota_participacao: extrair(/Cota de Participação\s*\n?(\d+\s*x\s*R\$\s*[\d.,]+)/) || extrair(/Cota de participação\s*\n?([\d.,]+)/)
+                            taxa_unica: "R$ " + (extrair(/Taxa única\s*\n?R\$\s*([\d.,]+)/i) || "350,00"),
+                            cota_participacao: extrair(/Cota de Participação\s*\n?(\d+\s*x\s*R\$\s*[\d.,]+)/i) || extrair(/Cota de participação\s*\n?([\d.,]+)/i)
                         }
                     },
                     protecoes_inclusas: protecoes
                 };
 
+                // Limpeza de campos vazios ou duplicados no desconto
+                if (mockJson.financeiro.mensalidade.detalhe_desconto.length > 50) {
+                    mockJson.financeiro.mensalidade.detalhe_desconto = "Desconto Especial Aplicado";
+                }
+
                 document.getElementById('rawInput').value = JSON.stringify(mockJson, null, 2);
-            } catch (e) { alert("Erro ao interpretar texto."); console.error(e); }
+
+                // Alerta visual de sucesso
+                const btn = document.querySelector('button[onclick="interpretarTexto()"]');
+                btn.innerHTML = "Texto Interpretado!";
+                btn.classList.replace('bg-orange-500', 'bg-green-600');
+                setTimeout(() => {
+                    btn.innerHTML = "Interpretar Texto";
+                    btn.classList.replace('bg-green-600', 'bg-orange-500');
+                }, 2000);
+
+            } catch (e) {
+                alert("Erro ao ler o texto. Verifique o formato.");
+                console.error(e);
+            }
         }
 
         function gerarProposta() {
