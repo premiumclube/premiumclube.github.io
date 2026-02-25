@@ -15,24 +15,15 @@ export default async function handler(req, res) {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                // O Token gigante do cURL é obrigatório até pro login!
-                'Authorization': token || '', 
+                'Authorization': token || '',
                 'Accept': '*/*',
-                
-                // --- DISFARCE DE NAVEGADOR (Clone do seu cURL) ---
                 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36',
-                'HeaderUsuario': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36',
-                'Accept-Language': 'pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7',
                 'LocalAcesso': 'Consultor',
                 'Origin': 'https://novoev.premiumclube.org.br',
                 'Referer': 'https://novoev.premiumclube.org.br/',
-                'Rota': 'https://novoev.premiumclube.org.br/',
-                'DNT': '1',
-                'Sec-Fetch-Dest': 'empty',
-                'Sec-Fetch-Mode': 'cors',
-                'Sec-Fetch-Site': 'same-site'
+                'Rota': 'https://novoev.premiumclube.org.br/'
             },
-            body: JSON.stringify(data)
+            body: JSON.stringify(data) // O 'data' virá limpo do HTML
         });
 
         const text = await response.text();

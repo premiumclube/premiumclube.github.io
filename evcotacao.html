@@ -191,42 +191,34 @@
             const senha = document.getElementById('user-pass').value;
             const btn = document.getElementById('btn-login');
 
-            if (!email || !senha) {
-                alert("Preencha e-mail e senha.");
-                return;
-            }
+            if (!email || !senha) return alert("Preencha as credenciais.");
 
             btn.innerText = "AUTENTICANDO...";
             btn.disabled = true;
 
             try {
-                // 1. Usa o endpoint EXATO do seu cURL
-                // 2. Usa as variáveis EXATAS do seu cURL (UsuariosLogin, UsuariosSenha, TipoLogin)
-                const res = await callAPI('/Login/Login/', {
-                    UsuariosLogin: email,
-                    UsuariosSenha: senha,
-                    TipoLogin: "2"
-                });
+                // Montando o payload EXATAMENTE como o oficial
+                const payloadOficial = {
+                    "UsuariosLogin": email,
+                    "UsuariosSenha": senha,
+                    "TipoLogin": "2"
+                };
 
-                console.log("Resposta do Login:", res);
+                const res = await callAPI('/Login/Login/', payloadOficial);
 
-                // A API pode retornar o token em 'Token', 'token', ou 'Authorization'. 
-                // Adapte abaixo se o JSON de resposta usar uma chave diferente.
-                if (res.Token || res.token || res.Authorization) {
-                    const tokenRecebido = res.Token || res.token || res.Authorization;
+                console.log("Resposta do servidor:", res);
 
-                    document.getElementById('token-input').value = tokenRecebido;
-                    localStorage.setItem('token_premium', tokenRecebido);
-
-                    alert("✅ Login realizado! Token capturado com sucesso.");
-                } else if (res.erro) {
-                    alert("Erro do servidor: " + res.mensagem);
+                if (res.token || res.Token) {
+                    const novoToken = res.token || res.Token;
+                    document.getElementById('token-input').value = novoToken;
+                    localStorage.setItem('token_premium', novoToken);
+                    alert("✅ Sucesso! Sistema conectado.");
                 } else {
-                    alert("Login feito, mas o token não foi encontrado na resposta. Verifique o console.");
+                    // Caso dê erro, mostramos a mensagem real da API
+                    alert("Falha: " + (res.mensagem || "Verifique o console"));
                 }
             } catch (e) {
-                console.error("Erro na request de login:", e);
-                alert("Falha crítica na conexão com o Proxy Vercel.");
+                alert("Erro na comunicação com a Vercel.");
             } finally {
                 btn.innerText = "CONECTAR AGORA";
                 btn.disabled = false;
