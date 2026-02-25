@@ -1,44 +1,82 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Painel do Consultor | Premium Clube</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        .step-hidden { display: none; }
-        select, input { color: black !important; }
-        .loader { border-top-color: #3498db; animation: spinner 1.5s linear infinite; }
-        @keyframes spinner { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .step-hidden {
+            display: none;
+        }
+
+        select,
+        input {
+            color: black !important;
+        }
+
+        .loader {
+            border-top-color: #3498db;
+            animation: spinner 1.5s linear infinite;
+        }
+
+        @keyframes spinner {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
     </style>
 </head>
+
 <body class="bg-slate-900 text-slate-100 min-h-screen">
 
     <header class="bg-slate-800 border-b border-slate-700 p-6 shadow-2xl">
         <div class="max-w-7xl mx-auto">
-            <h1 class="text-blue-400 font-black text-center mb-6 tracking-widest">SESSÃO DE ACESSO</h1>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
+            <h1 class="text-blue-400 font-black text-center mb-6 tracking-widest uppercase">Acesso ao Escritório Virtual
+            </h1>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-end bg-slate-700/50 p-6 rounded-xl">
                 <div>
-                    <label class="block text-[10px] font-bold uppercase text-slate-400">Usuário (E-mail)</label>
-                    <input type="text" id="user-email" class="w-full p-2 bg-slate-900 border border-slate-600 rounded text-sm">
+                    <label class="block text-[10px] font-bold uppercase text-slate-300 mb-1">E-mail do Consultor</label>
+                    <input type="text" id="user-email" placeholder="seu@email.com"
+                        class="w-full p-3 bg-white border border-slate-300 rounded text-slate-900 font-bold focus:ring-2 focus:ring-blue-500 outline-none">
                 </div>
+
                 <div class="relative">
-                    <label class="block text-[10px] font-bold uppercase text-slate-400">Senha</label>
-                    <input type="password" id="user-pass" class="w-full p-2 bg-slate-900 border border-slate-600 rounded text-sm">
-                    <button onclick="toggleSenha()" class="absolute right-2 top-7 text-slate-500 hover:text-white">
-                        <svg id="eye-icon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                        </svg>
-                    </button>
+                    <label class="block text-[10px] font-bold uppercase text-slate-300 mb-1">Senha</label>
+                    <div class="relative">
+                        <input type="password" id="user-pass" placeholder="••••••••"
+                            class="w-full p-3 bg-white border border-slate-300 rounded text-slate-900 font-bold focus:ring-2 focus:ring-blue-500 outline-none">
+                        <button onclick="toggleSenha()"
+                            class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-blue-600 transition-colors">
+                            <svg id="eye-icon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                            </svg>
+                        </button>
+                    </div>
                 </div>
-                <button onclick="realizarLogin()" id="btn-login" class="bg-blue-600 h-10 rounded font-bold hover:bg-blue-500 transition-all">CONECTAR AO SISTEMA</button>
+
+                <button onclick="realizarLogin()" id="btn-login"
+                    class="bg-blue-600 h-[50px] rounded-lg font-black text-white hover:bg-blue-500 transition-all shadow-lg active:scale-95 uppercase">
+                    Conectar Agora
+                </button>
             </div>
 
-            <div class="mt-4 pt-4 border-t border-slate-700">
-                <label class="block text-[10px] font-bold uppercase text-green-400">Authorization Atual</label>
-                <input type="text" id="token-input" class="w-full p-2 bg-slate-900 border border-slate-700 rounded text-[10px] font-mono opacity-50 focus:opacity-100">
+            <div class="mt-4">
+                <label class="block text-[10px] font-bold uppercase text-blue-400 mb-1">Token de Autorização
+                    Ativo</label>
+                <input type="text" id="token-input"
+                    class="w-full p-2 bg-slate-900 border border-slate-700 rounded text-[11px] font-mono text-blue-300 focus:border-blue-500 outline-none"
+                    placeholder="O token aparecerá aqui após o login ou cole manualmente...">
             </div>
         </div>
     </header>
@@ -55,8 +93,10 @@
                     <div class="md:col-span-2">
                         <label class="text-xs font-bold text-slate-400 uppercase">Placa *</label>
                         <div class="flex gap-2">
-                            <input type="text" id="placa" placeholder="ABC1234" class="flex-1 p-3 bg-white rounded font-black text-2xl uppercase tracking-widest text-slate-900">
-                            <button onclick="buscarDadosPlaca()" id="btn-placa" class="bg-green-600 px-8 rounded font-bold hover:bg-green-500 transition-all">VERIFICAR</button>
+                            <input type="text" id="placa" placeholder="ABC1234"
+                                class="flex-1 p-3 bg-white rounded font-black text-2xl uppercase tracking-widest text-slate-900">
+                            <button onclick="buscarDadosPlaca()" id="btn-placa"
+                                class="bg-green-600 px-8 rounded font-bold hover:bg-green-500 transition-all">VERIFICAR</button>
                         </div>
                     </div>
 
@@ -74,7 +114,9 @@
                         </select>
                     </div>
 
-                    <div class="md:col-span-2 text-slate-500 text-[10px] font-bold py-2 border-b border-slate-700 uppercase">Resultados da API (Editável)</div>
+                    <div
+                        class="md:col-span-2 text-slate-500 text-[10px] font-bold py-2 border-b border-slate-700 uppercase">
+                        Resultados da API (Editável)</div>
 
                     <div>
                         <label class="text-xs text-slate-400 uppercase">Marca</label>
@@ -103,20 +145,29 @@
                 </div>
 
                 <div class="mt-8">
-                    <button onclick="irParaEtapa2()" class="w-full bg-blue-600 py-4 rounded-lg font-black text-white hover:bg-blue-500 uppercase tracking-widest shadow-xl">Confirmar e Continuar</button>
+                    <button onclick="irParaEtapa2()"
+                        class="w-full bg-blue-600 py-4 rounded-lg font-black text-white hover:bg-blue-500 uppercase tracking-widest shadow-xl">Confirmar
+                        e Continuar</button>
                 </div>
             </div>
         </section>
 
-        </main>
+    </main>
 
     <script>
         const API_BASE = "https://service-provisorio.premiumclube.org.br";
-        
+
         // --- FUNÇÕES DE INTERFACE ---
         function toggleSenha() {
             const input = document.getElementById('user-pass');
-            input.type = input.type === 'password' ? 'text' : 'password';
+            const icon = document.getElementById('eye-icon');
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l18 18" />';
+            } else {
+                input.type = 'password';
+                icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />';
+            }
         }
 
         // --- CHAMADA VIA PROXY VERCEL ---
@@ -136,26 +187,44 @@
 
         // --- LOGIN LEGÍTIMO ---
         async function realizarLogin() {
+            const email = document.getElementById('user-email').value;
+            const senha = document.getElementById('user-pass').value;
             const btn = document.getElementById('btn-login');
+
+            if (!email || !senha) {
+                alert("Preencha e-mail e senha.");
+                return;
+            }
+
             btn.innerText = "AUTENTICANDO...";
-            
+            btn.disabled = true;
+
             try {
+                // Conforme os seus arquivos TXT, o login espera 'email' e 'senha'
+                // Passamos pela nossa rota /api/proxy na Vercel para evitar o CORS
                 const res = await callAPI('/Login/fazerLogin', {
-                    email: document.getElementById('user-email').value,
-                    senha: document.getElementById('user-pass').value
+                    email: email,
+                    senha: senha
                 });
 
-                if(res.token) {
+                if (res.token) {
                     document.getElementById('token-input').value = res.token;
                     localStorage.setItem('token_premium', res.token);
-                    alert("Conectado com sucesso!");
+
+                    // Se a API retornar um PHPSESSID ou similar, salvamos também
+                    if (res.session_id) localStorage.setItem('session_premium', res.session_id);
+
+                    alert("✅ Login realizado! Token capturado com sucesso.");
                 } else {
-                    alert("Erro ao logar: " + (res.mensagem || "Credenciais inválidas"));
+                    console.error("Resposta erro login:", res);
+                    alert("Erro: " + (res.mensagem || "Não foi possível capturar o token. Verifique as credenciais."));
                 }
             } catch (e) {
-                alert("Falha na comunicação com o servidor.");
+                console.error("Erro na request de login:", e);
+                alert("Falha crítica na conexão com o Proxy Vercel.");
             } finally {
-                btn.innerText = "CONECTAR AO SISTEMA";
+                btn.innerText = "CONECTAR AGORA";
+                btn.disabled = false;
             }
         }
 
@@ -172,12 +241,12 @@
                 // Notar "Placa" com P maiúsculo como você descobriu
                 const data = await callAPI('/Placa/verificaPlaca/', { Placa: placaLimpa });
 
-                if(data.MarcaDescricao) {
+                if (data.MarcaDescricao) {
                     // Preenchendo campos de texto
                     document.getElementById('fipe_codigo').value = data.FipeCodigo || "";
                     document.getElementById('fipe_valor').value = data.ValorFipe || "";
                     document.getElementById('ano_fab').value = data.AnoModelo || "";
-                    
+
                     // Preenchendo picklist de Estados
                     const estadoSel = document.getElementById('estado');
                     estadoSel.innerHTML = `<option value="${data.Estado}">${data.Estado}</option>`;
@@ -205,4 +274,5 @@
         document.getElementById('token-input').value = localStorage.getItem('token_premium') || '';
     </script>
 </body>
+
 </html>
