@@ -3,96 +3,126 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Status da Contratação | Premium Clube</title>
+    <title>Pré-Ativação Comercial | Premium Clube</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #f1f5f9; }
-        .pulse-orange { animation: pulse 2s infinite; }
-        @keyframes pulse { 0% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.05); opacity: 0.8; } 100% { transform: scale(1); opacity: 1; } }
+        .pulse { animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+        #social-notify { transform: translateX(-120%); transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55); }
+        #social-notify.show { transform: translateX(0); }
     </style>
 </head>
 <body class="text-slate-900 pb-20">
-    <div class="bg-[#1e3668] text-white p-6 text-center rounded-b-[3rem] shadow-xl">
-        <div class="bg-orange-500 text-[10px] font-black uppercase px-3 py-1 rounded-full inline-block mb-2 pulse-orange">Aguardando Conclusão</div>
-        <h1 class="text-2xl font-black uppercase italic italic">Cotação Pré-Aprovada</h1>
-        <p class="text-slate-300 text-xs font-bold mt-1">Protocolo: <span id="prop-id">#8837175</span></p>
-    </div>
 
-    <div class="max-w-md mx-auto px-4 -mt-4">
-        <div class="bg-white rounded-3xl p-6 shadow-lg border border-orange-100 text-center mb-6">
-            <p class="text-[10px] font-black uppercase text-slate-400 mb-2">Sua reserva expira em:</p>
-            <div id="countdown" class="text-3xl font-black text-[#1e3668] tracking-tighter">00:00:00</div>
+    <header class="bg-white border-b border-slate-100 py-6 px-4">
+        <div class="max-w-4xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left">
+            <div>
+                <h1 class="text-2xl font-black text-[#1e3668] uppercase italic leading-tight">Status da Contratação</h1>
+                <p class="text-slate-500 font-bold uppercase text-xs tracking-widest mt-1">Protocolo: <span id="prop-id">#8837175</span></p>
+            </div>
+            <img src="assets/logo-tran.png" class="h-10 logo-dark" alt="Premium Clube" onerror="this.style.display='none'">
         </div>
+    </header>
 
-        <div class="bg-white rounded-3xl p-6 shadow-lg mb-6">
-            <h2 class="text-[#1e3668] font-black uppercase italic mb-4 flex items-center gap-2">
-                <i data-lucide="clipboard-check" class="text-orange-500"></i> Check-list de Ativação
-            </h2>
-            <div id="check-list" class="space-y-4">
+    <main class="max-w-4xl mx-auto px-4 py-8">
+        <div class="bg-white rounded-[3rem] p-8 shadow-2xl border border-slate-100 relative overflow-hidden">
+            
+            <div class="absolute top-0 right-0 bg-orange-500 text-white px-8 py-2 rounded-bl-3xl font-black uppercase italic text-[10px] tracking-widest pulse">
+                Aguardando Documentos
+            </div>
+
+            <div class="mb-8 text-center border-b pb-8">
+                <p class="text-[10px] font-black uppercase text-slate-400 mb-2">Sua pré-aprovação expira em:</p>
+                <div id="countdown" class="text-5xl font-black text-[#1e3668] tracking-tighter italic">00:00:00</div>
+            </div>
+
+            <div class="mb-10">
+                <h2 class="text-xl font-black text-[#1e3668] uppercase italic mb-6 flex items-center gap-3">
+                    <i data-lucide="clipboard-list" class="text-orange-500"></i> Documentação Pendente
+                </h2>
+                <div id="check-list-container" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    </div>
+            </div>
+
+            <div id="box-pdf" class="hidden mb-8">
+                <a id="btn-pdf" href="#" target="_blank" class="w-full flex items-center justify-center gap-3 p-4 border-2 border-dashed border-slate-200 rounded-2xl text-slate-500 font-bold text-xs hover:bg-slate-50 transition-all uppercase">
+                    <i data-lucide="file-text"></i> Visualizar PDF da Cotação Reservada
+                </a>
+            </div>
+
+            <div class="bg-orange-50 border-2 border-orange-200 rounded-[2.5rem] p-8 text-center mb-8">
+                <div class="bg-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 shadow-sm">
+                    <i data-lucide="shield-alert" class="w-8 h-8 text-orange-600"></i>
                 </div>
-        </div>
+                <h3 class="text-orange-900 font-black uppercase italic text-lg mb-2">Proposta Pré-Aprovada</h3>
+                <p class="text-orange-800 text-xs font-bold leading-relaxed uppercase">
+                    Seus dados já foram analisados. Para finalizar a contratação e garantir os benefícios, basta enviar os itens pendentes marcados acima.
+                </p>
+            </div>
 
-        <div class="bg-orange-50 border-2 border-orange-200 rounded-[2rem] p-6 text-center mb-6">
-            <i data-lucide="alert-circle" class="w-10 h-10 text-orange-600 mx-auto mb-3"></i>
-            <h3 class="text-orange-900 font-black uppercase italic text-sm">Documentação Pendente</h3>
-            <p class="text-orange-700 text-[11px] font-bold mt-2 leading-relaxed uppercase">
-                Para garantir o desconto de R$ 50,00 e o bônus de adesão, finalize o envio dos itens marcados acima.
-            </p>
+            <button onclick="irZap()" class="w-full bg-green-600 hover:bg-green-700 text-white font-black py-7 rounded-[2.5rem] shadow-xl hover:scale-[1.02] transition-all uppercase italic text-xl flex items-center justify-center gap-4">
+                <i data-lucide="check-circle"></i> Finalizar Contratação
+            </button>
         </div>
-
-        <button onclick="irZap()" class="w-full bg-green-600 hover:bg-green-700 text-white font-black py-6 rounded-[2rem] shadow-xl transition-all uppercase italic text-xl flex items-center justify-center gap-3">
-            <i data-lucide="message-circle"></i> Finalizar Contratação
-        </button>
-    </div>
+    </main>
 
     <script>
-        // Lógica de captura de dados (igual à proposta.html)
+        // Lógica de Processamento de Dados
         const params = new URLSearchParams(window.location.search);
-        const data = params.get('data');
-        const payload = JSON.parse(decodeURIComponent(atob(data)));
+        const encodedData = params.get('data');
+        const payload = JSON.parse(decodeURIComponent(atob(encodedData)));
 
+        // Preencher ID
         document.getElementById('prop-id').innerText = '#' + (payload.dados.cotacao_numero || '8837175');
 
-        // Renderizar Check-list
-        const docs = [
-            { id: 'cnh', label: 'Foto da CNH (fora da capinha)' },
-            { id: 'doc', label: 'Foto do documento do veiculo' },
-            { id: 'end', label: 'Foto do comprovante de endereço' },
-            { id: 'email', label: 'E-mail' },
-            { id: 'tel', label: 'Telefone de contato' },
-            { id: 'venc', label: 'Melhor dia de vencimento' }
+        // Renderizar o PDF se existir
+        if (payload.cliente.pdf) {
+            document.getElementById('box-pdf').classList.remove('hidden');
+            document.getElementById('btn-pdf').href = payload.cliente.pdf;
+        }
+
+        // Checklist Dinâmico
+        const itens = [
+            { id: 'cnh', txt: 'Foto da CNH (Fora da Capinha)' },
+            { id: 'doc', txt: 'Foto do Documento do Veículo' },
+            { id: 'end', txt: 'Comprovante de Endereço' },
+            { id: 'email', txt: 'E-mail para Cadastro' },
+            { id: 'tel', txt: 'Telefone de Contato' },
+            { id: 'venc', txt: 'Dia de Vencimento Definido' }
         ];
 
-        const listContainer = document.getElementById('check-list');
-        docs.forEach(doc => {
-            const isChecked = payload.checks && payload.checks.includes(doc.id);
-            listContainer.innerHTML += `
-                <div class="flex items-center gap-3 ${isChecked ? 'opacity-50' : ''}">
-                    <div class="w-6 h-6 rounded-full border-2 ${isChecked ? 'bg-green-500 border-green-500' : 'border-slate-300'} flex items-center justify-center">
-                        ${isChecked ? '<i data-lucide="check" class="text-white w-4 h-4"></i>' : ''}
+        const container = document.getElementById('check-list-container');
+        itens.forEach(item => {
+            const checked = payload.checks && payload.checks.includes(item.id);
+            container.innerHTML += `
+                <div class="flex items-center gap-4 p-4 rounded-2xl border ${checked ? 'bg-slate-50 border-slate-100 opacity-60' : 'bg-white border-slate-200 shadow-sm'}">
+                    <div class="w-8 h-8 rounded-full flex items-center justify-center ${checked ? 'bg-green-500' : 'bg-slate-100'}">
+                        ${checked ? '<i data-lucide="check" class="text-white w-5 h-5"></i>' : '<i data-lucide="circle" class="text-slate-300 w-5 h-5"></i>'}
                     </div>
-                    <span class="text-xs font-bold ${isChecked ? 'line-through text-slate-400' : 'text-slate-700'} uppercase">${doc.label}</span>
+                    <span class="text-[11px] font-black uppercase ${checked ? 'text-slate-400 line-through' : 'text-[#1e3668]'}">${item.txt}</span>
                 </div>
             `;
         });
 
-        // Countdown Dinâmico
+        // Timer de Expiração
         let segundos = (payload.expiraDias || 2) * 86400;
-        const timer = setInterval(() => {
+        const countdownTimer = setInterval(() => {
             const h = Math.floor(segundos / 3600);
             const m = Math.floor((segundos % 3600) / 60);
             const s = segundos % 60;
-            document.getElementById('countdown').innerText = 
-                `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
-            if (segundos <= 0) clearInterval(timer);
+            document.getElementById('countdown').innerText = `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+            if (segundos <= 0) clearInterval(countdownTimer);
             segundos--;
         }, 1000);
 
         function irZap() {
-            window.location.href = `https://wa.me/${payload.cliente.tel || '55XXXXXXXXXXX'}?text=Olá! Segue a documentação pendente para finalizar minha proteção.`;
+            const msg = `Olá! Estou enviando os documentos pendentes para finalizar minha contratação da cotação nº ${payload.dados.cotacao_numero}.`;
+            window.location.href = `https://wa.me/${payload.cliente.tel || '55XXXXXXXXXXX'}?text=${encodeURIComponent(msg)}`;
         }
+
         lucide.createIcons();
     </script>
 </body>
