@@ -1,348 +1,208 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gerador de Proposta | Premium Clube</title>
+    <title>Painel do Consultor | Premium Clube</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        .step-hidden {
-            display: none;
-        }
-
-        select,
-        input {
-            color: black !important;
-        }
-
-        .sidebar-item {
-            border-bottom: 1px solid #334155;
-            padding: 8px 0;
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.85rem;
-        }
+        .step-hidden { display: none; }
+        select, input { color: black !important; }
+        .loader { border-top-color: #3498db; animation: spinner 1.5s linear infinite; }
+        @keyframes spinner { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 </head>
-
 <body class="bg-slate-900 text-slate-100 min-h-screen">
 
-    <header class="bg-slate-800 border-b border-slate-700 p-4 sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-                <label class="block text-[10px] font-bold uppercase text-blue-400">Authorization Token</label>
-                <input type="text" id="token-input" placeholder="nv1Llq..."
-                    class="w-full p-2 bg-slate-900 border border-slate-600 rounded text-xs font-mono outline-none">
+    <header class="bg-slate-800 border-b border-slate-700 p-6 shadow-2xl">
+        <div class="max-w-7xl mx-auto">
+            <h1 class="text-blue-400 font-black text-center mb-6 tracking-widest">SESSÃO DE ACESSO</h1>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
+                <div>
+                    <label class="block text-[10px] font-bold uppercase text-slate-400">Usuário (E-mail)</label>
+                    <input type="text" id="user-email" class="w-full p-2 bg-slate-900 border border-slate-600 rounded text-sm">
+                </div>
+                <div class="relative">
+                    <label class="block text-[10px] font-bold uppercase text-slate-400">Senha</label>
+                    <input type="password" id="user-pass" class="w-full p-2 bg-slate-900 border border-slate-600 rounded text-sm">
+                    <button onclick="toggleSenha()" class="absolute right-2 top-7 text-slate-500 hover:text-white">
+                        <svg id="eye-icon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                        </svg>
+                    </button>
+                </div>
+                <button onclick="realizarLogin()" id="btn-login" class="bg-blue-600 h-10 rounded font-bold hover:bg-blue-500 transition-all">CONECTAR AO SISTEMA</button>
             </div>
-            <div>
-                <label class="block text-[10px] font-bold uppercase text-purple-400">PHP Session ID (PHPSESSID)</label>
-                <input type="text" id="session-input" placeholder="Ex: 7a307046..."
-                    class="w-full p-2 bg-slate-900 border border-slate-600 rounded text-xs font-mono outline-none">
+
+            <div class="mt-4 pt-4 border-t border-slate-700">
+                <label class="block text-[10px] font-bold uppercase text-green-400">Authorization Atual</label>
+                <input type="text" id="token-input" class="w-full p-2 bg-slate-900 border border-slate-700 rounded text-[10px] font-mono opacity-50 focus:opacity-100">
             </div>
         </div>
     </header>
 
     <main class="max-w-7xl mx-auto p-4 md:p-8">
-
         <section id="step-1" class="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div class="lg:col-span-2 bg-slate-800 p-6 rounded-xl border border-slate-700">
                 <h2 class="text-xl font-bold mb-6 flex items-center gap-2">
                     <span class="bg-blue-600 w-8 h-8 rounded-full flex items-center justify-center text-sm">1</span>
-                    Dados do Veículo
+                    Busca de Veículo
                 </h2>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div class="md:col-span-2">
-                        <label class="text-xs font-bold text-slate-400 uppercase">Informe a Placa *</label>
+                        <label class="text-xs font-bold text-slate-400 uppercase">Placa *</label>
                         <div class="flex gap-2">
-                            <input type="text" id="placa" placeholder="RZU2G08"
-                                class="flex-1 p-3 bg-white rounded font-bold text-xl uppercase text-slate-900">
-                            <button onclick="buscarDadosPlaca()"
-                                class="bg-blue-600 px-6 rounded font-bold hover:bg-blue-500 transition-colors">VERIFICAR</button>
+                            <input type="text" id="placa" placeholder="ABC1234" class="flex-1 p-3 bg-white rounded font-black text-2xl uppercase tracking-widest text-slate-900">
+                            <button onclick="buscarDadosPlaca()" id="btn-placa" class="bg-green-600 px-8 rounded font-bold hover:bg-green-500 transition-all">VERIFICAR</button>
                         </div>
                     </div>
 
                     <div>
                         <label class="text-xs text-slate-400 uppercase">Estado</label>
-                        <select id="estado" class="w-full p-2 bg-white rounded text-slate-900">
-                            <option value="PE">Pernambuco</option>
-                            <option value="PB">Paraíba</option>
-                            <option value="AL">Alagoas</option>
-                            <option value="SP">São Paulo</option>
-                        </select>
+                        <select id="estado" class="w-full p-3 bg-white rounded font-bold"></select>
                     </div>
 
                     <div>
-                        <label class="text-xs text-slate-400 uppercase">Categoria</label>
-                        <select id="categoria" class="w-full p-2 bg-white rounded text-slate-900">
-                            <option value="11">Automóvel (Passeio)</option>
+                        <label class="text-xs text-slate-400 uppercase">Tipo Veículo</label>
+                        <select id="categoria" class="w-full p-3 bg-white rounded font-bold">
+                            <option value="11">Automóvel</option>
                             <option value="12">Moto</option>
                             <option value="13">Caminhão</option>
                         </select>
                     </div>
 
-                    <div
-                        class="md:col-span-2 text-slate-400 text-[10px] font-bold py-2 border-b border-slate-700 uppercase">
-                        Detalhamento FIPE</div>
+                    <div class="md:col-span-2 text-slate-500 text-[10px] font-bold py-2 border-b border-slate-700 uppercase">Resultados da API (Editável)</div>
 
                     <div>
                         <label class="text-xs text-slate-400 uppercase">Marca</label>
-                        <select id="marca" class="w-full p-2 bg-white rounded text-slate-900"></select>
+                        <select id="marca" class="w-full p-3 bg-white rounded font-bold"></select>
                     </div>
 
                     <div>
-                        <label class="text-xs text-slate-400 uppercase">Ano Fab.</< /label>
-                            <input type="text" id="ano_fab" class="w-full p-2 bg-white rounded text-slate-900">
+                        <label class="text-xs text-slate-400 uppercase">Ano Modelo</label>
+                        <input type="text" id="ano_fab" class="w-full p-3 bg-white rounded font-bold">
                     </div>
 
                     <div class="md:col-span-2">
                         <label class="text-xs text-slate-400 uppercase">Modelo</label>
-                        <select id="modelo" class="w-full p-2 bg-white rounded text-slate-900"></select>
+                        <select id="modelo" class="w-full p-3 bg-white rounded font-bold"></select>
                     </div>
 
                     <div>
                         <label class="text-xs text-slate-400 uppercase">Código Fipe</label>
-                        <input type="text" id="fipe_codigo" class="w-full p-2 bg-white rounded text-slate-900">
+                        <input type="text" id="fipe_codigo" class="w-full p-3 bg-white rounded font-bold">
                     </div>
 
                     <div>
                         <label class="text-xs text-slate-400 uppercase">Valor FIPE (R$)</label>
-                        <input type="text" id="fipe_valor" class="w-full p-2 bg-white rounded text-slate-900 font-bold">
+                        <input type="text" id="fipe_valor" class="w-full p-3 bg-white rounded font-black text-blue-600">
                     </div>
                 </div>
 
                 <div class="mt-8">
-                    <button onclick="irParaEtapa2()"
-                        class="w-full bg-green-600 py-4 rounded-lg font-black text-white hover:bg-green-500 transition-all uppercase tracking-widest shadow-xl">Continuar</button>
+                    <button onclick="irParaEtapa2()" class="w-full bg-blue-600 py-4 rounded-lg font-black text-white hover:bg-blue-500 uppercase tracking-widest shadow-xl">Confirmar e Continuar</button>
                 </div>
             </div>
         </section>
 
-        <section id="step-2" class="grid grid-cols-1 lg:grid-cols-3 gap-8 step-hidden">
-            <div class="lg:col-span-2 space-y-6">
-
-                <div class="bg-slate-800 p-6 rounded-xl border border-slate-700">
-                    <h2 class="text-xl font-bold mb-6 flex items-center gap-2">
-                        <span class="bg-blue-600 w-8 h-8 rounded-full flex items-center justify-center text-sm">2</span>
-                        Opcionais da Cotação
-                    </h2>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <label class="text-xs text-slate-400 uppercase">Assistência *</label>
-                            <select id="opt_assistencia" class="w-full p-2 bg-white rounded text-slate-900">
-                                <option value="1">24h - 200km</option>
-                                <option value="2">24h - 500km</option>
-                                <option value="3">24h - 1000km</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="text-xs text-slate-400 uppercase">Proteção de Vidros</label>
-                            <select id="opt_vidros" class="w-full p-2 bg-white rounded text-slate-900">
-                                <option value="0">Não incluso</option>
-                                <option value="1">Vidros Parcial</option>
-                                <option value="2">Vidros Completo</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="text-xs text-slate-400 uppercase">Terceiros (RCFV)</label>
-                            <select id="opt_terceiros" class="w-full p-2 bg-white rounded text-slate-900">
-                                <option value="30">R$ 30.000,00</option>
-                                <option value="50">R$ 50.000,00</option>
-                                <option value="100" selected>R$ 100.000,00</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="text-xs text-slate-400 uppercase">Monitoramento</label>
-                            <select id="opt_monitoramento" class="w-full p-2 bg-white rounded text-slate-900">
-                                <option value="1">Apenas App</option>
-                                <option value="2">Equipamento Rastreador</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-slate-800 p-6 rounded-xl border border-slate-700">
-                    <h2 class="text-xl font-bold mb-4">Dados do Participante</h2>
-                    <div>
-                        <label class="text-xs text-slate-400 uppercase">CPF ou CNPJ</label>
-                        <input type="text" id="participante_cpf" placeholder="000.000.000-00"
-                            class="w-full p-3 bg-white rounded text-slate-900 font-bold">
-                    </div>
-                </div>
-
-                <button onclick="gerarCotacaoFinal()"
-                    class="w-full bg-blue-600 py-6 rounded-xl font-black text-xl hover:bg-blue-500 transition-all uppercase shadow-2xl pulse">Gerar
-                    Cotação e PDF</button>
-            </div>
-
-            <aside class="bg-slate-800 p-6 rounded-xl border border-blue-500/30 h-fit sticky top-28">
-                <h3 class="text-blue-400 font-bold uppercase text-xs mb-4 tracking-tighter">Resumo da Pré-Cotação</h3>
-
-                <div class="space-y-1">
-                    <div class="sidebar-item"><span>Placa:</span> <b id="side-placa">-</b></div>
-                    <div class="sidebar-item"><span>Marca:</span> <b id="side-marca">-</b></div>
-                    <div class="sidebar-item"><span>Modelo:</span> <b id="side-modelo">-</b></div>
-                    <div class="sidebar-item"><span>Ano:</span> <b id="side-ano">-</b></div>
-                    <div class="sidebar-item"><span>Valor FIPE:</span> <b id="side-fipe">-</b></div>
-                    <div class="sidebar-item text-green-400"><span>Mensalidade:</span> <b id="side-valor">R$ 0,00</b>
-                    </div>
-                    <div class="sidebar-item text-orange-400"><span>Adesão:</span> <b id="side-adesao">R$ 0,00</b></div>
-                </div>
-
-                <div class="mt-6">
-                    <label class="text-[10px] text-slate-500 uppercase font-bold">Desconto Adicional</label>
-                    <input type="number" id="input-desconto" value="0" oninput="atualizarPainel()"
-                        class="w-full bg-slate-900 p-2 rounded border border-slate-700 text-white mt-1">
-                </div>
-            </aside>
-        </section>
-    </main>
+        </main>
 
     <script>
-        // Recupera ambos os valores salvos
-        document.getElementById('token-input').value = localStorage.getItem('token_premium') || '';
-        document.getElementById('session-input').value = localStorage.getItem('session_premium') || '';
-        // --- CONFIGURAÇÃO INICIAL ---
-        //const proxy = "https://cors-anywhere.herokuapp.com/";
-        //const proxy = "https://service-provisorio.premiumclube.org.br";
         const API_BASE = "https://service-provisorio.premiumclube.org.br";
+        
+        // --- FUNÇÕES DE INTERFACE ---
+        function toggleSenha() {
+            const input = document.getElementById('user-pass');
+            input.type = input.type === 'password' ? 'text' : 'password';
+        }
 
-        // Mantendo os mesmos nomes de variáveis conforme solicitado
-        let dadosCotacao = {
-            placaVeiculo: "",
-            nomeMarca: "",
-            nomeModelo: "",
-            valorFipe: "",
-            anoVeiculo: "",
-            estadoVeiculo: "",
-            valorMensalidadeFinal: 0,
-            valorAdesao: 250.00, // Exemplo conforme sua solicitação
-            linkPdf: ""
-        };
-
-        // Recupera token salvo
-        document.getElementById('token-input').value = localStorage.getItem('token_premium') || '';
-
-        // --- FUNÇÕES DE API ---
+        // --- CHAMADA VIA PROXY VERCEL ---
         async function callAPI(endpoint, body) {
             const token = document.getElementById('token-input').value;
-            localStorage.setItem('token_premium', token);
-
-            // Agora chamamos a nossa própria API na Vercel
             const response = await fetch('/api/proxy', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     url: API_BASE + endpoint,
                     token: token,
-                    data: body // Aqui o body já deve conter { Placa: "..." } com P maiúsculo
+                    data: body
                 })
             });
-
             return await response.json();
         }
 
-        async function buscarDadosPlaca() {
-            const placa = document.getElementById('placa').value;
-            if (!placa) return alert("Digite a placa");
-
+        // --- LOGIN LEGÍTIMO ---
+        async function realizarLogin() {
+            const btn = document.getElementById('btn-login');
+            btn.innerText = "AUTENTICANDO...";
+            
             try {
-                // ETAPA 1: API de Verificação de Placa
-                const data = await callAPI('/Placa/verificaPlaca/', { Placa: placa });
-
-                // Preenche os campos do form (Etapa 1)
-                document.getElementById('estado').value = data.Estado || "PE";
-                document.getElementById('fipe_codigo').value = data.FipeCodigo || "";
-                document.getElementById('fipe_valor').value = data.ValorFipe || "";
-                document.getElementById('ano_fab').value = data.AnoModelo || "";
-
-                // Simulação de preenchimento dos selects de Marca/Modelo
-                // No EV real, isso gera novas requests de 'getMarcas'
-                const marcaSel = document.getElementById('marca');
-                marcaSel.innerHTML = `<option value="${data.MarcaId}">${data.MarcaDescricao}</option>`;
-
-                const modeloSel = document.getElementById('modelo');
-                modeloSel.innerHTML = `<option value="${data.ModeloId}">${data.ModeloDescricao}</option>`;
-
-                // Atualiza objeto global
-                dadosCotacao.placaVeiculo = placa.toUpperCase();
-                dadosCotacao.nomeMarca = data.MarcaDescricao;
-                dadosCotacao.nomeModelo = data.ModeloDescricao;
-                dadosCotacao.valorFipe = data.ValorFipe;
-                dadosCotacao.anoVeiculo = data.AnoModelo;
-
-                atualizarPainel();
-                alert("Veículo localizado com sucesso!");
-            } catch (e) {
-                alert("Erro ao buscar placa. Verifique o token ou o proxy.");
-            }
-        }
-
-        function atualizarPainel() {
-            document.getElementById('side-placa').innerText = dadosCotacao.placaVeiculo || "-";
-            document.getElementById('side-marca').innerText = dadosCotacao.nomeMarca || "-";
-            document.getElementById('side-modelo').innerText = dadosCotacao.nomeModelo || "-";
-            document.getElementById('side-ano').innerText = dadosCotacao.anoVeiculo || "-";
-            document.getElementById('side-fipe').innerText = "R$ " + (dadosCotacao.valorFipe || "0,00");
-            document.getElementById('side-adesao').innerText = "R$ " + dadosCotacao.valorAdesao.toFixed(2);
-
-            // Simulação de cálculo de mensalidade
-            const base = 250.00;
-            const desconto = parseFloat(document.getElementById('input-desconto').value) || 0;
-            dadosCotacao.valorMensalidadeFinal = base - desconto;
-            document.getElementById('side-valor').innerText = "R$ " + dadosCotacao.valorMensalidadeFinal.toFixed(2);
-        }
-
-        function irParaEtapa2() {
-            document.getElementById('step-1').classList.add('step-hidden');
-            document.getElementById('step-2').classList.remove('step-hidden');
-            window.scrollTo(0, 0);
-        }
-
-        async function gerarCotacaoFinal() {
-            try {
-                // ETAPA 3: Registro Oficial (NovoOrcamento)
-                const resFinal = await callAPI('/orcamento/NovoOrcamento/', {
-                    placa: dadosCotacao.placaVeiculo,
-                    modelo: dadosCotacao.nomeModelo,
-                    cpf: document.getElementById('participante_cpf').value
-                    // ... mapear outros campos conforme o TXT enviado
+                const res = await callAPI('/Login/fazerLogin', {
+                    email: document.getElementById('user-email').value,
+                    senha: document.getElementById('user-pass').value
                 });
 
-                // Captura o link do PDF gerado pelo sistema
-                const linkDoSistema = resFinal.link || "https://premiumclube.org.br/orcamento/exemplo";
-
-                // Monta o Payload para a Proposta.html (Base64)
-                const payload = {
-                    dados: {
-                        veiculo: {
-                            placa: dadosCotacao.placaVeiculo,
-                            marca: dadosCotacao.nomeMarca,
-                            modelo: dadosCotacao.nomeModelo,
-                            ano: dadosCotacao.anoVeiculo,
-                            valor_fipe: dadosCotacao.valorFipe
-                        },
-                        valores: {
-                            mensalidade: dadosCotacao.valorMensalidadeFinal.toFixed(2).replace('.', ','),
-                            adesao: dadosCotacao.valorAdesao.toFixed(2).replace('.', ',')
-                        },
-                        opcionais: ["Assistência 24h", "Proteção de Vidros", "Terceiros R$ 100k"],
-                        link_pdf: linkDoSistema
-                    }
-                };
-
-                const base64 = btoa(unescape(encodeURIComponent(JSON.stringify(payload))));
-                window.location.href = `proposta.html?dados=${base64}`;
-
+                if(res.token) {
+                    document.getElementById('token-input').value = res.token;
+                    localStorage.setItem('token_premium', res.token);
+                    alert("Conectado com sucesso!");
+                } else {
+                    alert("Erro ao logar: " + (res.mensagem || "Credenciais inválidas"));
+                }
             } catch (e) {
-                alert("Erro ao finalizar cotação.");
+                alert("Falha na comunicação com o servidor.");
+            } finally {
+                btn.innerText = "CONECTAR AO SISTEMA";
             }
         }
+
+        // --- BUSCA E AUTO-PREENCHIMENTO ---
+        async function buscarDadosPlaca() {
+            const placaField = document.getElementById('placa');
+            const placaLimpa = placaField.value.replace(/[^a-zA-Z0-9]/g, "").toUpperCase();
+            placaField.value = placaLimpa;
+
+            const btn = document.getElementById('btn-placa');
+            btn.innerText = "AGUARDE...";
+
+            try {
+                // Notar "Placa" com P maiúsculo como você descobriu
+                const data = await callAPI('/Placa/verificaPlaca/', { Placa: placaLimpa });
+
+                if(data.MarcaDescricao) {
+                    // Preenchendo campos de texto
+                    document.getElementById('fipe_codigo').value = data.FipeCodigo || "";
+                    document.getElementById('fipe_valor').value = data.ValorFipe || "";
+                    document.getElementById('ano_fab').value = data.AnoModelo || "";
+                    
+                    // Preenchendo picklist de Estados
+                    const estadoSel = document.getElementById('estado');
+                    estadoSel.innerHTML = `<option value="${data.Estado}">${data.Estado}</option>`;
+
+                    // Preenchendo Marcas
+                    const marcaSel = document.getElementById('marca');
+                    marcaSel.innerHTML = `<option value="${data.MarcaId}">${data.MarcaDescricao}</option>`;
+
+                    // Preenchendo Modelos
+                    const modeloSel = document.getElementById('modelo');
+                    modeloSel.innerHTML = `<option value="${data.ModeloId}">${data.ModeloDescricao}</option>`;
+
+                    console.log("Veículo carregado:", data);
+                } else {
+                    alert("Veículo não encontrado.");
+                }
+            } catch (e) {
+                alert("Erro ao consultar placa.");
+            } finally {
+                btn.innerText = "VERIFICAR";
+            }
+        }
+
+        // Recuperar token salvo
+        document.getElementById('token-input').value = localStorage.getItem('token_premium') || '';
     </script>
 </body>
-
 </html>
