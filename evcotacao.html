@@ -200,24 +200,29 @@
             btn.disabled = true;
 
             try {
-                // Conforme os seus arquivos TXT, o login espera 'email' e 'senha'
-                // Passamos pela nossa rota /api/proxy na Vercel para evitar o CORS
-                const res = await callAPI('/Login/fazerLogin', {
-                    email: email,
-                    senha: senha
+                // 1. Usa o endpoint EXATO do seu cURL
+                // 2. Usa as variáveis EXATAS do seu cURL (UsuariosLogin, UsuariosSenha, TipoLogin)
+                const res = await callAPI('/Login/Login/', {
+                    UsuariosLogin: email,
+                    UsuariosSenha: senha,
+                    TipoLogin: "2"
                 });
 
-                if (res.token) {
-                    document.getElementById('token-input').value = res.token;
-                    localStorage.setItem('token_premium', res.token);
+                console.log("Resposta do Login:", res);
 
-                    // Se a API retornar um PHPSESSID ou similar, salvamos também
-                    if (res.session_id) localStorage.setItem('session_premium', res.session_id);
+                // A API pode retornar o token em 'Token', 'token', ou 'Authorization'. 
+                // Adapte abaixo se o JSON de resposta usar uma chave diferente.
+                if (res.Token || res.token || res.Authorization) {
+                    const tokenRecebido = res.Token || res.token || res.Authorization;
+
+                    document.getElementById('token-input').value = tokenRecebido;
+                    localStorage.setItem('token_premium', tokenRecebido);
 
                     alert("✅ Login realizado! Token capturado com sucesso.");
+                } else if (res.erro) {
+                    alert("Erro do servidor: " + res.mensagem);
                 } else {
-                    console.error("Resposta erro login:", res);
-                    alert("Erro: " + (res.mensagem || "Não foi possível capturar o token. Verifique as credenciais."));
+                    alert("Login feito, mas o token não foi encontrado na resposta. Verifique o console.");
                 }
             } catch (e) {
                 console.error("Erro na request de login:", e);
