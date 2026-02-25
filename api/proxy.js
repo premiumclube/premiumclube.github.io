@@ -1,37 +1,30 @@
 export default async function handler(req, res) {
-    // Permite que seu site se comunique com este proxy
     res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    res.setHeader('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, LocalAcesso, Rota');
 
-    if (req.method === 'OPTIONS') {
-        return res.status(200).end();
-    }
+    if (req.method === 'OPTIONS') return res.status(200).end();
 
-    const { url, data, token } = req.body;
+    const { path } = req.query;
+    const targetUrl = `https://service-provisorio.premiumclube.org.br${path}`;
 
     try {
-        const response = await fetch(url, {
-            method: 'POST',
+        const response = await fetch(targetUrl, {
+            method: req.method,
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': token || '',
-                'Accept': '*/*',
-                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36',
+                'Authorization': req.headers.authorization || '',
                 'LocalAcesso': 'Consultor',
                 'Origin': 'https://novoev.premiumclube.org.br',
                 'Referer': 'https://novoev.premiumclube.org.br/',
-                'Rota': 'https://novoev.premiumclube.org.br/'
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
             },
-            body: JSON.stringify(data) // O 'data' virá limpo do HTML
+            body: req.method === 'POST' ? JSON.stringify(req.body) : null
         });
 
-        const text = await response.text();
-        const jsonStart = text.indexOf('{');
-        const cleanJson = jsonStart !== -1 ? JSON.parse(text.substring(jsonStart)) : { error: text };
-
-        return res.status(200).json(cleanJson);
+        const data = await response.json();
+        res.status(response.status).json(data);
     } catch (error) {
-        return res.status(500).json({ error: error.message });
+        res.status(500).json({ erro: 'Erro no Proxy', detalhes: error.message });
     }
 }

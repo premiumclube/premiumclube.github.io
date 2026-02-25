@@ -37,46 +37,15 @@
 
     <header class="bg-slate-800 border-b border-slate-700 p-6 shadow-2xl">
         <div class="max-w-7xl mx-auto">
-            <h1 class="text-blue-400 font-black text-center mb-6 tracking-widest uppercase">Acesso ao Escritório Virtual
-            </h1>
+            <h1 class="text-blue-400 font-black text-center mb-4 tracking-widest uppercase text-xl">Painel de Cotação
+                Premium</h1>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-end bg-slate-700/50 p-6 rounded-xl">
-                <div>
-                    <label class="block text-[10px] font-bold uppercase text-slate-300 mb-1">E-mail do Consultor</label>
-                    <input type="text" id="user-email" placeholder="seu@email.com"
-                        class="w-full p-3 bg-white border border-slate-300 rounded text-slate-900 font-bold focus:ring-2 focus:ring-blue-500 outline-none">
-                </div>
-
-                <div class="relative">
-                    <label class="block text-[10px] font-bold uppercase text-slate-300 mb-1">Senha</label>
-                    <div class="relative">
-                        <input type="password" id="user-pass" placeholder="••••••••"
-                            class="w-full p-3 bg-white border border-slate-300 rounded text-slate-900 font-bold focus:ring-2 focus:ring-blue-500 outline-none">
-                        <button onclick="toggleSenha()"
-                            class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-blue-600 transition-colors">
-                            <svg id="eye-icon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-
-                <button onclick="realizarLogin()" id="btn-login"
-                    class="bg-blue-600 h-[50px] rounded-lg font-black text-white hover:bg-blue-500 transition-all shadow-lg active:scale-95 uppercase">
-                    Conectar Agora
-                </button>
-            </div>
-
-            <div class="mt-4">
-                <label class="block text-[10px] font-bold uppercase text-blue-400 mb-1">Token de Autorização
-                    Ativo</label>
+            <div class="bg-slate-700/30 p-4 rounded-xl border border-slate-600">
+                <label class="block text-[10px] font-bold uppercase text-blue-300 mb-2">Token de Autorização
+                    (Authorization)</label>
                 <input type="text" id="token-input"
-                    class="w-full p-2 bg-slate-900 border border-slate-700 rounded text-[11px] font-mono text-blue-300 focus:border-blue-500 outline-none"
-                    placeholder="O token aparecerá aqui após o login ou cole manualmente...">
+                    class="w-full p-3 bg-white border border-slate-300 rounded text-slate-900 font-mono text-sm font-bold shadow-inner focus:ring-2 focus:ring-blue-500 outline-none"
+                    placeholder="Cole o token capturado no F12 aqui...">
             </div>
         </div>
     </header>
@@ -226,44 +195,82 @@
         }
 
         // --- BUSCA E AUTO-PREENCHIMENTO ---
-        async function buscarDadosPlaca() {
-            const placaField = document.getElementById('placa');
-            const placaLimpa = placaField.value.replace(/[^a-zA-Z0-9]/g, "").toUpperCase();
-            placaField.value = placaLimpa;
+        async function realizarBuscaCompleta() {
+            const placaInput = document.getElementById('placa');
+            const placa = placaInput.value.trim().toUpperCase();
+            const token = document.getElementById('token-input').value;
+
+            if (!placa || !token) return alert("Insira a Placa e o Token!");
 
             const btn = document.getElementById('btn-placa');
-            btn.innerText = "AGUARDE...";
+            btn.innerText = "BUSCANDO VEÍCULO...";
+            btn.disabled = true;
 
             try {
-                // Notar "Placa" com P maiúsculo como você descobriu
-                const data = await callAPI('/Placa/verificaPlaca/', { Placa: placaLimpa });
+                // PASSO 1: Verificar Placa [cite: 1]
+                const dadosVeiculo = await callAPI('/Placa/verificaPlaca/', { Placa: placa });
 
-                if (data.MarcaDescricao) {
-                    // Preenchendo campos de texto
-                    document.getElementById('fipe_codigo').value = data.FipeCodigo || "";
-                    document.getElementById('fipe_valor').value = data.ValorFipe || "";
-                    document.getElementById('ano_fab').value = data.AnoModelo || "";
+                if (!dadosVeiculo.marca) throw new Error("Veículo não encontrado.");
 
-                    // Preenchendo picklist de Estados
-                    const estadoSel = document.getElementById('estado');
-                    estadoSel.innerHTML = `<option value="${data.Estado}">${data.Estado}</option>`;
+                // Preenche campos da Etapa 1
+                document.getElementById('fipe_valor').value = dadosVeiculo.valorfipe;
+                document.getElementById('ano_fab').value = dadosVeiculo.nomeanomod;
+                console.log("Veículo identificado:", dadosVeiculo.completo);
 
-                    // Preenchendo Marcas
-                    const marcaSel = document.getElementById('marca');
-                    marcaSel.innerHTML = `<option value="${data.MarcaId}">${data.MarcaDescricao}</option>`;
+                // PASSO 2: Pré-Cotação (Tabela de Preços e Opcionais) [cite: 23]
+                btn.innerText = "CARREGANDO TABELA...";
+                const payloadPre = {
+                    modelo: dadosVeiculo.modelo,
+                    marca: dadosVeiculo.marca,
+                    ano: dadosVeiculo.nomeanomod,
+                    anoModeloId: dadosVeiculo.anomod,
+                    estado: dadosVeiculo.estado,
+                    placa: placa,
+                    fipe: dadosVeiculo.valorfipe,
+                    categoria: dadosVeiculo.tipo,
+                    tabela: dadosVeiculo.tabela,
+                    consultor: "320800" // Seu ID de consultor conforme log 
+                };
 
-                    // Preenchendo Modelos
-                    const modeloSel = document.getElementById('modelo');
-                    modeloSel.innerHTML = `<option value="${data.ModeloId}">${data.ModeloDescricao}</option>`;
+                const dadosPre = await callAPI('/orcamento_pre/preOrcamento', payloadPre);
 
-                    console.log("Veículo carregado:", data);
-                } else {
-                    alert("Veículo não encontrado.");
-                }
-            } catch (e) {
-                alert("Erro ao consultar placa.");
+                // Armazena tudo para a Etapa 2
+                orcamentoAtual = { ...dadosVeiculo, ...dadosPre };
+
+                // Renderiza os opcionais (Vidros, Terceiros, etc)
+                renderizarOpcionais(dadosPre.Opcionais);
+
+                alert("Sucesso! Veículo e Opcionais carregados.");
+                // Rolar para a Etapa 2
+                document.getElementById('etapa2').scrollIntoView({ behavior: 'smooth' });
+
+            } catch (error) {
+                console.error(error);
+                alert("Erro: " + error.message);
             } finally {
                 btn.innerText = "VERIFICAR";
+                btn.disabled = false;
+            }
+        }
+
+        // Função para criar os botões de opcionais dinamicamente
+        function renderizarOpcionais(opcionais) {
+            const container = document.getElementById('container-opcionais');
+            container.innerHTML = ''; // Limpa anterior
+
+            // Exemplo: Vidros 
+            if (opcionais.Vidros) {
+                opcionais.Vidros.forEach(item => {
+                    container.innerHTML += `
+                <div class="flex justify-between items-center p-3 bg-slate-700 rounded mb-2">
+                    <span class="text-white text-sm">${item.nome}</span>
+                    <button onclick="selecionarServico('${item.codigo}', ${item.valor})" 
+                        class="bg-blue-600 text-[10px] px-3 py-1 rounded">
+                        ADICIONAR R$ ${item.valor}
+                    </button>
+                </div>
+            `;
+                });
             }
         }
 
