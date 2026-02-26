@@ -1,0 +1,19 @@
+fetch("https://service-provisorio.premiumclube.org.br/Placa/verificaPlaca/", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+    "authorization": "nv1LlqWsgMhoqxY3rqtLf0YLqFWUq0o5sqE5XYfpnvYwJnY6rvWhfx1xgvYcg0WfsMmiJdmktCWJvx56sFYmfUYTrFoBHU4PsUAlZCfWlpfmHx5LsOfiJdbVHdRmJC9WrntqcYk6gpZiqkk0nqtetx1Wcnmicx15rktfckk6gptfJCPxrpWLtU5TrUoftkxSlvY3JqksqMhAtOY5sqAVJdtaHaoBJnU2lv1lZqmTlCAvqOU0qCWdl01dtMovJOqJovRJckovJx5YqrqvonqLsqbSnYqocqoionoJqCkbJkZfqUY5qUoUlCqdEaqpHUWJsYtvtqoqvYZAHdtpvUoiJ2mdvUfoJ1WQokn1vqkTHkqfJUoAvrkUcdkvvFqrHCtprv5IvYYngFfqt0WSq2PVnCxSJdkoHks0od1iq2fkEktlcnW0qUE1sqmdqUAwvdAiqC1lvqWaE3AUtU5ps0Z0J1bVvFtocFA3oxoiEqmNvU5rtrxOqqoIq1fvExAnHkmTnYoVvqUSfnoYt0q4vUALrCmaZ3ApHFheonZivqmNHdkBvdAcqkoIHCgSrFfBt3hpsYn0ckgPJd9fHn50q21VJYsOnFYnHdAynMkoXn1ptCAfHYmmvv14q2mptYAJtUmIsUqufqUVvCRfq1mknqtdq1fkvYZvcMqTonZvlx9pJdWBqks0vrkvZ2tvqUYMlx5pqUqJtkZntYofqU5oqdPJJYsPlUPvcqWTov1iEYZLJkmBt2DPqCPll2cSnFfrJUWssYouZkZpcrtltYodrqZVq1ZkvYYocMqQsYZlvqmNlYZfczn1qv14J2tRrYowqFhTq0oVq1ZRcaABqYWpsUnPn1ZaJztqcMqrqnZkXqWbqYqvc1miq20PckYplFtYtFhAsrhoZ1UScrhqq05qnCRuq2mTEdkpq3AzrvPuZx1sqCWpt2Aoq2RIl2tplpApJ1WGqFWLqksVozhBcUWbqd5IJCqTlMtnqYoaqMkuqYtNJkZlczn1vvWmfqZvokAfqx5GrrkVrYoqox5Yt1mmnC5vq1o6HatocqowqMjPZqmRZx5vtnI1qkoJJU1plUYtHrkWqYE5c1Y6tUfUHqoas0qVvdxVfptvq3tQrC1mXn9nlCAfJUosvpWhXdkqcnoMlkogqC1lXYqnlMhMcYmknC5lrYfkvrmoqqWprvPkXYmRZktAJOqAvrkvH01LtYABlahTsUqurYZRXafft05sr1AuvdxVvFkJqOkNrqZuE2mxgCkptrt5vqtefx1LlFtpHYoJrvPmZ1WaczqUq0Y3onEPnU0SJkkqHdANrqoUqCkbqU5lHaj0q2Rlt1sSrFmnHrqpsYn1cqUPoztYt1obr1q0Jn0PEx5nqYopq21lt1fNEx5Bt3Akvv01lCgViqmmJpZWqYAicqYslFhBc05uvUoiHkUOqFqJt0o5sqE4Jn9WlUmwqxmdnpWmfkmWczhftxWarkqlt05Go3twtxmarFUVc1mkvrfwqqnOnCWvtYk6gvYcg0Wus0qdJYWsrFWBXnU2lvWmfx1xnrofJCPWr0tQcn1pqpZwHqU1vUtQXqUSvCWwHn5TrYtqfU0SlCWiqd8Sr0ZtXxYWZ2Yrt1oIvUZvXqosrMkovxWVsFYmfUYTcpoYHvPOsUZds0P6qpqfg0kQqMmLZqWairfMXnmwqUfhXx1zfaZwXnmssqE0cU5xE2ZYtkUVl1fegCfbgFfJqCtLvvR0EdtdZ3oiqx0OrdWfcUYzJxPrtYmiqxf3o2maHamJn0mbvYZiECm5J2ZtcCA5sMbPHkAziaAitkq1rnc0Z0PGgvZqcUoRvqAuEkAzizkfXCf1rpWoJnPzlUmMlxkWr2WeigjXRAs5vxzaJOOOjXRAs5vxzaJOOO",
+    "content-type": "text/plain;charset=UTF-8",
+    "sec-ch-ua": "\"Not:A-Brand\";v=\"99\", \"Google Chrome\";v=\"145\", \"Chromium\";v=\"145\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-site"
+  },
+  "referrer": "https://novoev.premiumclube.org.br/",
+  "body": "{\"Placa\":\"rzu2g08\"}",
+  "method": "POST",
+  "mode": "cors",
+  "credentials": "include"
+});

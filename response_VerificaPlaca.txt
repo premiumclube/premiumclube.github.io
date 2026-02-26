@@ -1,0 +1,14 @@
+{
+    "PlacaCotada": "Placa j\u00e1 pr\u00e9 cotado pelo consultor: STEFANO FELIPE BISPO SANTOS 21\/01\/2026 23:10:20",
+    "tipo": "11",
+    "marca": "21",
+    "modelo": "001542-3",
+    "anomod": "214419570",
+    "valorfipe": "95019",
+    "tabela": "330",
+    "cor": "AZUL",
+    "nomeanomod": "2023",
+    "estado": "PE",
+    "completo": "FIAT\/PULSE AUDACE TF200\/2023",
+    "localidade": "Recife\/PE"
+}

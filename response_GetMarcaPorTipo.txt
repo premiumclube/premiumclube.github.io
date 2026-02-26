@@ -1,0 +1,938 @@
+{
+    "1": {
+        "id": "1",
+        "nome": "Acura",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:09"
+    },
+    "2": {
+        "id": "2",
+        "nome": "Agrale",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:09"
+    },
+    "3": {
+        "id": "3",
+        "nome": "Alfa Romeo",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:09"
+    },
+    "4": {
+        "id": "4",
+        "nome": "AM Gen",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:09"
+    },
+    "5": {
+        "id": "5",
+        "nome": "Asia Motors",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:09"
+    },
+    "6": {
+        "id": "189",
+        "nome": "ASTON MARTIN",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:09"
+    },
+    "7": {
+        "id": "6",
+        "nome": "Audi",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": "1",
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:09"
+    },
+    "8": {
+        "id": "207",
+        "nome": "Baby",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:09"
+    },
+    "9": {
+        "id": "7",
+        "nome": "BMW",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:09"
+    },
+    "10": {
+        "id": "8",
+        "nome": "BRM",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:09"
+    },
+    "11": {
+        "id": "123",
+        "nome": "Bugre",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:09"
+    },
+    "12": {
+        "id": "238",
+        "nome": "BYD",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:09"
+    },
+    "13": {
+        "id": "236",
+        "nome": "CAB Motors",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:09"
+    },
+    "14": {
+        "id": "10",
+        "nome": "Cadillac",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:09"
+    },
+    "15": {
+        "id": "245",
+        "nome": "Caoa Chery",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:09"
+    },
+    "16": {
+        "id": "161",
+        "nome": "Caoa Chery\/Chery",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:09"
+    },
+    "17": {
+        "id": "11",
+        "nome": "CBT Jipe",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:09"
+    },
+    "18": {
+        "id": "136",
+        "nome": "CHANA",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:09"
+    },
+    "19": {
+        "id": "182",
+        "nome": "CHANGAN",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:09"
+    },
+    "20": {
+        "id": "12",
+        "nome": "Chrysler",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:09"
+    },
+    "21": {
+        "id": "13",
+        "nome": "Citro\u00ebn",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": "1",
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:09"
+    },
+    "22": {
+        "id": "14",
+        "nome": "Cross Lander",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:10"
+    },
+    "23": {
+        "id": "241",
+        "nome": "D2D Motors",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:10"
+    },
+    "24": {
+        "id": "15",
+        "nome": "Daewoo",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:10"
+    },
+    "25": {
+        "id": "16",
+        "nome": "Daihatsu",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:10"
+    },
+    "26": {
+        "id": "246",
+        "nome": "DFSK",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:10"
+    },
+    "27": {
+        "id": "17",
+        "nome": "Dodge",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:10"
+    },
+    "28": {
+        "id": "147",
+        "nome": "EFFA",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:10"
+    },
+    "29": {
+        "id": "18",
+        "nome": "Engesa",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:10"
+    },
+    "30": {
+        "id": "19",
+        "nome": "Envemo",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:10"
+    },
+    "31": {
+        "id": "20",
+        "nome": "Ferrari",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:10"
+    },
+    "32": {
+        "id": "249",
+        "nome": "FEVER",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": null
+    },
+    "33": {
+        "id": "21",
+        "nome": "Fiat",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": "1",
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:10"
+    },
+    "34": {
+        "id": "149",
+        "nome": "Fibravan",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:10"
+    },
+    "35": {
+        "id": "22",
+        "nome": "Ford",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": "1",
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:10"
+    },
+    "36": {
+        "id": "190",
+        "nome": "FOTON",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:10"
+    },
+    "37": {
+        "id": "170",
+        "nome": "Fyber",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:10"
+    },
+    "38": {
+        "id": "254",
+        "nome": "GAC",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": null
+    },
+    "39": {
+        "id": "199",
+        "nome": "GEELY",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:10"
+    },
+    "40": {
+        "id": "23",
+        "nome": "GM - Chevrolet",
+        "tipo": "1",
+        "apelido": "GM,CHEVROLET,CHEV",
+        "ordem": "1",
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:10"
+    },
+    "41": {
+        "id": "153",
+        "nome": "GREAT WALL",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:10"
+    },
+    "42": {
+        "id": "24",
+        "nome": "Gurgel",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:10"
+    },
+    "43": {
+        "id": "240",
+        "nome": "GWM",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:10"
+    },
+    "44": {
+        "id": "152",
+        "nome": "HAFEI",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:10"
+    },
+    "45": {
+        "id": "214",
+        "nome": "HITECH ELECTRIC",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:10"
+    },
+    "46": {
+        "id": "25",
+        "nome": "Honda",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": "1",
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:10"
+    },
+    "47": {
+        "id": "26",
+        "nome": "Hyundai",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": "1",
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:10"
+    },
+    "48": {
+        "id": "27",
+        "nome": "Isuzu",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:10"
+    },
+    "49": {
+        "id": "208",
+        "nome": "IVECO",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:10"
+    },
+    "50": {
+        "id": "177",
+        "nome": "JAC",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:10"
+    },
+    "51": {
+        "id": "251",
+        "nome": "Jaecoo",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": null
+    },
+    "52": {
+        "id": "28",
+        "nome": "Jaguar",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:10"
+    },
+    "53": {
+        "id": "29",
+        "nome": "Jeep",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:10"
+    },
+    "54": {
+        "id": "154",
+        "nome": "JINBEI",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:10"
+    },
+    "55": {
+        "id": "30",
+        "nome": "JPX",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:10"
+    },
+    "56": {
+        "id": "31",
+        "nome": "Kia Motors",
+        "tipo": "1",
+        "apelido": "KIA",
+        "ordem": "1",
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:10"
+    },
+    "57": {
+        "id": "32",
+        "nome": "Lada",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:10"
+    },
+    "58": {
+        "id": "171",
+        "nome": "LAMBORGHINI",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:10"
+    },
+    "59": {
+        "id": "33",
+        "nome": "Land Rover",
+        "tipo": "1",
+        "apelido": "LR,LAND",
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:10"
+    },
+    "60": {
+        "id": "260",
+        "nome": "Leapmotor",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": null
+    },
+    "61": {
+        "id": "34",
+        "nome": "Lexus",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:10"
+    },
+    "62": {
+        "id": "168",
+        "nome": "LIFAN",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:10"
+    },
+    "63": {
+        "id": "127",
+        "nome": "LOBINI",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:10"
+    },
+    "64": {
+        "id": "35",
+        "nome": "Lotus",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:10"
+    },
+    "65": {
+        "id": "140",
+        "nome": "Mahindra",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:10"
+    },
+    "66": {
+        "id": "36",
+        "nome": "Maserati",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:10"
+    },
+    "67": {
+        "id": "37",
+        "nome": "Matra",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:10"
+    },
+    "68": {
+        "id": "38",
+        "nome": "Mazda",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:10"
+    },
+    "69": {
+        "id": "211",
+        "nome": "Mclaren",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:10"
+    },
+    "70": {
+        "id": "39",
+        "nome": "Mercedes-Benz",
+        "tipo": "1",
+        "apelido": "M.BENZ",
+        "ordem": "1",
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:10"
+    },
+    "71": {
+        "id": "40",
+        "nome": "Mercury",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:10"
+    },
+    "72": {
+        "id": "167",
+        "nome": "MG",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:10"
+    },
+    "73": {
+        "id": "156",
+        "nome": "MINI",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:10"
+    },
+    "74": {
+        "id": "41",
+        "nome": "Mitsubishi",
+        "tipo": "1",
+        "apelido": "MIA,MMC",
+        "ordem": "1",
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:10"
+    },
+    "75": {
+        "id": "42",
+        "nome": "Miura",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:10"
+    },
+    "76": {
+        "id": "250",
+        "nome": "NETA",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": null
+    },
+    "77": {
+        "id": "43",
+        "nome": "Nissan",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": "1",
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:10"
+    },
+    "78": {
+        "id": "252",
+        "nome": "Omoda",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": null
+    },
+    "79": {
+        "id": "44",
+        "nome": "Peugeot",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": "1",
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:10"
+    },
+    "80": {
+        "id": "45",
+        "nome": "Plymouth",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:10"
+    },
+    "81": {
+        "id": "46",
+        "nome": "Pontiac",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:10"
+    },
+    "82": {
+        "id": "47",
+        "nome": "Porsche",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:10"
+    },
+    "83": {
+        "id": "185",
+        "nome": "RAM",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:10"
+    },
+    "84": {
+        "id": "186",
+        "nome": "RELY",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:10"
+    },
+    "85": {
+        "id": "48",
+        "nome": "Renault",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": "1",
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:10"
+    },
+    "86": {
+        "id": "195",
+        "nome": "Rolls-Royce",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:10"
+    },
+    "87": {
+        "id": "49",
+        "nome": "Rover",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:10"
+    },
+    "88": {
+        "id": "50",
+        "nome": "Saab",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:10"
+    },
+    "89": {
+        "id": "51",
+        "nome": "Saturn",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:10"
+    },
+    "90": {
+        "id": "52",
+        "nome": "Seat",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:10"
+    },
+    "91": {
+        "id": "247",
+        "nome": "SERES",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:10"
+    },
+    "92": {
+        "id": "183",
+        "nome": "SHINERAY",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:10"
+    },
+    "93": {
+        "id": "157",
+        "nome": "smart",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:10"
+    },
+    "94": {
+        "id": "125",
+        "nome": "SSANGYONG",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:10"
+    },
+    "95": {
+        "id": "54",
+        "nome": "Subaru",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:10"
+    },
+    "96": {
+        "id": "55",
+        "nome": "Suzuki",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:10"
+    },
+    "97": {
+        "id": "165",
+        "nome": "TAC",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:10"
+    },
+    "98": {
+        "id": "56",
+        "nome": "Toyota",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": "1",
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:10"
+    },
+    "99": {
+        "id": "57",
+        "nome": "Troller",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:10"
+    },
+    "100": {
+        "id": "58",
+        "nome": "Volvo",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:10"
+    },
+    "101": {
+        "id": "59",
+        "nome": "VW - VolksWagen",
+        "tipo": "1",
+        "apelido": "VW,VOLKSWAGEN",
+        "ordem": "1",
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:10"
+    },
+    "102": {
+        "id": "163",
+        "nome": "Wake",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:10"
+    },
+    "103": {
+        "id": "120",
+        "nome": "Walk",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": "2024-07-05 12:54:10"
+    },
+    "104": {
+        "id": "253",
+        "nome": "ZEEKR",
+        "tipo": "1",
+        "apelido": null,
+        "ordem": null,
+        "TabelaReferencia": "330",
+        "dataatualizacao": null
+    }
+}
