@@ -1,147 +1,93 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Painel do Consultor | Premium Clube</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        .step-hidden {
-            display: none;
-        }
-
-        select,
-        input {
-            color: black !important;
-        }
-
-        .loader {
-            border-top-color: #3498db;
-            animation: spinner 1.5s linear infinite;
-        }
-
-        @keyframes spinner {
-            0% {
-                transform: rotate(0deg);
-            }
-
-            100% {
-                transform: rotate(360deg);
-            }
-        }
+        select, input { color: #0f172a !important; background-color: white !important; }
+        /* Máscara visual para placa */
+        #placa { text-transform: uppercase; }
     </style>
 </head>
-
 <body class="bg-slate-900 text-slate-100 min-h-screen">
 
     <header class="bg-slate-800 border-b border-slate-700 p-6 shadow-2xl">
         <div class="max-w-7xl mx-auto">
-            <h1 class="text-blue-400 font-black text-center mb-4 tracking-widest uppercase text-xl">Painel de Cotação
-                Premium</h1>
-
-            <div class="bg-slate-700/30 p-4 rounded-xl border border-slate-600">
-                <label class="block text-[10px] font-bold uppercase text-blue-300 mb-2">Token de Autorização
-                    (Authorization)</label>
-                <input type="text" id="token-input"
-                    class="w-full p-3 bg-white border border-slate-300 rounded text-slate-900 font-mono text-sm font-bold shadow-inner focus:ring-2 focus:ring-blue-500 outline-none"
-                    placeholder="Cole o token capturado no F12 aqui...">
+            <h1 class="text-blue-400 font-black text-center mb-6 tracking-widest uppercase">Escritório Virtual - Cotação</h1>
+            
+            <div class="bg-slate-700/50 p-4 rounded-xl border border-slate-600">
+                <label class="block text-[10px] font-bold uppercase text-blue-300 mb-2">Authorization Ativo (F12)</label>
+                <input type="text" id="token-input" 
+                    class="w-full p-3 bg-white rounded text-slate-900 font-mono text-sm font-bold shadow-inner outline-none focus:ring-2 focus:ring-blue-500" 
+                    placeholder="Cole aqui o token que começa com nv1Llq...">
             </div>
         </div>
     </header>
 
     <main class="max-w-7xl mx-auto p-4 md:p-8">
-        <section id="step-1" class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <div class="lg:col-span-2 bg-slate-800 p-6 rounded-xl border border-slate-700">
-                <h2 class="text-xl font-bold mb-6 flex items-center gap-2">
-                    <span class="bg-blue-600 w-8 h-8 rounded-full flex items-center justify-center text-sm">1</span>
-                    Busca de Veículo
-                </h2>
+        <section id="step-1" class="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-xl">
+            <h2 class="text-xl font-bold mb-6 flex items-center gap-2">
+                <span class="bg-blue-600 w-8 h-8 rounded-full flex items-center justify-center text-sm">1</span>
+                Dados do Veículo
+            </h2>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div class="md:col-span-2">
-                        <label class="text-xs font-bold text-slate-400 uppercase">Placa *</label>
-                        <div class="flex gap-2">
-                            <input type="text" id="placa" placeholder="ABC1234"
-                                class="flex-1 p-3 bg-white rounded font-black text-2xl uppercase tracking-widest text-slate-900">
-                            <button onclick="buscarDadosPlaca()" id="btn-placa"
-                                class="bg-green-600 px-8 rounded font-bold hover:bg-green-500 transition-all">VERIFICAR</button>
-                        </div>
-                    </div>
-
-                    <div>
-                        <label class="text-xs text-slate-400 uppercase">Estado</label>
-                        <select id="estado" class="w-full p-3 bg-white rounded font-bold"></select>
-                    </div>
-
-                    <div>
-                        <label class="text-xs text-slate-400 uppercase">Tipo Veículo</label>
-                        <select id="categoria" class="w-full p-3 bg-white rounded font-bold">
-                            <option value="11">Automóvel</option>
-                            <option value="12">Moto</option>
-                            <option value="13">Caminhão</option>
-                        </select>
-                    </div>
-
-                    <div
-                        class="md:col-span-2 text-slate-500 text-[10px] font-bold py-2 border-b border-slate-700 uppercase">
-                        Resultados da API (Editável)</div>
-
-                    <div>
-                        <label class="text-xs text-slate-400 uppercase">Marca</label>
-                        <select id="marca" class="w-full p-3 bg-white rounded font-bold"></select>
-                    </div>
-
-                    <div>
-                        <label class="text-xs text-slate-400 uppercase">Ano Modelo</label>
-                        <input type="text" id="ano_fab" class="w-full p-3 bg-white rounded font-bold">
-                    </div>
-
-                    <div class="md:col-span-2">
-                        <label class="text-xs text-slate-400 uppercase">Modelo</label>
-                        <select id="modelo" class="w-full p-3 bg-white rounded font-bold"></select>
-                    </div>
-
-                    <div>
-                        <label class="text-xs text-slate-400 uppercase">Código Fipe</label>
-                        <input type="text" id="fipe_codigo" class="w-full p-3 bg-white rounded font-bold">
-                    </div>
-
-                    <div>
-                        <label class="text-xs text-slate-400 uppercase">Valor FIPE (R$)</label>
-                        <input type="text" id="fipe_valor" class="w-full p-3 bg-white rounded font-black text-blue-600">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="md:col-span-2">
+                    <label class="text-xs font-bold text-slate-400 uppercase">Placa *</label>
+                    <div class="flex gap-2">
+                        <input type="text" id="placa" maxlength="8" placeholder="ABC-1234" 
+                            class="flex-1 p-3 rounded font-black text-2xl uppercase tracking-widest border-2 border-slate-600 focus:border-blue-500 outline-none">
+                        <button onclick="buscarDadosPlaca()" id="btn-placa" class="bg-green-600 px-8 rounded font-bold hover:bg-green-500 transition-all shadow-lg active:scale-95">VERIFICAR</button>
                     </div>
                 </div>
 
-                <div class="mt-8">
-                    <button onclick="irParaEtapa2()"
-                        class="w-full bg-blue-600 py-4 rounded-lg font-black text-white hover:bg-blue-500 uppercase tracking-widest shadow-xl">Confirmar
-                        e Continuar</button>
+                <div>
+                    <label class="text-xs text-slate-400 uppercase">Marca</label>
+                    <input type="text" id="marca_nome" readonly class="w-full p-3 rounded font-bold bg-slate-200 cursor-not-allowed">
+                </div>
+
+                <div>
+                    <label class="text-xs text-slate-400 uppercase">Ano Modelo</label>
+                    <input type="text" id="ano_fab" readonly class="w-full p-3 rounded font-bold bg-slate-200 cursor-not-allowed">
+                </div>
+
+                <div class="md:col-span-2">
+                    <label class="text-xs text-slate-400 uppercase">Modelo</label>
+                    <input type="text" id="modelo_nome" readonly class="w-full p-3 rounded font-bold bg-slate-200 cursor-not-allowed">
+                </div>
+
+                <div>
+                    <label class="text-xs text-slate-400 uppercase">Valor FIPE (R$)</label>
+                    <input type="text" id="fipe_valor" readonly class="w-full p-3 rounded font-black text-blue-700 bg-slate-200 cursor-not-allowed">
+                </div>
+                
+                <div>
+                    <label class="text-xs text-slate-400 uppercase">Código Fipe</label>
+                    <input type="text" id="fipe_codigo" readonly class="w-full p-3 rounded font-bold bg-slate-200 cursor-not-allowed">
                 </div>
             </div>
         </section>
-
     </main>
 
     <script>
+        // Mascara de Placa: Transforma ABC1234 em ABC-1234
+        const inputPlaca = document.getElementById('placa');
+        inputPlaca.addEventListener('input', (e) => {
+            let v = e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, "");
+            if (v.length > 3 && !v.match(/^[A-Z]{3}[0-9][A-Z][0-9]{2}$/)) { // Não aplica traço se for Mercosul puro
+                v = v.slice(0, 3) + "-" + v.slice(3, 7);
+            }
+            e.target.value = v.slice(0, 8);
+        });
+
+        // Configuração da API
         const API_BASE = "https://service-provisorio.premiumclube.org.br";
 
-        // --- FUNÇÕES DE INTERFACE ---
-        function toggleSenha() {
-            const input = document.getElementById('user-pass');
-            const icon = document.getElementById('eye-icon');
-            if (input.type === 'password') {
-                input.type = 'text';
-                icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l18 18" />';
-            } else {
-                input.type = 'password';
-                icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />';
-            }
-        }
-
-        // --- CHAMADA VIA PROXY VERCEL ---
         async function callAPI(endpoint, body) {
             const token = document.getElementById('token-input').value;
+            // IMPORTANTE: Se rodar local (file://), o fetch vai falhar. Use no servidor.
             const response = await fetch('/api/proxy', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -151,132 +97,60 @@
                     data: body
                 })
             });
+            if (!response.ok) throw new Error("Erro na rede ou Token inválido.");
             return await response.json();
         }
 
-        // --- LOGIN LEGÍTIMO ---
-        async function realizarLogin() {
-            const email = document.getElementById('user-email').value;
-            const senha = document.getElementById('user-pass').value;
-            const btn = document.getElementById('btn-login');
+        async function buscarDadosPlaca() {
+            const placaField = document.getElementById('placa');
+            const placaOriginal = placaField.value.replace("-", ""); // Remove o traço para a API
+            const btn = document.getElementById('btn-placa');
 
-            if (!email || !senha) return alert("Preencha as credenciais.");
+            if (!placaOriginal || placaOriginal.length < 7) return alert("Digite uma placa válida!");
 
-            btn.innerText = "AUTENTICANDO...";
+            btn.innerText = "BUSCANDO...";
             btn.disabled = true;
 
             try {
-                // Montando o payload EXATAMENTE como o oficial
-                const payloadOficial = {
-                    "UsuariosLogin": email,
-                    "UsuariosSenha": senha,
-                    "TipoLogin": "2"
-                };
+                // REQUEST 1: Verificação de Placa
+                const res1 = await callAPI('/Placa/verificaPlaca/', { Placa: placaOriginal });
 
-                const res = await callAPI('/Login/Login/', payloadOficial);
+                if (res1.marca_nome || res1.MarcaDescricao) {
+                    document.getElementById('marca_nome').value = res1.marca_nome || res1.MarcaDescricao;
+                    document.getElementById('modelo_nome').value = res1.modelo_nome || res1.ModeloDescricao;
+                    document.getElementById('ano_fab').value = res1.nomeanomod || res1.AnoModelo;
+                    document.getElementById('fipe_valor').value = res1.valorfipe || res1.ValorFipe;
+                    document.getElementById('fipe_codigo').value = res1.fipe_codigo || res1.FipeCodigo;
 
-                console.log("Resposta do servidor:", res);
+                    // REQUEST 2: Pré-Cotação (preOrcamento)
+                    const payloadPre = {
+                        modelo: res1.modelo || res1.ModeloId,
+                        marca: res1.marca || res1.MarcaId,
+                        ano: res1.nomeanomod || res1.AnoModelo,
+                        placa: placaOriginal,
+                        fipe: res1.valorfipe || res1.ValorFipe,
+                        consultor: "320800" 
+                    };
 
-                if (res.token || res.Token) {
-                    const novoToken = res.token || res.Token;
-                    document.getElementById('token-input').value = novoToken;
-                    localStorage.setItem('token_premium', novoToken);
-                    alert("✅ Sucesso! Sistema conectado.");
+                    const res2 = await callAPI('/orcamento_pre/preOrcamento', payloadPre);
+                    console.log("Opcionais carregados:", res2);
+                    alert("Dados do veículo carregados!");
                 } else {
-                    // Caso dê erro, mostramos a mensagem real da API
-                    alert("Falha: " + (res.mensagem || "Verifique o console"));
+                    alert("Dados não retornados. O Token pode ter expirado.");
                 }
             } catch (e) {
-                alert("Erro na comunicação com a Vercel.");
-            } finally {
-                btn.innerText = "CONECTAR AGORA";
-                btn.disabled = false;
-            }
-        }
-
-        // --- BUSCA E AUTO-PREENCHIMENTO ---
-        async function realizarBuscaCompleta() {
-            const placaInput = document.getElementById('placa');
-            const placa = placaInput.value.trim().toUpperCase();
-            const token = document.getElementById('token-input').value;
-
-            if (!placa || !token) return alert("Insira a Placa e o Token!");
-
-            const btn = document.getElementById('btn-placa');
-            btn.innerText = "BUSCANDO VEÍCULO...";
-            btn.disabled = true;
-
-            try {
-                // PASSO 1: Verificar Placa [cite: 1]
-                const dadosVeiculo = await callAPI('/Placa/verificaPlaca/', { Placa: placa });
-
-                if (!dadosVeiculo.marca) throw new Error("Veículo não encontrado.");
-
-                // Preenche campos da Etapa 1
-                document.getElementById('fipe_valor').value = dadosVeiculo.valorfipe;
-                document.getElementById('ano_fab').value = dadosVeiculo.nomeanomod;
-                console.log("Veículo identificado:", dadosVeiculo.completo);
-
-                // PASSO 2: Pré-Cotação (Tabela de Preços e Opcionais) [cite: 23]
-                btn.innerText = "CARREGANDO TABELA...";
-                const payloadPre = {
-                    modelo: dadosVeiculo.modelo,
-                    marca: dadosVeiculo.marca,
-                    ano: dadosVeiculo.nomeanomod,
-                    anoModeloId: dadosVeiculo.anomod,
-                    estado: dadosVeiculo.estado,
-                    placa: placa,
-                    fipe: dadosVeiculo.valorfipe,
-                    categoria: dadosVeiculo.tipo,
-                    tabela: dadosVeiculo.tabela,
-                    consultor: "320800" // Seu ID de consultor conforme log 
-                };
-
-                const dadosPre = await callAPI('/orcamento_pre/preOrcamento', payloadPre);
-
-                // Armazena tudo para a Etapa 2
-                orcamentoAtual = { ...dadosVeiculo, ...dadosPre };
-
-                // Renderiza os opcionais (Vidros, Terceiros, etc)
-                renderizarOpcionais(dadosPre.Opcionais);
-
-                alert("Sucesso! Veículo e Opcionais carregados.");
-                // Rolar para a Etapa 2
-                document.getElementById('etapa2').scrollIntoView({ behavior: 'smooth' });
-
-            } catch (error) {
-                console.error(error);
-                alert("Erro: " + error.message);
+                console.error(e);
+                alert("Erro: " + e.message + "\nLembre-se: Este código só funciona rodando no link da Vercel.");
             } finally {
                 btn.innerText = "VERIFICAR";
                 btn.disabled = false;
             }
         }
 
-        // Função para criar os botões de opcionais dinamicamente
-        function renderizarOpcionais(opcionais) {
-            const container = document.getElementById('container-opcionais');
-            container.innerHTML = ''; // Limpa anterior
-
-            // Exemplo: Vidros 
-            if (opcionais.Vidros) {
-                opcionais.Vidros.forEach(item => {
-                    container.innerHTML += `
-                <div class="flex justify-between items-center p-3 bg-slate-700 rounded mb-2">
-                    <span class="text-white text-sm">${item.nome}</span>
-                    <button onclick="selecionarServico('${item.codigo}', ${item.valor})" 
-                        class="bg-blue-600 text-[10px] px-3 py-1 rounded">
-                        ADICIONAR R$ ${item.valor}
-                    </button>
-                </div>
-            `;
-                });
-            }
-        }
-
-        // Recuperar token salvo
-        document.getElementById('token-input').value = localStorage.getItem('token_premium') || '';
+        window.onload = () => {
+            const savedToken = localStorage.getItem('token_premium');
+            if(savedToken) document.getElementById('token-input').value = savedToken;
+        };
     </script>
 </body>
-
 </html>
