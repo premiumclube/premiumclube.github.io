@@ -140,7 +140,7 @@
         // --- ATUALIZAÇÃO DE CIDADES (BASEADO NO SEU JSON) ---
         async function atualizarCidades(estadoUF, cidadeSelecionada = "") {
             try {
-                const cidadesRes = await callAPI(`/tabela_valores/Cidades/?Estado=${estadoUF}`, 'GET');
+                const cidadesRes = await callAPI(`/ViewCidadesEstados/consultar/?EstadosUF=${estadoUF}&order=CidadesNome`, 'GET');
                 const selectCid = document.getElementById('cidade');
                 let optionsHtml = '<option value="">Selecione a cidade</option>';
                 
@@ -178,7 +178,7 @@
                         callAPI(`/ano_modelo/getValorFipe/?modelo=${res1.modelo}`, 'GET'),
                         callAPI(`/ViewModeloAno/consultar/?marca=${res1.marca}&categoria=${res1.tipo}&tipo=${tipoTexto}&ano=${res1.nomeanomod}&order=GROUP BY nome ORDER BY nome ASC`, 'GET'),
                         callAPI(`/ViewAnoModeloMarca/consultar/?marca=${res1.marca}&ano!=NULL&order=GROUP BY ano, nome, marca ORDER BY IF(ano = 0, 0, 1), ano DESC`, 'GET'),
-                        callAPI(`/ViewEstados/consultar/?order=Nome`, 'GET'),
+                        callAPI(`/ViewCidadesEstados/consultar/?EstadosUF=${estadoUF}&order=CidadesNome`, 'GET'),
                         callAPI(`/CategoriasConfiguracoesAutorizadas/getCategoriasCalculo/?consultor=320800&maximo=${res1.valorfipe}&tipo=${res1.tipo}&estado=${res1.estado || 'PE'}`, 'GET')
                     ]);
 
