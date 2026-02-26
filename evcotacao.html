@@ -1,26 +1,37 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Painel do Consultor | Premium Clube</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        select, input { color: #0f172a !important; background-color: white !important; }
+        select,
+        input {
+            color: #0f172a !important;
+            background-color: white !important;
+        }
+
         /* Máscara visual para placa */
-        #placa { text-transform: uppercase; }
+        #placa {
+            text-transform: uppercase;
+        }
     </style>
 </head>
+
 <body class="bg-slate-900 text-slate-100 min-h-screen">
 
     <header class="bg-slate-800 border-b border-slate-700 p-6 shadow-2xl">
         <div class="max-w-7xl mx-auto">
-            <h1 class="text-blue-400 font-black text-center mb-6 tracking-widest uppercase">Escritório Virtual - Cotação</h1>
-            
+            <h1 class="text-blue-400 font-black text-center mb-6 tracking-widest uppercase">Escritório Virtual - Cotação
+            </h1>
+
             <div class="bg-slate-700/50 p-4 rounded-xl border border-slate-600">
-                <label class="block text-[10px] font-bold uppercase text-blue-300 mb-2">Authorization Ativo (F12)</label>
-                <input type="text" id="token-input" 
-                    class="w-full p-3 bg-white rounded text-slate-900 font-mono text-sm font-bold shadow-inner outline-none focus:ring-2 focus:ring-blue-500" 
+                <label class="block text-[10px] font-bold uppercase text-blue-300 mb-2">Authorization Ativo
+                    (F12)</label>
+                <input type="text" id="token-input"
+                    class="w-full p-3 bg-white rounded text-slate-900 font-mono text-sm font-bold shadow-inner outline-none focus:ring-2 focus:ring-blue-500"
                     placeholder="Cole aqui o token que começa com nv1Llq...">
             </div>
         </div>
@@ -37,35 +48,41 @@
                 <div class="md:col-span-2">
                     <label class="text-xs font-bold text-slate-400 uppercase">Placa *</label>
                     <div class="flex gap-2">
-                        <input type="text" id="placa" maxlength="8" placeholder="ABC-1234" 
+                        <input type="text" id="placa" maxlength="8" placeholder="ABC-1234"
                             class="flex-1 p-3 rounded font-black text-2xl uppercase tracking-widest border-2 border-slate-600 focus:border-blue-500 outline-none">
-                        <button onclick="buscarDadosPlaca()" id="btn-placa" class="bg-green-600 px-8 rounded font-bold hover:bg-green-500 transition-all shadow-lg active:scale-95">VERIFICAR</button>
+                        <button onclick="buscarDadosPlaca()" id="btn-placa"
+                            class="bg-green-600 px-8 rounded font-bold hover:bg-green-500 transition-all shadow-lg active:scale-95">VERIFICAR</button>
                     </div>
                 </div>
 
                 <div>
                     <label class="text-xs text-slate-400 uppercase">Marca</label>
-                    <input type="text" id="marca_nome" readonly class="w-full p-3 rounded font-bold bg-slate-200 cursor-not-allowed">
+                    <input type="text" id="marca_nome" readonly
+                        class="w-full p-3 rounded font-bold bg-slate-200 cursor-not-allowed">
                 </div>
 
                 <div>
                     <label class="text-xs text-slate-400 uppercase">Ano Modelo</label>
-                    <input type="text" id="ano_fab" readonly class="w-full p-3 rounded font-bold bg-slate-200 cursor-not-allowed">
+                    <input type="text" id="ano_fab" readonly
+                        class="w-full p-3 rounded font-bold bg-slate-200 cursor-not-allowed">
                 </div>
 
                 <div class="md:col-span-2">
                     <label class="text-xs text-slate-400 uppercase">Modelo</label>
-                    <input type="text" id="modelo_nome" readonly class="w-full p-3 rounded font-bold bg-slate-200 cursor-not-allowed">
+                    <input type="text" id="modelo_nome" readonly
+                        class="w-full p-3 rounded font-bold bg-slate-200 cursor-not-allowed">
                 </div>
 
                 <div>
                     <label class="text-xs text-slate-400 uppercase">Valor FIPE (R$)</label>
-                    <input type="text" id="fipe_valor" readonly class="w-full p-3 rounded font-black text-blue-700 bg-slate-200 cursor-not-allowed">
+                    <input type="text" id="fipe_valor" readonly
+                        class="w-full p-3 rounded font-black text-blue-700 bg-slate-200 cursor-not-allowed">
                 </div>
-                
+
                 <div>
                     <label class="text-xs text-slate-400 uppercase">Código Fipe</label>
-                    <input type="text" id="fipe_codigo" readonly class="w-full p-3 rounded font-bold bg-slate-200 cursor-not-allowed">
+                    <input type="text" id="fipe_codigo" readonly
+                        class="w-full p-3 rounded font-bold bg-slate-200 cursor-not-allowed">
                 </div>
             </div>
         </section>
@@ -87,23 +104,34 @@
 
         async function callAPI(endpoint, body) {
             const token = document.getElementById('token-input').value;
-            // IMPORTANTE: Se rodar local (file://), o fetch vai falhar. Use no servidor.
+
+            // Garante que o endpoint comece com /
+            const cleanEndpoint = endpoint.startsWith('/') ? endpoint : '/' + endpoint;
+            const targetUrl = "https://service-provisorio.premiumclube.org.br" + cleanEndpoint;
+
             const response = await fetch('/api/proxy', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    url: API_BASE + endpoint,
+                    url: targetUrl,
                     token: token,
                     data: body
                 })
             });
-            if (!response.ok) throw new Error("Erro na rede ou Token inválido.");
-            return await response.json();
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                console.error("Resposta da API erro:", data);
+                throw new Error(data.mensagem || data.erro || "Erro na requisição");
+            }
+
+            return data;
         }
 
         async function buscarDadosPlaca() {
             const placaField = document.getElementById('placa');
-            const placaOriginal = placaField.value.replace("-", ""); // Remove o traço para a API
+            const placaOriginal = placaField.value.replace(/-/g, "");
             const btn = document.getElementById('btn-placa');
 
             if (!placaOriginal || placaOriginal.length < 7) return alert("Digite uma placa válida!");
@@ -112,35 +140,38 @@
             btn.disabled = true;
 
             try {
-                // REQUEST 1: Verificação de Placa
+                // Request 1: Verifica Placa
                 const res1 = await callAPI('/Placa/verificaPlaca/', { Placa: placaOriginal });
 
-                if (res1.marca_nome || res1.MarcaDescricao) {
-                    document.getElementById('marca_nome').value = res1.marca_nome || res1.MarcaDescricao;
+                // Verificando se a resposta tem os dados (Sempre use os nomes de variáveis do seu log)
+                const marca = res1.marca_nome || res1.MarcaDescricao;
+
+                if (marca) {
+                    document.getElementById('marca_nome').value = marca;
                     document.getElementById('modelo_nome').value = res1.modelo_nome || res1.ModeloDescricao;
                     document.getElementById('ano_fab').value = res1.nomeanomod || res1.AnoModelo;
                     document.getElementById('fipe_valor').value = res1.valorfipe || res1.ValorFipe;
                     document.getElementById('fipe_codigo').value = res1.fipe_codigo || res1.FipeCodigo;
 
-                    // REQUEST 2: Pré-Cotação (preOrcamento)
+                    // Request 2: Pre-Orcamento
                     const payloadPre = {
                         modelo: res1.modelo || res1.ModeloId,
                         marca: res1.marca || res1.MarcaId,
                         ano: res1.nomeanomod || res1.AnoModelo,
                         placa: placaOriginal,
                         fipe: res1.valorfipe || res1.ValorFipe,
-                        consultor: "320800" 
+                        consultor: "320800"
                     };
 
                     const res2 = await callAPI('/orcamento_pre/preOrcamento', payloadPre);
-                    console.log("Opcionais carregados:", res2);
-                    alert("Dados do veículo carregados!");
+                    console.log("Sucesso na Pré-Cotação:", res2);
+                    alert("Veículo localizado!");
                 } else {
-                    alert("Dados não retornados. O Token pode ter expirado.");
+                    alert("Placa não encontrada ou Token inválido.");
                 }
             } catch (e) {
-                console.error(e);
-                alert("Erro: " + e.message + "\nLembre-se: Este código só funciona rodando no link da Vercel.");
+                console.error("Erro detalhado:", e);
+                alert("Erro: " + e.message);
             } finally {
                 btn.innerText = "VERIFICAR";
                 btn.disabled = false;
@@ -149,8 +180,9 @@
 
         window.onload = () => {
             const savedToken = localStorage.getItem('token_premium');
-            if(savedToken) document.getElementById('token-input').value = savedToken;
+            if (savedToken) document.getElementById('token-input').value = savedToken;
         };
     </script>
 </body>
+
 </html>

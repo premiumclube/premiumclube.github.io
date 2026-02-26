@@ -1,30 +1,31 @@
 export default async function handler(req, res) {
+    // Cabeçalhos de CORS
     res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, LocalAcesso, Rota');
+    res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
 
     if (req.method === 'OPTIONS') return res.status(200).end();
 
-    const { path } = req.query;
-    const targetUrl = `https://service-provisorio.premiumclube.org.br${path}`;
+    const { url, data, token } = req.body;
 
     try {
-        const response = await fetch(targetUrl, {
-            method: req.method,
+        const response = await fetch(url, {
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': req.headers.authorization || '',
+                'Authorization': token || '',
                 'LocalAcesso': 'Consultor',
                 'Origin': 'https://novoev.premiumclube.org.br',
                 'Referer': 'https://novoev.premiumclube.org.br/',
                 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
             },
-            body: req.method === 'POST' ? JSON.stringify(req.body) : null
+            body: JSON.stringify(data)
         });
 
-        const data = await response.json();
-        res.status(response.status).json(data);
+        const result = await response.json();
+        return res.status(response.status).json(result);
     } catch (error) {
-        res.status(500).json({ erro: 'Erro no Proxy', detalhes: error.message });
+        console.error("Erro no Proxy:", error);
+        return res.status(500).json({ error: "Erro interno no servidor proxy", detalhes: error.message });
     }
 }
