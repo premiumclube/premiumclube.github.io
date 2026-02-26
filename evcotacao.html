@@ -8,8 +8,10 @@
     <style>
         select, input { color: #0f172a !important; background-color: white !important; }
         #placa { text-transform: uppercase; }
-        /* Estilo para simular campos readonly um pouco mais escuros */
         .readonly-field { background-color: #e2e8f0 !important; cursor: not-allowed; }
+        /* Esconde barra de rolagem mas mantém funcionando */
+        select::-webkit-scrollbar { width: 8px; }
+        select::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
     </style>
 </head>
 <body class="bg-slate-900 text-slate-100 min-h-screen">
@@ -20,9 +22,17 @@
             
             <div class="bg-slate-700/50 p-4 rounded-xl border border-slate-600">
                 <label class="block text-[10px] font-bold uppercase text-blue-300 mb-2">Authorization Ativo (F12)</label>
-                <input type="text" id="token-input" 
-                    class="w-full p-3 bg-white rounded text-slate-900 font-mono text-sm font-bold shadow-inner outline-none focus:ring-2 focus:ring-blue-500" 
-                    placeholder="Cole aqui o token que começa com nv1Llq...">
+                <div class="flex gap-2 relative">
+                    <input type="text" id="token-input" 
+                        class="w-full p-3 bg-white rounded text-slate-900 font-mono text-sm font-bold shadow-inner outline-none focus:ring-2 focus:ring-blue-500 pr-12" 
+                        placeholder="Cole aqui o token que começa com nv1Llq...">
+                    
+                    <button onclick="colarToken()" class="absolute right-2 top-1/2 -translate-y-1/2 p-2 bg-slate-200 hover:bg-slate-300 rounded text-slate-600 transition-colors" title="Colar da Área de Transferência">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                        </svg>
+                    </button>
+                </div>
             </div>
         </div>
     </header>
@@ -31,10 +41,11 @@
         <section id="step-1" class="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-xl">
             <h2 class="text-xl font-bold mb-6 flex items-center gap-2">
                 <span class="bg-blue-600 w-8 h-8 rounded-full flex items-center justify-center text-sm">1</span>
-                Dados do Veículo
+                Dados do Veículo e Localidade
             </h2>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+                
                 <div class="lg:col-span-2">
                     <label class="text-xs font-bold text-slate-400 uppercase">Placa *</label>
                     <div class="flex gap-2">
@@ -45,34 +56,29 @@
                 </div>
 
                 <div>
-                    <label class="text-xs text-slate-400 uppercase">Estado</label>
-                    <input type="text" id="estado" class="w-full p-3 rounded font-bold border border-slate-300">
+                    <label class="text-xs text-slate-400 uppercase">Estado (UF)</label>
+                    <select id="estado" onchange="mudouEstado()" class="w-full p-3 rounded font-bold border border-slate-300">
+                        <option value="">Aguardando...</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="text-xs text-slate-400 uppercase">Cidade</label>
+                    <select id="cidade" class="w-full p-3 rounded font-bold border border-slate-300">
+                        <option value="">Aguardando UF...</option>
+                    </select>
                 </div>
 
                 <div>
                     <label class="text-xs text-slate-400 uppercase">Marca</label>
-                    <select id="marca" class="w-full p-3 rounded font-bold border border-slate-300">
+                    <select id="marca" onchange="mudouMarca()" class="w-full p-3 rounded font-bold border border-slate-300">
                         <option value="">Aguardando...</option>
                     </select>
                 </div>
 
                 <div class="lg:col-span-2">
                     <label class="text-xs text-slate-400 uppercase">Modelo</label>
-                    <select id="modelo" class="w-full p-3 rounded font-bold border border-slate-300 text-sm">
-                        <option value="">Aguardando...</option>
-                    </select>
-                </div>
-
-                <div>
-                    <label class="text-xs text-slate-400 uppercase">Ano Modelo (Valor FIPE)</label>
-                    <select id="anomod" class="w-full p-3 rounded font-bold border border-slate-300 text-sm">
-                        <option value="">Aguardando...</option>
-                    </select>
-                </div>
-
-                <div>
-                    <label class="text-xs text-slate-400 uppercase">Ano de Fabricação</label>
-                    <select id="ano_fab" class="w-full p-3 rounded font-bold border border-slate-300 text-sm">
+                    <select id="modelo" onchange="mudouModelo()" class="w-full p-3 rounded font-bold border border-slate-300 text-sm">
                         <option value="">Aguardando...</option>
                     </select>
                 </div>
@@ -87,25 +93,44 @@
                 </div>
 
                 <div>
-                    <label class="text-xs text-slate-400 uppercase">Valor FIPE (R$)</label>
-                    <input type="text" id="fipe_valor" readonly class="w-full p-3 rounded font-black text-blue-700 readonly-field">
+                    <label class="text-xs text-slate-400 uppercase">Ano de Fabricação</label>
+                    <select id="ano_fab" class="w-full p-3 rounded font-bold border border-slate-300 text-sm">
+                        <option value="">Aguardando...</option>
+                    </select>
                 </div>
-                
+
                 <div>
-                    <label class="text-xs text-slate-400 uppercase">Código Fipe</label>
-                    <input type="text" id="fipe_codigo" readonly class="w-full p-3 rounded font-bold readonly-field text-center">
+                    <label class="text-xs text-slate-400 uppercase">Ano Modelo (Base FIPE)</label>
+                    <select id="anomod" onchange="mudouAnoMod()" class="w-full p-3 rounded font-bold border border-slate-300 text-sm">
+                        <option value="">Aguardando...</option>
+                    </select>
                 </div>
 
                 <div>
                     <label class="text-xs text-slate-400 uppercase">Tabela de Adesão</label>
-                    <input type="text" id="tabela" readonly class="w-full p-3 rounded font-bold readonly-field text-center">
+                    <select id="tabela_adesao" class="w-full p-3 rounded font-bold border border-slate-300 text-sm">
+                        <option value="">Aguardando...</option>
+                    </select>
                 </div>
+
+                <div>
+                    <label class="text-xs text-slate-400 uppercase text-blue-400">Valor FIPE (R$)</label>
+                    <input type="text" id="fipe_valor" readonly class="w-full p-3 rounded font-black text-blue-700 bg-blue-50 border border-blue-200 readonly-field text-right">
+                </div>
+                
+                <input type="hidden" id="fipe_codigo">
+                <input type="hidden" id="tabela_base">
             </div>
         </section>
     </main>
 
     <script>
-        // Mascara de Placa
+        // --- VARIÁVEIS GLOBAIS (Sempre utilizando os mesmos nomes) ---
+        let cacheValoresFipe = []; 
+        let dadosAtuais = { tipoTexto: 'carro', categoria: '11', fipeNumerico: 0 };
+        const API_BASE = "https://service-provisorio.premiumclube.org.br";
+
+        // --- MÁSCARA DE PLACA ---
         document.getElementById('placa').addEventListener('input', (e) => {
             let v = e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, "");
             if (v.length > 3 && !v.match(/^[A-Z]{3}[0-9][A-Z][0-9]{2}$/)) { 
@@ -114,20 +139,35 @@
             e.target.value = v.slice(0, 8);
         });
 
-        const API_BASE = "https://service-provisorio.premiumclube.org.br";
+        // --- BOTÃO COLAR TOKEN ---
+        async function colarToken() {
+            try {
+                const text = await navigator.clipboard.readText();
+                if(text) {
+                    document.getElementById('token-input').value = text;
+                    localStorage.setItem('token_premium', text);
+                    // Flash visual para confirmar que colou
+                    const btn = event.currentTarget;
+                    btn.classList.add('bg-green-300');
+                    setTimeout(() => btn.classList.remove('bg-green-300'), 500);
+                }
+            } catch (err) {
+                alert('Falha ao colar. Permita o acesso à área de transferência ou cole manualmente.');
+            }
+        }
 
-        // Nova função callAPI que aceita métodos (GET/POST)
+        // --- FUNÇÃO CORE DE API ---
         async function callAPI(endpoint, method = 'POST', body = null) {
             const token = document.getElementById('token-input').value;
             const cleanEndpoint = endpoint.startsWith('/') ? endpoint : '/' + endpoint;
             
             const response = await fetch('/api/proxy', {
-                method: 'POST', // Sempre POST para a Vercel
+                method: 'POST', 
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     url: API_BASE + cleanEndpoint,
                     token: token,
-                    method: method, // Diz ao proxy se ele fará GET ou POST na Premium
+                    method: method, 
                     data: body
                 })
             });
@@ -137,6 +177,7 @@
             return data;
         }
 
+        // --- BUSCA INICIAL (A ESPINHA DORSAL) ---
         async function buscarDadosPlaca() {
             const placaField = document.getElementById('placa');
             const placaOriginal = placaField.value.replace(/-/g, ""); 
@@ -148,70 +189,79 @@
             btn.disabled = true;
 
             try {
-                // REQUEST 1: Dados Base
+                // 1. DADOS BASE
                 const res1 = await callAPI('/Placa/verificaPlaca/', 'POST', { Placa: placaOriginal });
-                console.log("1. Base Placa:", res1);
-
+                
                 if (res1.marca || res1.completo) {
                     
-                    // Define se é carro, moto ou caminhao para os próximos GETs
+                    // Identificando Tipo (Incluindo 7 = moto)
                     let tipoTexto = 'carro';
-                    if(res1.tipo === "12") tipoTexto = 'moto';
+                    if(res1.tipo === "12" || res1.tipo === "7") tipoTexto = 'moto';
                     if(res1.tipo === "13") tipoTexto = 'caminhao';
+                    
+                    dadosAtuais.tipoTexto = tipoTexto;
+                    dadosAtuais.categoria = res1.tipo;
+                    dadosAtuais.fipeNumerico = res1.valorfipe;
 
-                    // PARALELISMO: Dispara as 4 consultas GET ao mesmo tempo!
+                    const estadoAtual = res1.estado || "PE";
+                    const fipeFormatado = parseFloat(res1.valorfipe).toLocaleString('pt-BR', {minimumFractionDigits: 2});
+
+                    // 2. PARALELISMO MAXIMO (7 Requisições simultâneas para montar a tela)
                     const queryModelos = `?marca=${res1.marca}&categoria=${res1.tipo}&tipo=${tipoTexto}&ano=${res1.nomeanomod}&order=GROUP BY nome ORDER BY nome ASC`;
                     const queryAnos = `?marca=${res1.marca}&ano!=NULL&order=GROUP BY ano, nome, marca ORDER BY IF(ano = 0, 0, 1), ano DESC`;
 
-                    const [marcasRes, fipeRes, modelosRes, anosFabRes] = await Promise.all([
+                    const [marcasRes, fipeRes, modelosRes, anosFabRes, estadosRes, adesaoRes, cidadesRes] = await Promise.all([
                         callAPI(`/marca/getMarcaPorTipo/?tipo=${tipoTexto}`, 'GET'),
                         callAPI(`/ano_modelo/getValorFipe/?modelo=${res1.modelo}`, 'GET'),
                         callAPI(`/ViewModeloAno/consultar/${queryModelos}`, 'GET'),
-                        callAPI(`/ViewAnoModeloMarca/consultar/${queryAnos}`, 'GET')
+                        callAPI(`/ViewAnoModeloMarca/consultar/${queryAnos}`, 'GET'),
+                        callAPI(`/ViewEstados/consultar/?order=Nome`, 'GET'),
+                        callAPI(`/CategoriasConfiguracoesAutorizadas/getCategoriasCalculo/?consultor=320800&maximo=${fipeFormatado}&tipo=${res1.tipo}&estado=${estadoAtual}`, 'GET'),
+                        callAPI(`/tabela_valores/Cidades/?Estado=${estadoAtual}`, 'GET')
                     ]);
 
-                    // REQUEST 2: Preenchendo "Marca"
-                    const marcaSelect = document.getElementById('marca');
-                    marcaSelect.innerHTML = Object.values(marcasRes).map(m => 
-                        `<option value="${m.id}">${m.nome}</option>`
-                    ).join('');
-                    marcaSelect.value = res1.marca; // Seleciona a retornada na res1
+                    cacheValoresFipe = Object.values(fipeRes); // Guarda para o onChange
 
-                    // REQUEST 3: Preenchendo "Ano Modelo / Valores FIPE"
-                    const anomodSelect = document.getElementById('anomod');
-                    anomodSelect.innerHTML = Object.values(fipeRes).map(f => 
-                        `<option value="${f.id}">${f.nome}</option>`
-                    ).join('');
-                    anomodSelect.value = res1.anomod;
+                    // POPULANDO OS PICKLISTS
+                    document.getElementById('estado').innerHTML = estadosRes.map(e => `<option value="${e.UF}">${e.Nome}</option>`).join('');
+                    document.getElementById('estado').value = estadoAtual;
 
-                    // REQUEST 4: Preenchendo "Modelos"
-                    const modeloSelect = document.getElementById('modelo');
-                    modeloSelect.innerHTML = modelosRes.map(m => 
-                        `<option value="${m.id}">${m.nome}</option>`
-                    ).join('');
-                    modeloSelect.value = res1.modelo;
+                    document.getElementById('marca').innerHTML = Object.values(marcasRes).map(m => `<option value="${m.id}">${m.nome}</option>`).join('');
+                    document.getElementById('marca').value = res1.marca;
 
-                    // REQUEST 5: Preenchendo "Ano Fabricação"
-                    const anoFabSelect = document.getElementById('ano_fab');
-                    anoFabSelect.innerHTML = anosFabRes.map(a => 
-                        `<option value="${a.ano}">${a.nome}</option>`
-                    ).join('');
-                    anoFabSelect.value = res1.nomeanomod;
+                    document.getElementById('anomod').innerHTML = cacheValoresFipe.map(f => `<option value="${f.id}">${f.nome}</option>`).join('');
+                    document.getElementById('anomod').value = res1.anomod;
 
-                    // Preenchendo os Inputs Soltos e ReadOnly
-                    document.getElementById('estado').value = res1.estado || "PE";
+                    document.getElementById('modelo').innerHTML = modelosRes.map(m => `<option value="${m.id}">${m.nome}</option>`).join('');
+                    document.getElementById('modelo').value = res1.modelo;
+
+                    document.getElementById('ano_fab').innerHTML = anosFabRes.map(a => `<option value="${a.ano}">${a.nome}</option>`).join('');
+                    document.getElementById('ano_fab').value = res1.nomeanomod;
+
+                    // Tabela de Adesão (Nome - valor)
+                    document.getElementById('tabela_adesao').innerHTML = adesaoRes.map(a => `<option value="${a.id}">${a.nome} - R$ ${a.valor}</option>`).join('');
+                    
+                    // Cidades
+                    document.getElementById('cidade').innerHTML = cidadesRes.map(c => `<option value="${c.Id || c.id || c.Nome || c.nome}">${c.Nome || c.nome}</option>`).join('');
+                    if(res1.localidade) {
+                        const cid = res1.localidade.split('/')[0]; // Pega "Recife" de "Recife/PE"
+                        // Tenta selecionar a cidade se existir na lista
+                        Array.from(document.getElementById('cidade').options).forEach(opt => {
+                            if(opt.text.toUpperCase() === cid.toUpperCase()) opt.selected = true;
+                        });
+                    }
+
+                    // Campos de texto simples
                     document.getElementById('categoria').value = res1.tipo;
                     document.getElementById('fipe_codigo').value = res1.modelo;
-                    document.getElementById('tabela').value = res1.tabela;
-                    document.getElementById('fipe_valor').value = "R$ " + parseFloat(res1.valorfipe).toLocaleString('pt-BR');
-
-                    alert("Veículo cruzado e validado nas tabelas FIPE com sucesso!");
+                    document.getElementById('tabela_base').value = res1.tabela;
+                    document.getElementById('fipe_valor').value = fipeFormatado;
 
                 } else {
                     alert("Dados não retornados. Verifique se o token expirou.");
                 }
             } catch (e) {
-                console.error("Erro no cruzamento de dados:", e);
+                console.error(e);
                 alert("Erro: " + e.message);
             } finally {
                 btn.innerText = "VERIFICAR";
@@ -219,6 +269,68 @@
             }
         }
 
+        // --- EVENTOS ONCHANGE (REATIVIDADE) ---
+
+        async function mudouEstado() {
+            const estado = document.getElementById('estado').value;
+            const fipeFormatado = parseFloat(dadosAtuais.fipeNumerico).toLocaleString('pt-BR', {minimumFractionDigits: 2});
+            
+            try {
+                // Atualiza Cidades e Adesão baseado na nova UF
+                const [cidadesRes, adesaoRes] = await Promise.all([
+                    callAPI(`/tabela_valores/Cidades/?Estado=${estado}`, 'GET'),
+                    callAPI(`/CategoriasConfiguracoesAutorizadas/getCategoriasCalculo/?consultor=320800&maximo=${fipeFormatado}&tipo=${dadosAtuais.categoria}&estado=${estado}`, 'GET')
+                ]);
+
+                document.getElementById('cidade').innerHTML = cidadesRes.map(c => `<option value="${c.Id || c.id || c.Nome || c.nome}">${c.Nome || c.nome}</option>`).join('');
+                document.getElementById('tabela_adesao').innerHTML = adesaoRes.map(a => `<option value="${a.id}">${a.nome} - R$ ${a.valor}</option>`).join('');
+            } catch(e) { console.error("Erro ao mudar estado", e); }
+        }
+
+        async function mudouMarca() {
+            const marcaId = document.getElementById('marca').value;
+            const anoFab = document.getElementById('ano_fab').value || ""; 
+            
+            try {
+                const queryModelos = `?marca=${marcaId}&categoria=${dadosAtuais.categoria}&tipo=${dadosAtuais.tipoTexto}&ano=${anoFab}&order=GROUP BY nome ORDER BY nome ASC`;
+                const modelosRes = await callAPI(`/ViewModeloAno/consultar/${queryModelos}`, 'GET');
+                
+                document.getElementById('modelo').innerHTML = modelosRes.map(m => `<option value="${m.id}">${m.nome}</option>`).join('');
+                
+                // Força a atualização do Ano e da FIPE para o primeiro modelo da nova lista
+                if(modelosRes.length > 0) mudouModelo(); 
+            } catch(e) { console.error("Erro ao mudar marca", e); }
+        }
+
+        async function mudouModelo() {
+            const modeloId = document.getElementById('modelo').value;
+            try {
+                const fipeRes = await callAPI(`/ano_modelo/getValorFipe/?modelo=${modeloId}`, 'GET');
+                cacheValoresFipe = Object.values(fipeRes);
+                
+                document.getElementById('anomod').innerHTML = cacheValoresFipe.map(f => `<option value="${f.id}">${f.nome}</option>`).join('');
+                document.getElementById('fipe_codigo').value = modeloId;
+                
+                // Força atualização visual da FIPE pro primeiro ano da lista
+                mudouAnoMod();
+            } catch(e) { console.error("Erro ao mudar modelo", e); }
+        }
+
+        function mudouAnoMod() {
+            const anoModId = document.getElementById('anomod').value;
+            const fipeObj = cacheValoresFipe.find(f => f.id === anoModId);
+            
+            if(fipeObj) {
+                dadosAtuais.fipeNumerico = fipeObj.valor;
+                const fipeFormatado = parseFloat(fipeObj.valor).toLocaleString('pt-BR', {minimumFractionDigits: 2});
+                document.getElementById('fipe_valor').value = fipeFormatado;
+                
+                // Como a FIPE mudou, idealmente a Tabela de Adesão também deve ser recalculada (baseada no novo valor maximo)
+                mudouEstado(); 
+            }
+        }
+
+        // Auto-load do Token
         window.onload = () => {
             document.getElementById('token-input').value = localStorage.getItem('token_premium') || '';
         };
