@@ -142,32 +142,59 @@
             try {
                 // Request 1: Verifica Placa
                 const res1 = await callAPI('/Placa/verificaPlaca/', { Placa: placaOriginal });
+                console.log("Response Bruta Request 1:", res1);
 
-                // Verificando se a resposta tem os dados (Sempre use os nomes de variáveis do seu log)
-                const marca = res1.marca_nome || res1.MarcaDescricao;
+                // Mapeamento exato baseado no seu retorno de log:
+                // Priorizamos os nomes que vieram na sua consulta com sucesso
+                const marcaId = res1.marca;
+                const modeloId = res1.modelo;
+                const nomeCompleto = res1.completo; // "FIAT/PULSE AUDACE TF200/2023"
+                const valorFipe = res1.valorfipe;
+                const anoModelo = res1.nomeanomod;
+                const fipeCodigo = res1.fipe_codigo || ""; // Caso não venha, fica vazio
 
-                if (marca) {
-                    document.getElementById('marca_nome').value = marca;
-                    document.getElementById('modelo_nome').value = res1.modelo_nome || res1.ModeloDescricao;
-                    document.getElementById('ano_fab').value = res1.nomeanomod || res1.AnoModelo;
-                    document.getElementById('fipe_valor').value = res1.valorfipe || res1.ValorFipe;
-                    document.getElementById('fipe_codigo').value = res1.fipe_codigo || res1.FipeCodigo;
+                // Se 'completo' ou 'marca' existirem, prosseguimos mesmo com aviso de "Já cotado"
+                if (nomeCompleto || marcaId) {
+                    // Separar Marca do Modelo se possível para preencher os campos
+                    const partes = nomeCompleto ? nomeCompleto.split('/') : ["", ""];
+
+                    document.getElementById('marca_nome').value = partes[0] || "Identificado";
+                    document.getElementById('modelo_nome').value = partes[1] || nomeCompleto;
+                    document.getElementById('ano_fab').value = anoModelo;
+                    document.getElementById('fipe_valor').value = "R$ " + parseFloat(valorFipe).toLocaleString('pt-BR');
+                    document.getElementById('fipe_codigo').value = modeloId; // Usando o ID do modelo como ref
 
                     // Request 2: Pre-Orcamento
+                    // Sempre utilize os mesmos nomes de variáveis conforme o payload esperado
                     const payloadPre = {
-                        modelo: res1.modelo || res1.ModeloId,
-                        marca: res1.marca || res1.MarcaId,
-                        ano: res1.nomeanomod || res1.AnoModelo,
+                        modelo: modeloId,
+                        marca: marcaId,
+                        ano: anoModelo,
+                        anomod: res1.anomod,
                         placa: placaOriginal,
-                        fipe: res1.valorfipe || res1.ValorFipe,
+                        fipe: valorFipe,
+                        tabela: res1.tabela,
+                        estado: res1.estado,
                         consultor: "320800"
                     };
 
+                    console.log("Enviando Request 2 com payload:", payloadPre);
                     const res2 = await callAPI('/orcamento_pre/preOrcamento', payloadPre);
-                    console.log("Sucesso na Pré-Cotação:", res2);
-                    alert("Veículo localizado!");
+
+                    console.log("Sucesso na Pré-Cotação (Opcionais):", res2);
+
+                    // Se houver mensagem de "já cotado", avisamos mas não travamos
+                    if (res1.PlacaCotada && res1.PlacaCotada.includes("já pré cotado")) {
+                        console.warn(res1.PlacaCotada);
+                    }
+
+                    alert("Veículo localizado e serviços carregados!");
+
+                    // Função para liberar a Etapa 2 (Opcionais) - Criaremos a seguir
+                    renderizarOpcionais(res2);
+
                 } else {
-                    alert("Placa não encontrada ou Token inválido.");
+                    alert("A API não retornou dados reconhecíveis. Verifique o console.");
                 }
             } catch (e) {
                 console.error("Erro detalhado:", e);
