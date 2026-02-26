@@ -217,7 +217,8 @@
                         callAPI(`/ViewAnoModeloMarca/consultar/${queryAnos}`, 'GET'),
                         callAPI(`/ViewEstados/consultar/?order=Nome`, 'GET'),
                         callAPI(`/CategoriasConfiguracoesAutorizadas/getCategoriasCalculo/?consultor=320800&maximo=${fipeFormatado}&tipo=${res1.tipo}&estado=${estadoAtual}`, 'GET'),
-                        callAPI(`/tabela_valores/Cidades/?Estado=${estadoAtual}`, 'GET')
+                        //callAPI(`/tabela_valores/Cidades/?Estado=${estadoAtual}`, 'GET')
+                        callAPI(`/ViewCidadesEstados/consultar/?EstadosUF=${estadoAtual}&order=CidadesNome`, 'GET')
                     ]);
 
                     cacheValoresFipe = Object.values(fipeRes); // Guarda para o onChange
