@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cotação Premium Clube - Novo EV</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .glass { background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(12px); }
+        .hidden { display: none; }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen">
+
+    <nav class="border-b border-blue-500/20 bg-slate-900/50 sticky top-0 z-50 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center font-bold">P</div>
+                <span class="font-black tracking-tighter text-xl">PREMIUM <span class="text-blue-500">CLUBE</span></span>
+            </div>
+            <div class="flex items-center gap-4">
+                <span id="user-display" class="text-xs font-bold text-slate-400 uppercase tracking-widest hidden md:block"></span>
+                <button onclick="deslogar()" class="text-xs bg-red-500/10 text-red-400 px-3 py-1 rounded-full border border-red-500/20 hover:bg-red-500 hover:text-white transition-all">
+                    Sair
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main id="etapa1" class="max-w-7xl mx-auto p-4 md:p-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            
+            <div class="lg:col-span-8 space-y-6">
+                <section class="bg-slate-800 p-6 rounded-2xl border border-blue-500/20 shadow-xl">
+                    <h2 class="text-sm font-bold text-blue-400 uppercase tracking-widest mb-6 flex items-center gap-2">
+                        <i class="fas fa-car"></i> Informações do Veículo
+                    </h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="md:col-span-1">
+                            <label class="block text-[10px] font-bold text-slate-400 uppercase mb-2">Placa</label>
+                            <div class="flex gap-2">
+                                <input type="text" id="placa" placeholder="ABC1234" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-white uppercase font-bold focus:border-blue-500 outline-none">
+                                <button onclick="verificarPlaca()" id="btn-verificar" class="bg-blue-600 hover:bg-blue-500 px-4 rounded-xl transition-all">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-[10px] font-bold text-slate-400 uppercase mb-2">Categoria</label>
+                            <select id="categoria" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-white outline-none focus:border-blue-500">
+                                <option value="11">Automóvel</option>
+                                <option value="12">Moto</option>
+                                <option value="13">Caminhão</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-[10px] font-bold text-slate-400 uppercase mb-2">Tabela de Adesão</label>
+                            <select id="tabela_adesao" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-white outline-none focus:border-blue-500">
+                                <option value="">Carregando...</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-6">
+                        <div>
+                            <label class="block text-[10px] font-bold text-slate-400 uppercase mb-2">Marca</label>
+                            <select id="marca" onchange="carregarModelos()" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-white text-sm outline-none"></select>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold text-slate-400 uppercase mb-2">Modelo</label>
+                            <select id="modelo" onchange="carregarAnos()" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-white text-sm outline-none"></select>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold text-slate-400 uppercase mb-2">Ano Fab/Mod</label>
+                            <select id="ano_fab" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-white text-sm outline-none"></select>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold text-slate-400 uppercase mb-2">Valor FIPE</label>
+                            <input type="text" id="fipe_valor" class="w-full bg-slate-700/50 border border-slate-700 rounded-xl p-3 text-blue-400 font-bold outline-none" readonly>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="bg-slate-800 p-6 rounded-2xl border border-blue-500/20 shadow-xl">
+                    <h2 class="text-sm font-bold text-blue-400 uppercase tracking-widest mb-6 flex items-center gap-2">
+                        <i class="fas fa-map-marker-alt"></i> Localização
+                    </h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-[10px] font-bold text-slate-400 uppercase mb-2">Estado (UF)</label>
+                            <select id="estado" onchange="carregarCidades()" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-white outline-none"></select>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold text-slate-400 uppercase mb-2">Cidade</label>
+                            <select id="cidade" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-white outline-none"></select>
+                        </div>
+                    </div>
+                </section>
+                
+                <button onclick="avancarEtapa2()" class="w-full bg-blue-600 hover:bg-blue-500 py-5 rounded-2xl font-black text-white uppercase tracking-[0.2em] shadow-lg shadow-blue-600/20 transition-all transform hover:-translate-y-1">
+                    Personalizar Benefícios <i class="fas fa-arrow-right ml-2"></i>
+                </button>
+            </div>
+
+            <div class="lg:col-span-4 space-y-6">
+                <div class="bg-gradient-to-br from-blue-600 to-blue-800 p-6 rounded-2xl shadow-xl">
+                    <h3 class="font-bold text-lg mb-2">Consultor Premium</h3>
+                    <p class="text-blue-100 text-xs leading-relaxed opacity-80">
+                        Preencha os dados do veículo para gerar uma cotação personalizada com os melhores benefícios do mercado.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <section id="etapa2" class="max-w-7xl mx-auto p-4 md:p-8 hidden">
+        <div class="bg-slate-800 p-8 rounded-2xl border border-blue-500/30 shadow-2xl">
+            <div class="flex justify-between items-center mb-8">
+                <h2 class="text-2xl font-black text-blue-400 uppercase tracking-tighter">Personalizar Cotação</h2>
+                <button onclick="voltarEtapa1()" class="bg-slate-700 hover:bg-slate-600 px-4 py-2 rounded-lg text-xs font-bold uppercase transition-all">
+                    <i class="fas fa-chevron-left mr-2"></i> Voltar
+                </button>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+                <div class="lg:col-span-2 space-y-6">
+                    <h3 class="text-xs font-bold text-slate-500 uppercase tracking-widest">Serviços Disponíveis</h3>
+                    <div id="lista-servicos" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        </div>
+                </div>
+
+                <div class="bg-slate-900/80 p-6 rounded-2xl border border-slate-700 h-fit sticky top-24">
+                    <h3 class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-6 text-center">Resumo do Investimento</h3>
+                    
+                    <div class="space-y-4 mb-8">
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-400 text-sm">Adesão</span>
+                            <span id="resumo-adesao" class="font-bold text-green-400">R$ 0,00</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-400 text-sm">Mensalidade Base</span>
+                            <span id="resumo-base" class="font-bold text-white">R$ 0,00</span>
+                        </div>
+                        <div class="pt-4 border-t border-slate-800">
+                            <label class="text-[10px] font-bold text-blue-400 uppercase mb-2 block">Aplicar Desconto Especial</label>
+                            <select id="select-desconto" onchange="recalcularTotal()" class="w-full bg-white text-slate-900 font-bold p-3 rounded-xl text-sm outline-none"></select>
+                        </div>
+                    </div>
+
+                    <div class="bg-blue-600 p-6 rounded-2xl text-center mb-8 shadow-inner">
+                        <span class="block text-[10px] uppercase font-black text-blue-200 mb-1">Valor Mensal Final</span>
+                        <span id="total-mensal" class="text-4xl font-black text-white">R$ 0,00</span>
+                    </div>
+
+                    <button onclick="gerarLinkFinal()" class="w-full bg-white hover:bg-blue-50 py-4 rounded-xl font-black text-blue-900 transition-all shadow-xl uppercase tracking-widest">
+                        Gerar Link Oficial
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="loading" class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-[100] flex items-center justify-center hidden">
+        <div class="text-center">
+            <div class="w-16 h-16 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+            <p class="text-blue-400 font-bold animate-pulse uppercase text-xs tracking-[0.3em]">Processando...</p>
+        </div>
+    </div>
+
+    <script>
+        // CONFIGURAÇÕES E AUTH
+        const API_BASE = "https://service-provisorio.premiumclube.org.br";
+        const PROXY_LOGIN = "/api/login"; 
+
+        // Função Mestra de Chamada de API com Silent Refresh
+        async function callAPI(endpoint, method = 'GET', body = null) {
+            let token = localStorage.getItem('premium_token');
+            const user = localStorage.getItem('premium_user');
+            const pass = localStorage.getItem('premium_pass');
+
+            if (!token || !user) {
+                window.location.href = "testelogin.html";
+                return;
+            }
+
+            const headers = {
+                "Content-Type": "application/json",
+                "Authorization": token
+            };
+
+            try {
+                let response = await fetch(`${API_BASE}${endpoint}`, {
+                    method,
+                    headers,
+                    body: body ? JSON.stringify(body) : null
+                });
+
+                let data = await response.json();
+
+                // Detecção de Expiração (Padrão da Premium: erro "Não Autorizado" ou mensagem de nível)
+                if (data.erro === "Não Autorizado" || (data.mensagem && data.mensagem.includes("Autorizado"))) {
+                    console.warn("Token expirado. Tentando renovação automática...");
+                    
+                    const novoToken = await realizarAutoLogin(user, pass);
+                    
+                    if (novoToken) {
+                        headers["Authorization"] = novoToken;
+                        response = await fetch(`${API_BASE}${endpoint}`, { method, headers, body: body ? JSON.stringify(body) : null });
+                        return await response.json();
+                    } else {
+                        localStorage.clear();
+                        window.location.href = "testelogin.html";
+                        return;
+                    }
+                }
+                return data;
+            } catch (error) {
+                console.error("Erro na API:", error);
+                throw error;
+            }
+        }
+
+        async function realizarAutoLogin(user, pass) {
+            try {
+                const res = await fetch(PROXY_LOGIN, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ "UsuariosLogin": user, "UsuariosSenha": pass, "TipoLogin": "2" })
+                });
+                const data = await res.json();
+                if (data.Authorization) {
+                    localStorage.setItem('premium_token', data.Authorization);
+                    return data.Authorization;
+                }
+                return null;
+            } catch (e) { return null; }
+        }
+
+        function deslogar() {
+            localStorage.clear();
+            window.location.href = "testelogin.html";
+        }
+
+        // LÓGICA DA ETAPA 1
+        async function verificarPlaca() {
+            const placa = document.getElementById('placa').value;
+            if(!placa) return;
+            
+            showLoading(true);
+            try {
+                const data = await callAPI(`/Placa/verificaPlaca/?Placa=${placa}`);
+                if(data.Id) {
+                    // Preencher campos (usando os mesmos nomes de variáveis anteriores)
+                    document.getElementById('marca').innerHTML = `<option value="${data.MarcaId}">${data.MarcaNome}</option>`;
+                    document.getElementById('modelo').innerHTML = `<option value="${data.ModeloId}">${data.ModeloNome}</option>`;
+                    document.getElementById('ano_fab').innerHTML = `<option value="${data.AnoFab}">${data.AnoFab}/${data.AnoMod}</option>`;
+                    document.getElementById('fipe_valor').value = data.ValorFipe;
+                    
+                    // Guardar campos ocultos para cotação
+                    window.anomod = data.AnoMod;
+                }
+            } catch(e) { alert("Erro ao consultar placa."); }
+            showLoading(false);
+        }
+
+        async function carregarTabelasAdesao() {
+            try {
+                const data = await callAPI('/orcamento/TabelasAdesao/', 'GET');
+                const select = document.getElementById('tabela_adesao');
+                select.innerHTML = data.map(t => `<option value="${t.Id}">${t.Nome}</option>`).join('');
+            } catch(e) { console.error("Erro tabelas"); }
+        }
+
+        async function carregarEstados() {
+            try {
+                const data = await callAPI('/localidade/Estado/', 'GET');
+                const select = document.getElementById('estado');
+                select.innerHTML = '<option value="">UF</option>' + data.map(e => `<option value="${e.Sigla}">${e.Sigla}</option>`).join('');
+            } catch(e) { }
+        }
+
+        async function carregarCidades() {
+            const uf = document.getElementById('estado').value;
+            if(!uf) return;
+            const data = await callAPI(`/localidade/Cidade/?Estado=${uf}`);
+            document.getElementById('cidade').innerHTML = data.map(c => `<option value="${c.Nome}">${c.Nome}</option>`).join('');
+        }
+
+        // LÓGICA DA ETAPA 2
+        let dadosPreCotacao = null;
+
+        async function avancarEtapa2() {
+            const payload = {
+                Placa: document.getElementById('placa').value,
+                MarcaId: document.getElementById('marca').value,
+                ModeloId: document.getElementById('modelo').value,
+                AnoFab: document.getElementById('ano_fab').value,
+                AnoMod: window.anomod || document.getElementById('ano_fab').value,
+                ValorFipe: document.getElementById('fipe_valor').value.replace(/\./g, '').replace(',', '.'),
+                Categoria: document.getElementById('categoria').value,
+                UF: document.getElementById('estado').value,
+                Cidade: document.getElementById('cidade').value,
+                TabelaAdesaoId: document.getElementById('tabela_adesao').value
+            };
+
+            if(!payload.TabelaAdesaoId || !payload.UF) return alert("Preencha Localização e Tabela de Adesão");
+
+            showLoading(true);
+            try {
+                const res = await callAPI('/orcamento_pre/preOrcamento', 'POST', payload);
+                dadosPreCotacao = res;
+
+                document.getElementById('etapa1').classList.add('hidden');
+                document.getElementById('etapa2').classList.remove('hidden');
+
+                // Renderizar Serviços
+                const containerServ = document.getElementById('lista-servicos');
+                containerServ.innerHTML = res.Servicos.map(serv => `
+                    <div class="flex items-center justify-between p-4 bg-slate-700/30 rounded-xl border ${serv.obrigatorio == '1' ? 'border-slate-600' : 'border-blue-500/20'}">
+                        <div class="flex items-center gap-3">
+                            <input type="checkbox" class="w-5 h-5 accent-blue-500 servico-check" 
+                                   data-id="${serv.id}" data-valor="${serv.valor}"
+                                   ${serv.obrigatorio == '1' ? 'checked disabled' : ''} onchange="recalcularTotal()">
+                            <span class="text-sm font-medium ${serv.obrigatorio == '1' ? 'text-slate-400' : 'text-white'}">${serv.nome}</span>
+                        </div>
+                        <span class="text-xs font-black text-blue-400">R$ ${parseFloat(serv.valor).toFixed(2)}</span>
+                    </div>
+                `).join('');
+
+                // Descontos
+                const selectDesc = document.getElementById('select-desconto');
+                selectDesc.innerHTML = '<option value="0">Sem Desconto</option>' + 
+                    res.ConsultoresDescontos.map(d => `<option value="${d.Valor}">${d.Nome} (-${d.Valor}%)</option>`).join('');
+
+                document.getElementById('resumo-adesao').innerText = `R$ ${parseFloat(res.ValorAdesao).toFixed(2)}`;
+                recalcularTotal();
+            } catch(e) { alert("Erro na pré-cotação."); }
+            showLoading(false);
+        }
+
+        function recalcularTotal() {
+            if(!dadosPreCotacao) return;
+            let total = parseFloat(dadosPreCotacao.ValorMensalBase || 0);
+            
+            document.querySelectorAll('.servico-check:checked').forEach(c => {
+                if(!c.disabled) total += parseFloat(c.dataset.valor);
+            });
+
+            const descPercent = parseFloat(document.getElementById('select-desconto').value);
+            if(descPercent > 0) total = total * (1 - (descPercent / 100));
+
+            document.getElementById('resumo-base').innerText = `R$ ${parseFloat(dadosPreCotacao.ValorMensalBase).toFixed(2)}`;
+            document.getElementById('total-mensal').innerText = `R$ ${total.toLocaleString('pt-BR', {minimumFractionDigits: 2})}`;
+        }
+
+        function showLoading(show) {
+            document.getElementById('loading').classList.toggle('hidden', !show);
+        }
+
+        function voltarEtapa1() {
+            document.getElementById('etapa2').classList.add('hidden');
+            document.getElementById('etapa1').classList.remove('hidden');
+        }
+
+        // Inicialização
+        window.onload = () => {
+            const user = localStorage.getItem('premium_user');
+            if(!user) window.location.href = "testelogin.html";
+            document.getElementById('user-display').innerText = `Consultor: ${user}`;
+            
+            carregarTabelasAdesao();
+            carregarEstados();
+        };
+    </script>
+</body>
+</html>
