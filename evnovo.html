@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,23 +9,40 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
-        body { font-family: 'Inter', sans-serif; }
-        .hidden { display: none !important; }
-        #placa { text-transform: uppercase; }
-        .readonly-field { background-color: #1e293b !important; cursor: not-allowed; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        #placa {
+            text-transform: uppercase;
+        }
+
+        .readonly-field {
+            background-color: #1e293b !important;
+            cursor: not-allowed;
+        }
     </style>
 </head>
+
 <body class="bg-slate-900 text-slate-100 min-h-screen">
 
     <nav class="border-b border-blue-500/20 bg-slate-900/50 sticky top-0 z-50 backdrop-blur-md">
         <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
             <div class="flex items-center gap-2">
                 <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center font-bold">P</div>
-                <span class="font-black tracking-tighter text-xl">PREMIUM <span class="text-blue-500">CLUBE</span></span>
+                <span class="font-black tracking-tighter text-xl">PREMIUM <span
+                        class="text-blue-500">CLUBE</span></span>
             </div>
             <div id="nav-user-area" class="flex items-center gap-4 hidden">
-                <span id="user-display" class="text-xs font-bold text-slate-400 uppercase tracking-widest hidden md:block"></span>
-                <button onclick="deslogar()" class="text-xs bg-red-500/10 text-red-400 px-3 py-1 rounded-full border border-red-500/20 hover:bg-red-500 hover:text-white transition-all">
+                <span id="user-display"
+                    class="text-xs font-bold text-slate-400 uppercase tracking-widest hidden md:block"></span>
+                <button onclick="deslogar()"
+                    class="text-xs bg-red-500/10 text-red-400 px-3 py-1 rounded-full border border-red-500/20 hover:bg-red-500 hover:text-white transition-all">
                     Sair
                 </button>
             </div>
@@ -41,13 +59,16 @@
             <form id="form-login" class="space-y-6">
                 <div>
                     <label class="block text-xs font-bold text-slate-400 uppercase mb-2">Usuário</label>
-                    <input type="text" id="login-usuario" required class="w-full bg-slate-700 border border-slate-600 rounded-xl p-4 text-white focus:outline-none focus:border-blue-500">
+                    <input type="text" id="login-usuario" required
+                        class="w-full bg-slate-700 border border-slate-600 rounded-xl p-4 text-white focus:outline-none focus:border-blue-500">
                 </div>
                 <div>
                     <label class="block text-xs font-bold text-slate-400 uppercase mb-2">Senha</label>
-                    <input type="password" id="login-senha" required class="w-full bg-slate-700 border border-slate-600 rounded-xl p-4 text-white focus:outline-none focus:border-blue-500">
+                    <input type="password" id="login-senha" required
+                        class="w-full bg-slate-700 border border-slate-600 rounded-xl p-4 text-white focus:outline-none focus:border-blue-500">
                 </div>
-                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-500 py-4 rounded-xl font-black text-white shadow-lg uppercase tracking-widest transition-all">
+                <button type="submit"
+                    class="w-full bg-blue-600 hover:bg-blue-500 py-4 rounded-xl font-black text-white shadow-lg uppercase tracking-widest transition-all">
                     Entrar <i class="fas fa-sign-in-alt ml-2"></i>
                 </button>
             </form>
@@ -56,24 +77,29 @@
 
     <main id="etapa1" class="max-w-7xl mx-auto p-4 md:p-8 hidden">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-            
+
             <div class="lg:col-span-8 space-y-6">
                 <section class="bg-slate-800 p-6 rounded-2xl border border-blue-500/20 shadow-xl">
                     <h2 class="text-sm font-bold text-blue-400 uppercase tracking-widest mb-6 flex items-center gap-2">
                         <i class="fas fa-car"></i> Informações do Veículo
                     </h2>
-                    
+
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <div class="md:col-span-1">
                             <label class="block text-[10px] font-bold text-slate-400 uppercase mb-2">Placa *</label>
                             <div class="flex gap-2">
-                                <input type="text" id="placa" maxlength="8" placeholder="ABC-1234" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-white uppercase font-bold focus:border-blue-500 outline-none">
-                                <button onclick="buscarDadosPlaca()" id="btn-placa" class="bg-blue-600 hover:bg-blue-500 px-4 rounded-xl transition-all shadow-lg"><i class="fas fa-search"></i></button>
+                                <input type="text" id="placa" maxlength="8" placeholder="ABC-1234"
+                                    class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-white uppercase font-bold focus:border-blue-500 outline-none">
+                                <button onclick="buscarDadosPlaca()" id="btn-placa"
+                                    class="bg-blue-600 hover:bg-blue-500 px-4 rounded-xl transition-all shadow-lg"><i
+                                        class="fas fa-search"></i></button>
                             </div>
                         </div>
                         <div>
                             <label class="block text-[10px] font-bold text-slate-400 uppercase mb-2">Categoria</label>
-                            <select id="categoria" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-white outline-none readonly-field" disabled>
+                            <select id="categoria"
+                                class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-white outline-none readonly-field"
+                                disabled>
                                 <option value="11">Automóvel (11)</option>
                                 <option value="12">Motocicleta (12)</option>
                                 <option value="7">Motocicleta (7)</option>
@@ -81,8 +107,10 @@
                             </select>
                         </div>
                         <div>
-                            <label class="block text-[10px] font-bold text-slate-400 uppercase mb-2">Tabela de Adesão</label>
-                            <select id="tabela_adesao" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-white outline-none">
+                            <label class="block text-[10px] font-bold text-slate-400 uppercase mb-2">Tabela de
+                                Adesão</label>
+                            <select id="tabela_adesao"
+                                class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-white outline-none">
                                 <option value="">Aguardando Busca...</option>
                             </select>
                         </div>
@@ -91,26 +119,34 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-6">
                         <div>
                             <label class="block text-[10px] font-bold text-slate-400 uppercase mb-2">Marca</label>
-                            <select id="marca" onchange="mudouMarca()" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-white text-sm outline-none">
+                            <select id="marca" onchange="mudouMarca()"
+                                class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-white text-sm outline-none">
                                 <option value="">Aguardando...</option>
                             </select>
                         </div>
                         <div>
                             <label class="block text-[10px] font-bold text-slate-400 uppercase mb-2">Modelo</label>
-                            <select id="modelo" onchange="mudouModelo()" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-white text-sm outline-none">
+                            <select id="modelo" onchange="mudouModelo()"
+                                class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-white text-sm outline-none">
                                 <option value="">Aguardando...</option>
                             </select>
                         </div>
                         <div>
-                            <label class="block text-[10px] font-bold text-slate-400 uppercase mb-2">Ano Fab / Mod</label>
-                            <select id="ano_fab" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-white text-sm outline-none mb-2 hidden"></select>
-                            <select id="anomod" onchange="mudouAnoMod()" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-white text-sm outline-none">
+                            <label class="block text-[10px] font-bold text-slate-400 uppercase mb-2">Ano Fab /
+                                Mod</label>
+                            <select id="ano_fab"
+                                class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-white text-sm outline-none mb-2 hidden"></select>
+                            <select id="anomod" onchange="mudouAnoMod()"
+                                class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-white text-sm outline-none">
                                 <option value="">Aguardando...</option>
                             </select>
                         </div>
                         <div>
-                            <label class="block text-[10px] font-bold text-slate-400 uppercase mb-2 text-blue-400">Valor FIPE (R$)</label>
-                            <input type="text" id="fipe_valor" class="w-full bg-slate-900 border border-blue-500/50 rounded-xl p-3 text-blue-400 font-black outline-none text-right readonly-field" readonly>
+                            <label class="block text-[10px] font-bold text-slate-400 uppercase mb-2 text-blue-400">Valor
+                                FIPE (R$)</label>
+                            <input type="text" id="fipe_valor"
+                                class="w-full bg-slate-900 border border-blue-500/50 rounded-xl p-3 text-blue-400 font-black outline-none text-right readonly-field"
+                                readonly>
                         </div>
                     </div>
                 </section>
@@ -122,28 +158,32 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
                             <label class="block text-[10px] font-bold text-slate-400 uppercase mb-2">Estado (UF)</label>
-                            <select id="estado" onchange="mudouEstado()" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-white outline-none">
+                            <select id="estado" onchange="mudouEstado()"
+                                class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-white outline-none">
                                 <option value="">Aguardando...</option>
                             </select>
                         </div>
                         <div>
                             <label class="block text-[10px] font-bold text-slate-400 uppercase mb-2">Cidade</label>
-                            <select id="cidade" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-white outline-none">
+                            <select id="cidade"
+                                class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-white outline-none">
                                 <option value="">Aguardando UF...</option>
                             </select>
                         </div>
                     </div>
                 </section>
-                
-                <button onclick="avancarEtapa2()" class="w-full bg-blue-600 hover:bg-blue-500 py-5 rounded-2xl font-black text-white uppercase tracking-[0.2em] shadow-lg transition-all">
+
+                <button onclick="avancarEtapa2()"
+                    class="w-full bg-blue-600 hover:bg-blue-500 py-5 rounded-2xl font-black text-white uppercase tracking-[0.2em] shadow-lg transition-all">
                     Personalizar Benefícios <i class="fas fa-arrow-right ml-2"></i>
                 </button>
             </div>
-            
+
             <div class="lg:col-span-4 hidden lg:block">
                 <div class="bg-gradient-to-br from-blue-600 to-blue-800 p-6 rounded-2xl shadow-xl h-full">
                     <h3 class="font-bold text-lg mb-2 text-white">Novo EV</h3>
-                    <p class="text-blue-100 text-xs">A busca foi restaurada com sucesso. Preencha a placa para puxar todos os dados.</p>
+                    <p class="text-blue-100 text-xs">A busca foi restaurada com sucesso. Preencha a placa para puxar
+                        todos os dados.</p>
                 </div>
             </div>
         </div>
@@ -153,7 +193,8 @@
         <div class="bg-slate-800 p-8 rounded-2xl border border-blue-500/30 shadow-2xl">
             <div class="flex justify-between items-center mb-8">
                 <h2 class="text-2xl font-black text-blue-400 uppercase tracking-tighter">Personalizar Cotação</h2>
-                <button onclick="alternarTelas('etapa1')" class="bg-slate-700 hover:bg-slate-600 px-4 py-2 rounded-lg text-xs font-bold uppercase transition-all">
+                <button onclick="alternarTelas('etapa1')"
+                    class="bg-slate-700 hover:bg-slate-600 px-4 py-2 rounded-lg text-xs font-bold uppercase transition-all">
                     <i class="fas fa-chevron-left mr-2"></i> Voltar
                 </button>
             </div>
@@ -166,7 +207,7 @@
 
                 <div class="bg-slate-900/80 p-6 rounded-2xl border border-slate-700 h-fit sticky top-24">
                     <h3 class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-6 text-center">Resumo</h3>
-                    
+
                     <div class="space-y-4 mb-8">
                         <div class="flex justify-between items-center text-sm">
                             <span class="text-slate-400">Adesão</span>
@@ -177,17 +218,21 @@
                             <span id="resumo-base" class="font-bold text-white">R$ 0,00</span>
                         </div>
                         <div class="pt-4 border-t border-slate-800">
-                            <label class="text-[10px] font-bold text-blue-400 uppercase mb-2 block">Aplicar Desconto Especial</label>
-                            <select id="select-desconto" onchange="recalcularTotal()" class="w-full bg-white text-slate-900 font-bold p-3 rounded-xl text-sm outline-none"></select>
+                            <label class="text-[10px] font-bold text-blue-400 uppercase mb-2 block">Aplicar Desconto
+                                Especial</label>
+                            <select id="select-desconto" onchange="recalcularTotal()"
+                                class="w-full bg-white text-slate-900 font-bold p-3 rounded-xl text-sm outline-none"></select>
                         </div>
                     </div>
 
                     <div class="bg-blue-600 p-6 rounded-2xl text-center mb-8">
-                        <span class="block text-[10px] uppercase font-black text-blue-200 mb-1">Valor Mensal Final</span>
+                        <span class="block text-[10px] uppercase font-black text-blue-200 mb-1">Valor Mensal
+                            Final</span>
                         <span id="total-mensal" class="text-4xl font-black text-white">R$ 0,00</span>
                     </div>
 
-                    <button class="w-full bg-white hover:bg-blue-50 py-4 rounded-xl font-black text-blue-900 transition-all shadow-xl uppercase tracking-widest">
+                    <button
+                        class="w-full bg-white hover:bg-blue-50 py-4 rounded-xl font-black text-blue-900 transition-all shadow-xl uppercase tracking-widest">
                         Gerar Link Oficial
                     </button>
                 </div>
@@ -195,26 +240,28 @@
         </div>
     </section>
 
-    <div id="loading" class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-[100] flex items-center justify-center hidden">
+    <div id="loading"
+        class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-[100] flex items-center justify-center hidden">
         <div class="text-center">
-            <div class="w-16 h-16 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+            <div class="w-16 h-16 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-4">
+            </div>
             <p class="text-blue-400 font-bold animate-pulse uppercase text-xs tracking-[0.3em]">Processando...</p>
         </div>
     </div>
 
     <script>
         const API_BASE = "https://service-provisorio.premiumclube.org.br";
-        const PROXY_LOGIN = "/api/login"; 
-        
+        const PROXY_LOGIN = "/api/login";
+
         // VARIÁVEIS GLOBAIS DE ESTADO
-        let cacheValoresFipe = []; 
+        let cacheValoresFipe = [];
         let dadosAtuais = { tipoTexto: 'carro', categoria: '11', fipeNumerico: 0 };
         let dadosPreCotacao = null;
 
         // MÁSCARA PLACA
         document.getElementById('placa').addEventListener('input', (e) => {
             let v = e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, "");
-            if (v.length > 3 && !v.match(/^[A-Z]{3}[0-9][A-Z][0-9]{2}$/)) { 
+            if (v.length > 3 && !v.match(/^[A-Z]{3}[0-9][A-Z][0-9]{2}$/)) {
                 v = v.slice(0, 3) + "-" + v.slice(3, 7);
             }
             e.target.value = v.slice(0, 8);
@@ -323,25 +370,29 @@
         // ==========================================
         // ETAPA 1: BUSCA DE PLACA E CRUZAMENTO DE DADOS
         // ==========================================
-        
+
         async function atualizarCidades(estadoUF, cidadeSelecionada = "") {
             try {
-                const cidadesRes = await callAPI(`/tabela_valores/Cidades/?Estado=${estadoUF}`, 'GET');
+                // A rota correta informada por você
+                const cidadesRes = await callAPI(`/ViewCidadesEstados/consultar/?EstadosUF=${estadoUF}&order=CidadesNome`, 'GET');
                 const selectCid = document.getElementById('cidade');
                 let optionsHtml = '<option value="">Selecione a cidade</option>';
-                
+
+                // Mapeamento correto lendo CidadesNome
                 if (Array.isArray(cidadesRes)) {
                     optionsHtml += cidadesRes.map(cid => `<option value="${cid.CidadesNome}">${cid.CidadesNome}</option>`).join('');
                 }
+
                 selectCid.innerHTML = optionsHtml;
 
-                if(cidadeSelecionada) {
+                // Lógica de pré-seleção
+                if (cidadeSelecionada) {
                     const cidLimpa = cidadeSelecionada.split('/')[0].trim().toUpperCase();
                     Array.from(selectCid.options).forEach(opt => {
-                        if(opt.text.toUpperCase() === cidLimpa) opt.selected = true;
+                        if (opt.text.toUpperCase() === cidLimpa) opt.selected = true;
                     });
                 }
-            } catch(e) { console.error("Erro cidades:", e); }
+            } catch (e) { console.error("Erro ao carregar cidades:", e); }
         }
 
         async function buscarDadosPlaca() {
@@ -355,18 +406,18 @@
 
             try {
                 const res1 = await callAPI('/Placa/verificaPlaca/', 'POST', { Placa: placaOriginal });
-                
+
                 if (res1.marca || res1.completo) {
                     let tipoTexto = 'carro';
-                    if(res1.tipo === "12" || res1.tipo === "7") tipoTexto = 'moto';
-                    if(res1.tipo === "13") tipoTexto = 'caminhao';
-                    
+                    if (res1.tipo === "12" || res1.tipo === "7") tipoTexto = 'moto';
+                    if (res1.tipo === "13") tipoTexto = 'caminhao';
+
                     dadosAtuais.tipoTexto = tipoTexto;
                     dadosAtuais.categoria = res1.tipo;
                     dadosAtuais.fipeNumerico = res1.valorfipe;
 
                     const estadoAtual = res1.estado || "PE";
-                    const fipeFormatado = parseFloat(res1.valorfipe).toLocaleString('pt-BR', {minimumFractionDigits: 2});
+                    const fipeFormatado = parseFloat(res1.valorfipe).toLocaleString('pt-BR', { minimumFractionDigits: 2 });
 
                     // Busca simultânea das listas baseadas na placa (Lógica idêntica ao evcotacao que funcionava)
                     const queryModelos = `?marca=${res1.marca}&categoria=${res1.tipo}&tipo=${tipoTexto}&ano=${res1.nomeanomod}&order=GROUP BY nome ORDER BY nome ASC`;
@@ -400,7 +451,7 @@
                     document.getElementById('ano_fab').value = res1.nomeanomod;
 
                     document.getElementById('tabela_adesao').innerHTML = adesaoRes.map(a => `<option value="${a.id}">${a.nome} - R$ ${a.valor}</option>`).join('');
-                    
+
                     document.getElementById('categoria').value = res1.tipo;
                     document.getElementById('fipe_valor').value = fipeFormatado;
 
@@ -424,27 +475,27 @@
 
         async function mudouEstado() {
             const estado = document.getElementById('estado').value;
-            const fipeFormatado = parseFloat(dadosAtuais.fipeNumerico).toLocaleString('pt-BR', {minimumFractionDigits: 2});
-            
+            const fipeFormatado = parseFloat(dadosAtuais.fipeNumerico).toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+
             showLoading(true);
             try {
                 await atualizarCidades(estado);
                 const adesaoRes = await callAPI(`/CategoriasConfiguracoesAutorizadas/getCategoriasCalculo/?consultor=320800&maximo=${fipeFormatado}&tipo=${dadosAtuais.categoria}&estado=${estado}`, 'GET');
                 document.getElementById('tabela_adesao').innerHTML = adesaoRes.map(a => `<option value="${a.id}">${a.nome} - R$ ${a.valor}</option>`).join('');
-            } catch(e) {}
+            } catch (e) { }
             showLoading(false);
         }
 
         async function mudouMarca() {
             const marcaId = document.getElementById('marca').value;
-            const anoFab = document.getElementById('ano_fab').value || ""; 
+            const anoFab = document.getElementById('ano_fab').value || "";
             showLoading(true);
             try {
                 const queryModelos = `?marca=${marcaId}&categoria=${dadosAtuais.categoria}&tipo=${dadosAtuais.tipoTexto}&ano=${anoFab}&order=GROUP BY nome ORDER BY nome ASC`;
                 const modelosRes = await callAPI(`/ViewModeloAno/consultar/${queryModelos}`, 'GET');
                 document.getElementById('modelo').innerHTML = modelosRes.map(m => `<option value="${m.id}">${m.nome}</option>`).join('');
-                if(modelosRes.length > 0) mudouModelo(); 
-            } catch(e) {}
+                if (modelosRes.length > 0) mudouModelo();
+            } catch (e) { }
             showLoading(false);
         }
 
@@ -456,17 +507,17 @@
                 cacheValoresFipe = Object.values(fipeRes);
                 document.getElementById('anomod').innerHTML = cacheValoresFipe.map(f => `<option value="${f.id}">${f.nome}</option>`).join('');
                 mudouAnoMod();
-            } catch(e) {}
+            } catch (e) { }
             showLoading(false);
         }
 
         function mudouAnoMod() {
             const anoModId = document.getElementById('anomod').value;
             const fipeObj = cacheValoresFipe.find(f => f.id === anoModId);
-            if(fipeObj) {
+            if (fipeObj) {
                 dadosAtuais.fipeNumerico = fipeObj.valor;
-                document.getElementById('fipe_valor').value = parseFloat(fipeObj.valor).toLocaleString('pt-BR', {minimumFractionDigits: 2});
-                mudouEstado(); 
+                document.getElementById('fipe_valor').value = parseFloat(fipeObj.valor).toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+                mudouEstado();
             }
         }
 
@@ -475,102 +526,75 @@
         // ==========================================
 
         async function avancarEtapa2() {
-            const payload = {
-                Placa: document.getElementById('placa').value.replace(/-/g, ""),
-                MarcaId: document.getElementById('marca').value,
-                ModeloId: document.getElementById('modelo').value,
-                AnoFab: document.getElementById('ano_fab').value,
-                AnoMod: document.getElementById('anomod').value, // Pegamos o ID da option do ano modelo
-                ValorFipe: dadosAtuais.fipeNumerico,
-                Categoria: document.getElementById('categoria').value,
-                UF: document.getElementById('estado').value,
-                Cidade: document.getElementById('cidade').value,
-                TabelaAdesaoId: document.getElementById('tabela_adesao').value
-            };
-
-            if(!payload.TabelaAdesaoId || !payload.UF || !payload.MarcaId) {
-                return alert("Faça a busca da placa e preencha todos os campos.");
-            }
-
-            showLoading(true);
             try {
-                // Montando o payload exato que a Premium espera no POST de pré-cotação
-                const requestPreCotacao = {
-                    modelo: payload.ModeloId,
-                    marca: payload.MarcaId,
-                    ano: document.getElementById('ano_fab').value,
-                    anoModeloId: payload.AnoMod,
-                    estado: payload.UF,
-                    categoria: payload.Categoria,
-                    consultor: "320800",
-                    placa: payload.Placa,
-                    fipe: payload.ValorFipe,
-                    tabelaValores: payload.TabelaAdesaoId,
-                    tabela: payload.TabelaAdesaoId,
+                // 1. Coletando os elementos do DOM
+                const selectAno = document.getElementById('ano');
+                const anoTexto = selectAno.options[selectAno.selectedIndex]?.text.split(' ')[0] || "2015"; 
+                
+                // Tratando a placa e fipe (ajuste o seletor da FIPE conforme o seu HTML)
+                const placaLimpa = document.getElementById('placa').value.replace(/[^a-zA-Z0-9]/g, '').toUpperCase();
+                
+                // Exemplo de como pegar o valor FIPE e converter para "10652.00"
+                const textoFipe = document.getElementById('fipeValor').innerText || "0"; 
+                const fipeFormatada = textoFipe.replace(/[^\d,]/g, '').replace(',', '.');
+
+                // 2. Montando o Payload Exato
+                const payload = {
+                    modelo: document.getElementById('modelo').value,
+                    nomeModelo: document.getElementById('modelo').value,
+                    marca: document.getElementById('marca').value,
+                    nomeMarca: document.getElementById('marca').value,
+                    ano: anoTexto,
+                    AnoNumerico: anoTexto,
+                    anoModeloId: document.getElementById('ano').value,
+                    nomeAno: document.getElementById('ano').value,
+                    estado: document.getElementById('estado').value,
+                    municipio: document.getElementById('cidade').value,
+                    categoria: 7, // Nota: Se houver variação de categoria no seu app, torne isso dinâmico
+                    nomeCategoria: 7,
+                    consultor: "320800", // Nota: Idealmente vem do login/sessão do usuário
+                    placa: placaLimpa,
+                    fipe: fipeFormatada,
+                    tabelaValores: "3",
+                    tabela: "3",
                     valorimplemento: 0,
-                    municipio: payload.Cidade
+                    latitude: "",
+                    longitude: ""
                 };
 
-                const res = await callAPI('/orcamento_pre/preOrcamento', 'POST', requestPreCotacao);
-                dadosPreCotacao = res;
-
-                // Renderiza Serviços se a resposta vier no formato novo (Kits/OpObrigatorio/Opcionais)
-                let servicosHTML = '';
+                // 3. Disparando a requisição com a nossa função callAPI
+                // O callAPI já usa JSON.stringify no body, o que atende perfeitamente.
+                const preOrcamentoRes = await callAPI('/orcamento_pre/preOrcamento', 'POST', payload);
                 
-                // Mapeia Opcionais e Opcionais Obrigatórios se existirem na resposta
-                const todosServicos = [];
-                if(res.OpObrigatorio) res.OpObrigatorio.forEach(s => todosServicos.push({...s, obrigatorio: '1'}));
-                if(res.Opcionais) {
-                    Object.values(res.Opcionais).forEach(lista => {
-                        if(Array.isArray(lista)) lista.forEach(s => todosServicos.push(s));
-                    });
-                }
+                console.log("Sucesso! ID do Pré-Orçamento:", preOrcamentoRes.PreOrcamentoId);
+                console.log("Valor Total Bruto:", preOrcamentoRes.ValorBruto);
+                
+                // 4. Aqui você chama a função para desenhar a tela de cotação com os dados
+                // renderizarCotacao(preOrcamentoRes);
 
-                document.getElementById('lista-servicos').innerHTML = todosServicos.map(serv => `
-                    <div class="flex items-center justify-between p-4 bg-slate-700/30 rounded-xl border ${serv.obrigatorio == '1' ? 'border-slate-600' : 'border-blue-500/20'}">
-                        <div class="flex items-center gap-3">
-                            <input type="checkbox" class="w-5 h-5 accent-blue-500 servico-check" 
-                                   data-id="${serv.id || serv.codigo}" data-valor="${serv.valor}"
-                                   ${serv.obrigatorio == '1' ? 'checked disabled' : ''} onchange="recalcularTotal()">
-                            <span class="text-sm font-medium ${serv.obrigatorio == '1' ? 'text-slate-400' : 'text-white'}">${serv.nome}</span>
-                        </div>
-                        <span class="text-xs font-black text-blue-400">R$ ${parseFloat(serv.valor).toFixed(2)}</span>
-                    </div>
-                `).join('');
-
-                // Renderiza Descontos
-                let descHtml = '<option value="0">Sem Desconto</option>';
-                if(res.ConsultoresDescontos) {
-                    const descArray = Object.values(res.ConsultoresDescontos);
-                    descHtml += descArray.map(d => `<option value="${d.Valor}">${d.Nome} (-${parseFloat(d.Valor).toFixed(0)}%)</option>`).join('');
-                }
-                document.getElementById('select-desconto').innerHTML = descHtml;
-
-                document.getElementById('resumo-adesao').innerText = `R$ ${parseFloat(res.Adesao || 250).toFixed(2)}`;
-                alternarTelas('etapa2');
-                recalcularTotal();
-            } catch(e) { 
-                console.error(e);
-                alert("Erro ao gerar personalização.");
+            } catch (e) {
+                console.error("Erro ao gerar o Pré-Orçamento:", e);
+                alert("Falha ao gerar a cotação. Verifique os dados e tente novamente.");
             }
-            showLoading(false);
+            
         }
 
         function recalcularTotal() {
-            if(!dadosPreCotacao) return;
+            if (!dadosPreCotacao) return;
             // Baseia-se no valor bruto ou soma de taxas se a API não retornar ValorMensalBase
             let total = parseFloat(dadosPreCotacao.ValorBruto || dadosPreCotacao.ValorRateio || 0);
-            
+
             document.querySelectorAll('.servico-check:checked').forEach(c => {
-                if(!c.disabled) total += parseFloat(c.dataset.valor);
+                if (!c.disabled) total += parseFloat(c.dataset.valor);
             });
 
             const descPercent = parseFloat(document.getElementById('select-desconto').value);
-            if(descPercent > 0) total = total * (1 - (descPercent / 100));
+            if (descPercent > 0) total = total * (1 - (descPercent / 100));
 
             document.getElementById('resumo-base').innerText = `R$ ${parseFloat(dadosPreCotacao.ValorRateio || 0).toFixed(2)}`;
-            document.getElementById('total-mensal').innerText = `R$ ${total.toLocaleString('pt-BR', {minimumFractionDigits: 2})}`;
+            document.getElementById('total-mensal').innerText = `R$ ${total.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
         }
     </script>
 </body>
+
 </html>
